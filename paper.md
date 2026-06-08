@@ -334,13 +334,14 @@ subsample remains future work.
 ## Data and Code Availability
 
 All scenarios, the six frozen condition prompts (with hashes), the negotiation harness, the
-scoring and analysis scripts, and per-arm outcome tables are openly available in the public
-repository, released under permissive licenses (MIT for code, CC BY 4.0 for data). Full
-negotiation transcripts are archived as a dataset of record with a permanent DOI
-(10.57967/hf/9090); the preregistrations, gate audits, and amendment logs are included. The
-archival record carries the permanent concept DOI 10.5281/zenodo.20595996 (this version,
-10.5281/zenodo.20595997).
-Reported figures are reproducible from the published scripts with the documented run commands.
+scoring and analysis scripts, per-arm outcome tables, preregistrations, gate audits, and
+amendment logs are openly available in the public repository at
+https://github.com/spectralbranding/negotiation-spec-experiment, released under permissive
+licenses (MIT for code, CC BY 4.0 for data). The full negotiation transcripts are archived as a
+dataset of record at https://huggingface.co/datasets/spectralbranding/negotiation-spec-experiment
+(DOI https://doi.org/10.57967/hf/9090). The archival record carries the permanent concept DOI
+https://doi.org/10.5281/zenodo.20595996 (this version, 10.5281/zenodo.20595997). Reported figures
+are reproducible from the published scripts with the documented run commands.
 
 *Companion computation script.* Every numerical value cited in this note is reproducible from
 the published analysis scripts in the public repository — `analyze.py` (per-arm contrasts and
