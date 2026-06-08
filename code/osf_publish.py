@@ -2,10 +2,10 @@
 
 Creates (or reuses) a PUBLIC OSF project node for the negotiation spec-vs-style
 experiment and uploads the pre-run scientific artifacts. Reads OSF_ACCESS_TOKEN
-from the environment; never prints the token.
+from the environment (via BWS); never prints the token.
 
 Run:
-    uv run python code/osf_publish.py
+    bws run -- uv run python research/negotiation_spec_experiment/code/osf_publish.py
 
 Idempotent: reuses an existing node with the same title and overwrites files of
 the same name (so re-running updates the uploads rather than duplicating).
@@ -34,16 +34,20 @@ DESCRIPTION = (
     "specification-first negotiation agent (explicit objective, reservation value, "
     "ranked issue weights, concession + stop rules) outperforms style-based agents "
     "(warmth / dominance), isolating structured specification from chain-of-thought "
-    "via a 2x2 factorial. Extension of Vaccaro, Caosun, Ju, Aral & Curhan (2026), "
+    "via a 2x2 factorial. Extension of Vaccaro, Caoson, Ju, Aral & Curhan (2026), "
     "'Advancing AI negotiations' (arXiv:2503.06416). Canonical pre-run freeze = git "
     "commit 2ed95ffd. Full code/data will be mirrored on GitHub + Zenodo + HuggingFace."
 )
 ROOT = Path(__file__).resolve().parent.parent
 UPLOADS = [
     ROOT / "PREREGISTRATION.md",
+    ROOT / "PREREGISTRATION_STUDY2.md",
     ROOT / "EXPERIMENT_DESIGN.md",
+    ROOT / "EXTENSION_DESIGN.md",
     ROOT / "PILOT_GATE_AUDIT.md",
     ROOT / "LOGGING_AND_PROVENANCE_STANDARD.md",
+    ROOT / "paper.md",
+    ROOT / "DATA_AVAILABILITY.md",
     ROOT / "prompts" / "PROMPT_HASHES.txt",
     ROOT / "prompts" / "SCORING_WARMTH_DOMINANCE.txt",
     ROOT / "prompts" / "SCORING_SVI.txt",
@@ -53,7 +57,7 @@ UPLOADS = [
 def _token() -> str:
     tok = os.environ.get("OSF_ACCESS_TOKEN", "").strip()
     if not tok:
-        sys.exit("OSF_ACCESS_TOKEN not in environment")
+        sys.exit("OSF_ACCESS_TOKEN not in environment (run via: bws run -- ...)")
     return tok
 
 

@@ -3,7 +3,7 @@ title: "Spec-Agent vs Styled-Agent: A Negotiation Replication-and-Extension Desi
 status: DRAFT — design only, NO RUNS, awaiting user GO/REVISE/DROP
 author: Dmitry Zharnikov
 date: 2026-06-06
-base_paper: Vaccaro, Caosun, Ju, Aral & Curhan (2026), PNAS 10.1073/pnas.2521774123; arXiv 2503.06416v3
+base_paper: Vaccaro, Caoson, Ju, Aral & Curhan (2026), PNAS 10.1073/pnas.2521774123; arXiv 2503.06416v3
 model_target: gpt-4o-mini @ temperature .20 (matches base paper)
 ---
 
@@ -354,7 +354,7 @@ flowchart TB
   `research/PUBLIC_MIRROR_STANDARD.md` (CITATION.cff, dual license,
   reproduce.sh, output/{figures,tables,logs}/). HF dataset DOI for transcripts.
 - **Citation discipline**: cite the base paper as
-  Vaccaro, Caosun, Ju, Aral & Curhan (2026), PNAS 10.1073/pnas.2521774123. This
+  Vaccaro, Caoson, Ju, Aral & Curhan (2026), PNAS 10.1073/pnas.2521774123. This
   is an *outside-corpus* extension, not an SBT self-citation — no Zharnikov
   citation-key applies. Direction-of-citation: we cite them; we do not bolt SBT
   vocabulary onto a negotiation paper.
@@ -397,8 +397,10 @@ MVP-vs-full based on the pilot.
 
 ### 9.3 Pre-draft gate
 
-A pre-draft critical-review gate runs before drafting prose. This document is
-design/scoping, upstream of that gate. The gate fires when drafting begins.
+Per project rule, a **new R-paper/empirical note triggers the pre-draft Grok
+critical-review gate** (`research/reviews/R_PAPER_PREDRAFT_WORKFLOW.md`) before
+drafting prose. This document is design/scoping, upstream of that gate. The gate
+fires when we move to draft the note.
 
 ---
 
@@ -424,7 +426,7 @@ design/scoping, upstream of that gate. The gate fires when drafting begins.
 6. **Scorer model for warmth/dominance + SVI.** Match the paper's frontier scorer
    (they used GPT-5.2) for comparability, or use gpt-4o-mini to save cost and
    accept a within-set-only manipulation check (H6)?
-7. **Pre-draft gate timing.** The pre-draft critical review fires when moving
+7. **Pre-draft gate timing.** Confirm the Grok pre-draft review fires when we move
    from this design to drafting the empirical note (not before the run).
 
 NO negotiations are run and NO API budget is spent until the user issues

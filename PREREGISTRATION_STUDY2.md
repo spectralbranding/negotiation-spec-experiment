@@ -3,7 +3,7 @@ title: "Spec-Agent vs Styled-Agent in AI–AI Negotiation — Study 2 (High-Head
 status: FROZEN PRE-RUN (v1.0.0) — preregistered BEFORE any Study 2 negotiation is run
 author: Dmitry Zharnikov
 date: 2026-06-06
-base_paper: Vaccaro, Caosun, Ju, Aral & Curhan (2026), arXiv 2503.06416 (PNAS published version; PUBLIC REF = arXiv 2503.06416)
+base_paper: Vaccaro, Caoson, Ju, Aral & Curhan (2026), arXiv 2503.06416 (PNAS published version; PUBLIC REF = arXiv 2503.06416)
 study1_prereg: PREREGISTRATION.md (same directory; FROZEN, git commit 2ed95ffd)
 study1_result: "null on primary H3 (value created); SPEC_NOCOT − NEUTRAL d = .049, p = .683"
 design_doc: EXPERIMENT_DESIGN.md (same directory — conditions, scoring, power logic reused)

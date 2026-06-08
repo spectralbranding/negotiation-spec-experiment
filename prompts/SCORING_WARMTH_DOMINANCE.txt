@@ -9,7 +9,7 @@ temperature: 0
 version: v2.1
 date: 2026-06-06
 source_code_reference: "code/scoring_llm.py::WARMTH_DOMINANCE_SYSTEM"
-base_paper_reference: "Vaccaro, Caosun, Ju, Aral & Curhan (2026), arXiv 2503.06416, SI Fig. S19"
+base_paper_reference: "Vaccaro, Caoson, Ju, Aral & Curhan (2026), arXiv 2503.06416, SI Fig. S19"
 amendment_note: >
   Dominance rubric revised to v2.1 before the main run (PREREGISTRATION §8 amendment b).
   Original v1 rubric produced inter-scorer ICC .472 (< .70 gate). Revised with explicit

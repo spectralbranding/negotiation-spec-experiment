@@ -383,7 +383,7 @@ Pruitt DG. *Negotiation Behavior*. New York: Academic Press; 1981.
 
 Raiffa H. *The Art and Science of Negotiation*. Cambridge, MA: Harvard University Press; 1982.
 
-Vaccaro M, Caosun S, Ju J, Aral S, Curhan J. Advancing AI Negotiations: A Large-Scale
+Vaccaro M, Caoson M, Ju H, Aral S, Curhan JR. Advancing AI Negotiations: A Large-Scale
 Autonomous Negotiation Competition. Working Paper 2025. arXiv:2503.06416.
 
 Walton RE, McKersie RB. *A Behavioral Theory of Labor Negotiations*. New York: McGraw-Hill;

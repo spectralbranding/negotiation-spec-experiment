@@ -3,7 +3,7 @@ title: "Spec-Agent vs Styled-Agent in AI–AI Negotiation — Preregistration"
 status: FROZEN PRE-RUN (v1.0.0) — canonical freeze = git commit 2ed95ffd (2026-06-06); archived (timestamped) on Zenodo 10.5281/zenodo.20595996 + GitHub
 author: Dmitry Zharnikov
 date: 2026-06-06
-base_paper: Vaccaro, Caosun, Ju, Aral & Curhan (2026), arXiv 2503.06416 (PNAS published version; PUBLIC REF = arXiv 2503.06416)
+base_paper: Vaccaro, Caoson, Ju, Aral & Curhan (2026), arXiv 2503.06416 (PNAS published version; PUBLIC REF = arXiv 2503.06416)
 design_doc: EXPERIMENT_DESIGN.md (same directory)
 ---
 
@@ -37,7 +37,7 @@ structure with CoT and never isolated structure itself; that isolation is our co
 | Sampling | Pilot ~300 negotiations → MVP ~150/cell → scale to ~400/cell on the primary model; robustness arm at MVP density. |
 | Budget ceiling | **$40 USD** (user-approved). Hard stop; logger sums `cost_usd_est` and the runner aborts at $38. |
 | Logging | Per-call JSONL via `research/code/llm_call_logger.py` (HARD RULE). Transcripts are the SSOT. |
-| Hosting | GitHub mirror `negotiation-spec-experiment` (SSOT) + OSF preregistration & registration + Zenodo dual-DOI (data + code) + HF dataset (transcripts). |
+| Hosting | GitHub mirror `negotiation-spec-experiment` (SSOT) + Zenodo dual-DOI (data + code) + HF dataset (transcripts). |
 | Author contact | None. Full open release lets the base authors reproduce against their own unpublished data. |
 
 ## 2. Conditions — the 2×2 (structured-spec × CoT) plus controls
@@ -58,8 +58,8 @@ The clean test of *structured specification holding CoT constant* is `SPEC_NOCOT
 `COT_ONLY` and `SPEC_NOCOT` vs `NEUTRAL`. The structure×CoT interaction is
 (`SPEC_COT` − `COT_ONLY`) − (`SPEC_NOCOT` − `NEUTRAL`).
 
-Exact prompt texts are frozen in `prompts/` and hashed; the hash is recorded at OSF
-registration. (Manipulation check H6 must confirm SPEC cells score LOW on both S19 axes.)
+Exact prompt texts are frozen in `prompts/` and hashed; the hash is bound to the freeze
+commit. (Manipulation check H6 must confirm SPEC cells score LOW on both S19 axes.)
 
 ## 3. Primary and secondary outcomes
 

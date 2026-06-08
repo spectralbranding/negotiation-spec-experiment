@@ -3,9 +3,9 @@ title: "Full Extension Design — Negotiation Spec Experiment (4 robustness comp
 status: DESIGN ONLY — NO RUNS, NO API CALLS. Awaiting user GO / REVISE / DROP + frontier-model + budget confirmation.
 author: Dmitry Zharnikov
 date: 2026-06-07
-base_paper: Vaccaro, Caosun, Ju, Aral & Curhan (2026), PNAS 10.1073/pnas.2521774123 (arXiv 2503.06416)
+base_paper: Vaccaro, Caoson, Ju, Aral & Curhan (2026), PNAS 10.1073/pnas.2521774123 (arXiv 2503.06416)
 preregistration: PREREGISTRATION.md (Study 1, git 2ed95ffd) + PREREGISTRATION_STUDY2.md (Study 2)
-results_so_far: results summary (3 arms × 630 dyads — Study 1 / Study 2 / Haiku cross-family)
+results_so_far: RESULTS_SUMMARY.md (3 arms × 630 dyads — Study 1 / Study 2 / Haiku cross-family)
 formatting: PAPER_QUALITY_STANDARDS (no leading zero on decimals < 1; exact p, 3 digits; p < .001 floor; effect sizes mandatory)
 ---
 
@@ -152,7 +152,7 @@ paraphrases — a robustness envelope, not a point estimate.
 
 ### 2.2 K and the blow-up problem
 
-One could run up to ~8–10 paraphrases. A naive "K paraphrases × every condition × full grid"
+Grok suggested up to ~8–10 paraphrases. A naive "K paraphrases × every condition × full grid"
 multiplies the 630-dyad Arm B by K — at K = 8 that is ~5,000 dyads for this component alone,
 which dominates the whole budget for marginal inferential gain. **Recommend K = 4** paraphrases
 per *paraphrased* condition (the original wording = a 5th anchor point), and **paraphrase only
@@ -255,7 +255,7 @@ they are 5 schema-valid YAMLs in a new `scenarios_headroom/` dir.
   `{NEUTRAL, COT_ONLY, SPEC_NOCOT}` — NEUTRAL anchors the headroom measurement (NEUTRAL's
   value-created / Pareto fraction *operationalizes* realized headroom per scenario), COT_ONLY is
   the structure-held-constant comparison, SPEC_NOCOT is the treatment.
-- **Dyads per headroom bin:** a target of ~400/bin would give 2,000 dyads for this
+- **Dyads per headroom bin:** Grok suggested ~400/bin. 400/bin × 5 bins = 2,000 dyads for this
   component, ~$3–4 of play — affordable. But a 3-condition round-robin = 6 pairs × 1 scenario ×
   2 role orders × R reps; to hit ~400 dyads/bin needs R ≈ 33 reps. **Recommend a middle target
   of ~240 dyads/bin** (6 pairs × 2 role orders × 20 reps = 240), which still gives ~80
@@ -351,7 +351,7 @@ balance risk introduced by the *play* model; the Anthropic scorer is unchanged).
 ### 5.1 HARD RULES baked in (project memory)
 
 - **Sandbox OFF** for all real runs (sandbox SIGKILLs long jobs → rc 137).
-- **ONE sequential detached job.** Never two concurrent `uv run` jobs — both share
+- **ONE sequential detached job.** Never two concurrent `bws run -- uv run` jobs — both share
   the `(gpt-4o + claude-haiku-4-5)` **scorer pair**; a 2nd concurrent job SIGKILLed the haiku arm
   at dyad 25/630 on 2026-06-06. Every component below `--score`s with that same pair, so **no two
   components may run concurrently.** They run as a chain, exactly like
@@ -388,18 +388,20 @@ spending on the rest. Stage 2 (headroom) is the highest-value figure and still c
 re-confirmation** because it costs more than Stages 1–3 combined and decides which provider
 balance to top up.
 
-### 5.3 The chain script (authored at run time)
+### 5.3 The chain script (to be authored at run time — modeled on run_chain_haiku_then_study2.sh)
 
-Launch idiom (a single sequenced, detached job that runs each extension stage in order):
+Launch idiom (NOT run now):
 
 ```bash
-nohup bash run_chain_extension.sh > run_chain_extension.log 2>&1 &
+cd /Users/d/projects/spectral-branding
+nohup bash research/negotiation_spec_experiment/run_chain_extension.sh \
+  > research/negotiation_spec_experiment/run_chain_extension.log 2>&1 &
 ```
 
-Stage bodies (each isolated; API keys injected from the environment at run time):
+Stage bodies (each isolated; `bws run` injects keys; sandbox OFF):
 
 ```bash
-RUNNER="uv run --with openai --with anthropic --with pyyaml --with numpy python code/run_experiment.py"
+RUNNER="bws run -- uv run --with openai --with anthropic --with pyyaml --with numpy python $T/code/run_experiment.py"
 
 # STAGE 1 — ablation (4-condition restricted grid; merger+supplier)
 $RUNNER --model gpt-4o-mini --score \
@@ -547,5 +549,6 @@ To append to `PREREGISTRATION_STUDY2.md §10` (append-only, dated) at run time:
 
 The note's spine: Study 1 (null/ceiling) → Study 2 (SPEC wins with headroom) → Component 1
 (it's the strategy) → Component 3 (it scales with headroom, dose-response) → Component 2 (robust
-to wording) → Component 4 (capability scope). The pre-draft critical-review gate fires when
-drafting begins — after this extension data is in hand.
+to wording) → Component 4 (capability scope). The Grok pre-draft gate
+(`research/reviews/R_PAPER_PREDRAFT_WORKFLOW.md`) fires when drafting begins — after this
+extension data is in hand.
