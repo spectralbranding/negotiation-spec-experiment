@@ -35,8 +35,6 @@ value frontier while remaining affectively neutral; style games the agreement pr
 apparent "style beats structure" result is recovered as the zero-headroom boundary case of
 a more general law.
 
-*Word count (abstract): ~197.*
-
 ## Specification, Style, and a Result That Depends on the Exam
 
 Two language models can be pointed at the same negotiation in two very different idioms.
@@ -344,11 +342,12 @@ archival record carries the permanent concept DOI 10.5281/zenodo.20595996 (this 
 10.5281/zenodo.20595997).
 Reported figures are reproducible from the published scripts with the documented run commands.
 
-*Companion computation script.* Every numerical value cited in this note is reproducible
-from `code/analyze.py` (per-arm contrasts and effect sizes) and `code/compute_icc.py`
-(inter-scorer reliability), with the run commands documented in the repository README; the
-graded-headroom scenarios are regenerated and arithmetically verified by
-`code/gen_headroom_variants.py`. No figure or statistic in this note is hand-entered.
+*Companion computation script.* Every numerical value cited in this note is reproducible from
+the published analysis scripts in the public repository — `analyze.py` (per-arm contrasts and
+effect sizes), `compute_icc.py` (inter-scorer reliability), and `compute_headroom.py` (the
+dose-response) — with the run commands documented in the repository README; the graded-headroom
+scenarios are regenerated and arithmetically verified by `gen_headroom_variants.py`. No figure
+or statistic in this note is hand-entered.
 
 ## Acknowledgments and Author Contributions
 
