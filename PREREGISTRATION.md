@@ -1,6 +1,6 @@
 ---
 title: "Spec-Agent vs Styled-Agent in AI–AI Negotiation — Preregistration"
-status: FROZEN PRE-RUN (v1.0.0) — OSF public project https://osf.io/gmhj7/ (uploaded 2026-06-06); canonical freeze = git commit 2ed95ffd
+status: FROZEN PRE-RUN (v1.0.0) — canonical freeze = git commit 2ed95ffd (2026-06-06); archived (timestamped) on Zenodo 10.5281/zenodo.20595996 + GitHub
 author: Dmitry Zharnikov
 date: 2026-06-06
 base_paper: Vaccaro, Caosun, Ju, Aral & Curhan (2026), arXiv 2503.06416 (PNAS published version; PUBLIC REF = arXiv 2503.06416)
@@ -11,12 +11,11 @@ design_doc: EXPERIMENT_DESIGN.md (same directory)
 
 This document freezes the hypotheses, conditions, sampling, and analysis **before any
 negotiation is run or any paid API call is made**. The canonical pre-run freeze is git
-commit `2ed95ffd` (2026-06-06, before the first paid call). A public OSF project mirrors
-this frozen prereg + design + pilot-gate audit + prompt hashes at **https://osf.io/gmhj7/**
-(uploaded 2026-06-06; author Dmitry Zharnikov, OSF id 3zvrp). An immutable OSF Registration
-was deliberately NOT minted: the run had already begun, so a pre-data-collection registration
-schema would misstate timing; the git commit is the authoritative timestamp. No change to §2–§6 is
-permitted after the OSF registration timestamp except as a logged, dated amendment in §8.
+commit `2ed95ffd` (2026-06-06, before the first paid call) — the authoritative timestamp. The
+frozen prereg + design + pilot-gate audit + prompt hashes are archived (third-party, timestamped)
+on Zenodo (concept DOI 10.5281/zenodo.20595996) and mirrored on GitHub
+(github.com/spectralbranding/negotiation-spec-experiment). No change to §2–§6 is permitted after
+the freeze commit except as a logged, dated amendment in §8.
 
 ## 0. Research question
 
@@ -105,7 +104,9 @@ H5) is pre-registered, not hidden.
   `*/dryrun/` and is git-ignored.
 - Every paid call logged before the next is issued; redaction at write time.
 - No SBT vocabulary bolted onto a negotiation paper; we cite the base paper, not vice versa.
-- A pre-draft critical-review gate fires at the drafting stage, not before the run.
+- The empirical-note DRAFTING stage triggers the Grok pre-draft gate
+  (`research/reviews/R_PAPER_PREDRAFT_WORKFLOW.md`) — confirmed by user 2026-06-06 to fire at
+  draft stage, NOT before the run.
 
 ## 8. Amendments (append-only, dated)
 

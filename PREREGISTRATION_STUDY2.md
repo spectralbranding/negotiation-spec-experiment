@@ -64,7 +64,7 @@ Identical to Study 1 except the scenario set. Reproduced here for self-containme
 | Sampling | Pilot (~300 Study 2 negotiations) → MVP ~150/cell. Scale to ~400/cell on the primary model only if the MVP shows a directional SPEC effect worth tightening. |
 | Budget ceiling | **$40 USD for Study 2** (separate from Study 1; user-approved required before first paid call). Logger sums `cost_usd_est`; runner aborts at $38. |
 | Logging | Per-call JSONL via `research/code/llm_call_logger.py` (HARD RULE). Transcripts are the SSOT. Study 2 transcripts land in a `study2/` subtree, never overwriting Study 1 data. |
-| Hosting | Same GitHub mirror `negotiation-spec-experiment` (Study 2 under a `study2/` path) + OSF + Zenodo dual-DOI + HF dataset. |
+| Hosting | Same GitHub mirror `negotiation-spec-experiment` + Zenodo dual-DOI + HF dataset (DOI 10.57967/hf/9090). |
 
 ## 2. Conditions — the SAME 2×2 (structured-spec × CoT) plus controls
 
@@ -228,7 +228,7 @@ Harness changes (correctness only, no hypothesis change; mirror Study-1 Amendmen
 `--conditions` (condition-subset selector) and `--opponent` (focal-vs-fixed-opponent) flags to
 `run_experiment.py`, unit-tested in `test_robustness.py`; default behavior unchanged. All arms
 isolate via `--data-dir`/`--logs-dir`. Components 1, 2, 4 ran 2026-06-08 (clean — see
-results summary); Component 3 (headroom) deferred at the pre-run gate (below).
+RESULTS_SUMMARY.md); Component 3 (headroom) deferred at the pre-run gate (below).
 
 **2026-06-08 — Component-3 headroom retune (pre-results, gate-driven).** The original graded
 series (`supplier_h05..h50`, headroom set analytically at the *naive* bundle) FAILED the
