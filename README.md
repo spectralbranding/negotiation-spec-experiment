@@ -113,9 +113,10 @@ Machine-readable citation: see [`CITATION.cff`](CITATION.cff). GitHub "Cite this
 
 Per-arm `outcomes.csv` files (one row per dyad, with computed value/deal outcomes and judged measures) live in the `data_*/` directories of this repository and are released under CC BY 4.0.
 
-The **full negotiation transcripts** are archived as a Hugging Face dataset and are **not** included in this repository due to size.
+The **full negotiation transcripts** (4,920 dyads across seven arms, consolidated per-arm JSONL) are archived as a Hugging Face dataset and are **not** included in this repository due to size:
 
-HF dataset DOI: `<to be added>`
+- **Dataset:** https://huggingface.co/datasets/spectralbranding/negotiation-spec-experiment
+- **DOI:** [`10.57967/hf/9090`](https://doi.org/10.57967/hf/9090)
 
 ---
 

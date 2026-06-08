@@ -338,9 +338,10 @@ subsample remains future work.
 All scenarios, the six frozen condition prompts (with hashes), the negotiation harness, the
 scoring and analysis scripts, and per-arm outcome tables are openly available in the public
 repository, released under permissive licenses (MIT for code, CC BY 4.0 for data). Full
-negotiation transcripts are archived as a dataset of record with a permanent DOI; the
-preregistrations, gate audits, and amendment logs are included. The archival record carries
-the permanent concept DOI 10.5281/zenodo.20595996 (this version, 10.5281/zenodo.20595997).
+negotiation transcripts are archived as a dataset of record with a permanent DOI
+(10.57967/hf/9090); the preregistrations, gate audits, and amendment logs are included. The
+archival record carries the permanent concept DOI 10.5281/zenodo.20595996 (this version,
+10.5281/zenodo.20595997).
 Reported figures are reproducible from the published scripts with the documented run commands.
 
 *Companion computation script.* Every numerical value cited in this note is reproducible
