@@ -1,0 +1,41 @@
+# Secrets + environment
+.env
+.env.*
+*.env
+!.env.example
+secrets
+*.key
+*.pem
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# Logs (never publish raw run logs or LLM-call logs to this mirror)
+*.log
+logs_*/
+
+# Full transcripts are archived separately (Hugging Face); never commit here
+data_*/transcripts/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*~

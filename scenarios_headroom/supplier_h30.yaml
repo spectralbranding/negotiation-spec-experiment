@@ -1,0 +1,164 @@
+---
+# Scenario: supplier_h30  (HEADROOM DOSE-RESPONSE — target realized headroom ~30%)
+# Retuned 2026-06-08 by code/gen_headroom_variants.py (SSOT for all numbers below).
+# Base template: scenarios_study2/supplier.yaml. Only the volume + warranty payoff
+# tables vary across the h10..h50 series; unit_price (zero-sum, joint 160) and
+# payment_terms (near-flat distractor, joint 40 band) are IDENTICAL to the base.
+#
+# HEADROOM (created on two missed moves a naive pair leaves on the table):
+#   volume   = COMPATIBLE (both want 200; naive haggler settles it LOW)
+#   warranty = LOGROLL    (supplier wants 1y, buyer ~indifferent; naive splits to 3y)
+# Pareto (price=12, vol=200, pay=45, warranty=1): joint = 960 (fixed all variants)
+# Naive  (price=12, vol=100, pay=45, warranty=3): joint = 600  -> headroom 0.375
+# Mid    (price=12, vol=150, pay=45, warranty=3): joint = 670  -> headroom 0.302
+#   (mid-grid = NEUTRAL's typical landing; the realized x-axis is MEASURED in the pilot.)
+
+scenario_id: supplier_h30
+type: integrative
+description: >
+  A procurement buyer and a component supplier negotiate a one-year supply contract on
+  four terms: unit price (USD/unit), committed annual volume (k units), payment terms
+  (net days), and warranty length (years). Each party has a private point table; the
+  full matrix is published. This is the ~30% headroom variant of the supplier family.
+
+roles:
+  - id: buyer
+    label: Buyer
+    description: >
+      You are procurement for a manufacturer. You want a LOW unit price. You also
+      genuinely benefit from a HIGH committed volume (it secures supply and locks
+      pricing), though it is easy to forget that under price pressure. You are nearly
+      indifferent to payment terms and care little about warranty length.
+    batna_value: 180
+    batna_description: >
+      Source from an alternative supplier on worse terms — worth 180 points.
+    private_payoff_card:
+      unit_price_usd:
+        description: "Lower unit price is better for you."
+        options:
+          10: 160
+          11: 128
+          12: 96
+          13: 64
+          14: 32
+          15: 0
+      volume_commit_kunits:
+        description: "A higher committed volume secures your supply — better for you."
+        options:
+          50: 0
+          100: 95
+          150: 125
+          200: 200
+      payment_terms_days:
+        description: "You mildly prefer longer terms, but it barely matters."
+        options:
+          15: 30
+          30: 25
+          45: 20
+          60: 15
+          90: 10
+      warranty_years:
+        description: "A longer warranty is mildly nice but low priority for you."
+        options:
+          1: 0
+          2: 16
+          3: 32
+          5: 52
+
+  - id: supplier
+    label: Supplier
+    description: >
+      You are the vendor. You want a HIGH unit price. You also strongly benefit from a
+      HIGH committed volume (predictable revenue and production planning). You are nearly
+      indifferent to payment terms. You care intensely about a SHORT warranty (long
+      warranties expose you to costly claims — your top priority).
+    batna_value: 180
+    batna_description: >
+      Sell the capacity to another customer on worse terms — worth 180 points.
+    private_payoff_card:
+      unit_price_usd:
+        description: "Higher unit price is better for you."
+        options:
+          10: 0
+          11: 32
+          12: 64
+          13: 96
+          14: 128
+          15: 160
+      volume_commit_kunits:
+        description: "A higher committed volume gives predictable revenue — better for you."
+        options:
+          50: 0
+          100: 125
+          150: 165
+          200: 260
+      payment_terms_days:
+        description: "You mildly prefer shorter terms, but it barely matters."
+        options:
+          15: 10
+          30: 15
+          45: 20
+          60: 25
+          90: 30
+      warranty_years:
+        description: "A SHORTER warranty is much better for you (claim-cost exposure — top priority)."
+        options:
+          1: 300
+          2: 256
+          3: 148
+          5: 0
+
+full_payoff_matrix:
+  note: >
+    Key reference bundles. Full per-issue tables above are published openly. Headroom is
+    graded BY DESIGN across the h10..h50 family (this variant target ~30%).
+  key_bundles:
+    - label: "Naive (unit_price=12, volume=100, payment=45, warranty=3)"
+      unit_price_usd: 12
+      volume_commit_kunits: 100
+      payment_terms_days: 45
+      warranty_years: 3
+      buyer_points: 243
+      supplier_points: 357
+      joint_points: 600
+    - label: "Mid-grid (unit_price=12, volume=150, payment=45, warranty=3)"
+      unit_price_usd: 12
+      volume_commit_kunits: 150
+      payment_terms_days: 45
+      warranty_years: 3
+      buyer_points: 273
+      supplier_points: 397
+      joint_points: 670
+    - label: "Pareto-optimal (high volume both, short warranty, distractor neutral)"
+      unit_price_usd: 12
+      volume_commit_kunits: 200
+      payment_terms_days: 45
+      warranty_years: 1
+      buyer_points: 316
+      supplier_points: 644
+      joint_points: 960
+
+analytic_optimum:
+  description: >
+    Pareto-optimal bundle: unit_price=$12/unit, volume=200k units, payment=net-45,
+    warranty=1 year. unit_price is zero-sum (joint constant 160); payment is a near-flat
+    distractor (joint ~40). Value is created on volume (compatible) and warranty (logroll).
+  best_bundle:
+    unit_price_usd: 12
+    volume_commit_kunits: 200
+    payment_terms_days: 45
+    warranty_years: 1
+  buyer_points: 316
+  supplier_points: 644
+  joint_points: 960
+
+offer_protocol:
+  description: >
+    Agents MUST use the structured offer protocol. A valid offer is an OFFER: line
+    containing a JSON object whose keys are the four issue names exactly as they appear
+    in the payoff card (unit_price_usd, volume_commit_kunits, payment_terms_days,
+    warranty_years). Every value is a number drawn from the option set.
+    Acceptance: ACCEPT on its own line. Rejection/counter: plain text + new OFFER.
+    Example: 'OFFER: {"unit_price_usd": 12, "volume_commit_kunits": 200, "payment_terms_days": 45, "warranty_years": 1}'
+
+max_rounds: 14

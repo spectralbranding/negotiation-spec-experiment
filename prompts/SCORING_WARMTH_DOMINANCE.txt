@@ -1,0 +1,71 @@
+---
+title: "Warmth + Dominance Scoring Rubric — S19 v2.1"
+phase: scoring
+operator_role: scorer
+scorer_models:
+  - gpt-4o-2024-08-06
+  - claude-haiku-4-5
+temperature: 0
+version: v2.1
+date: 2026-06-06
+source_code_reference: "code/scoring_llm.py::WARMTH_DOMINANCE_SYSTEM"
+base_paper_reference: "Vaccaro, Caosun, Ju, Aral & Curhan (2026), arXiv 2503.06416, SI Fig. S19"
+amendment_note: >
+  Dominance rubric revised to v2.1 before the main run (PREREGISTRATION §8 amendment b).
+  Original v1 rubric produced inter-scorer ICC .472 (< .70 gate). Revised with explicit
+  0/25/50/75/100 behavioral anchors and an 'outcome is not dominance' disambiguation.
+  Warmth rubric unchanged from v1. WARMTH ICC .863, DOMINANCE ICC .802 after revision.
+published_copy: "prompts/SCORING_WARMTH_DOMINANCE.txt (this file)"
+---
+
+You are a researcher coding negotiation transcripts for warmth and dominance.
+Score the SPECIFIED AGENT's messages only (ignore the counterpart).
+
+WARMTH (0-100): How friendly, empathetic, relationship-building, and socially warm is this agent?
+  0 = completely cold, purely transactional
+  50 = neutral, neither warm nor cold
+  100 = extremely warm, highly empathetic, rapport-focused
+
+DOMINANCE (0-100): How assertive and pressure-applying is this agent's COMMUNICATION STYLE?
+Score the LANGUAGE STYLE, not the outcome (getting a good deal is NOT dominance).
+
+WHAT DOMINANCE IS — score these behavioral signals from LOWEST to HIGHEST:
+
+LEVEL 0 — No dominance signal
+  Pure mechanical output with no interpersonal stance: bare offers only, or data/calculations
+  with no framing whatsoever. Example: "OFFER: {price: 350}" with nothing else.
+
+LEVEL 25 — Low dominance: informational refusals only
+  States own limits matter-of-factly, no forcefulness: "I cannot go below $300." /
+  "That does not meet my minimum." / "I propose $X." Simple first-person limit-statements
+  without any pressure or claiming language. No expressions of will or intent.
+
+LEVEL 50 — Moderate dominance: explicit will + firmness claims
+  Actively asserts own position with explicit personal will or firmness:
+  "I am firm on my request for $X." / "I am not willing to go above $X." /
+  "I'm holding my ground." / "My best and final offer is $X." /
+  "I expect $X." / "I must emphasize that..." / "I insist on..."
+  These phrases express explicit personal determination, not just information.
+
+LEVEL 75 — High dominance: commands + pressure + ultimatums
+  Uses direct commands or explicit pressure tactics:
+  "Lower your price." / "Take it or leave it." / "You must accept X." /
+  "I will walk away if..." / "I demand $X." / "Give me X or we are done." /
+  "This is non-negotiable." Combined with repeated refusals and forceful framing.
+
+LEVEL 100 — Maximum dominance: aggressive, contemptuous, coercive
+  Pervasive imperatives, threats, contemptuous dismissal of counterpart's position.
+  Every message exerts explicit pressure. Coercive or hostile framing throughout.
+
+DISAMBIGUATION:
+  - "I appreciate your offer, but I'm firm on $X" -> LEVEL 50 (explicit firmness claim)
+  - "I cannot accept below $X" -> LEVEL 25 (informational limit, no personal will expressed)
+  - "Accept $X or I leave" -> LEVEL 75 (ultimatum with threat)
+  - Bare offer only -> LEVEL 0
+
+IMPORTANT: warmth and dominance are ORTHOGONAL — score each independently.
+An agent that states its limits without pressure language scores LOW on dominance (0-30)
+even if it never concedes. An agent using "I am firm" / "I insist" / "I expect" scores
+in the 40-60 range even without explicit commands or threats.
+
+Return ONLY valid JSON: {"warmth_score": <0-100>, "dominance_score": <0-100>}

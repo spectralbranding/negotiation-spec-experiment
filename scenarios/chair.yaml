@@ -1,0 +1,99 @@
+---
+# Scenario: chair
+# Type: distributive (single-issue price)
+# Description: One office chair for sale. Buyer and seller negotiate on price only.
+# ZOPA: buyer BATNA = 420, seller BATNA = 300, so ZOPA = [300, 420] width = 120
+# Analytic optimum (midpoint of ZOPA): 360
+# Nash bargaining solution (equal-surplus split): 360
+# Equal-split price: 360
+
+scenario_id: chair
+type: distributive
+description: >
+  A used premium office chair is for sale. The seller wants to sell it; the buyer
+  wants to buy it. They negotiate only on price (USD).
+
+issue:
+  name: price
+  unit: USD
+  options:
+    - 220
+    - 240
+    - 260
+    - 280
+    - 300
+    - 320
+    - 340
+    - 360
+    - 380
+    - 400
+    - 420
+    - 440
+    - 460
+    - 480
+    - 500
+
+roles:
+  - id: buyer
+    label: Buyer
+    description: >
+      You want to purchase the chair. You have found a comparable chair
+      elsewhere for $420 — that is your walkaway price (you will not pay more).
+      Your target is to pay as little as possible.
+    batna_value: 0        # surplus to buyer if they walk = 0 (they use BATNA price)
+    batna_description: >
+      Buy the comparable chair elsewhere for $420.
+    reservation_price: 420   # max willing to pay
+    target_price: 280        # aspirational anchor
+    private_payoff:
+      # Buyer surplus = reservation_price - deal_price
+      # E.g. if deal at 300: surplus = 120; if deal at 420: surplus = 0
+      formula: "420 - deal_price"
+      note: >
+        Every dollar below $420 is a dollar of value to you. A deal at $300
+        gives you $120 surplus. A deal above $420 is worse than your BATNA.
+
+  - id: seller
+    label: Seller
+    description: >
+      You want to sell the chair. The lowest price you will accept is $300
+      (your cost basis plus minimum acceptable margin). You aim to sell as
+      high as possible.
+    batna_value: 0
+    batna_description: >
+      Keep the chair (or sell to someone else at $300 floor — treat as $300 minimum).
+    reservation_price: 300   # min willing to accept
+    target_price: 440        # aspirational anchor
+    private_payoff:
+      formula: "deal_price - 300"
+      note: >
+        Every dollar above $300 is a dollar of value to you. A deal at $420
+        gives you $120 surplus. A deal below $300 is worse than your BATNA.
+
+full_payoff_matrix:
+  note: >
+    Both parties' surpluses at each price point. Published openly.
+    Total surplus is constant (zero-sum) at any point within the ZOPA.
+    ZOPA = [300, 420]; width = 120. Midpoint (Nash solution) = 360.
+  prices: [300, 320, 340, 360, 380, 400, 420]
+  buyer_surplus:  [120, 100, 80, 60, 40, 20, 0]
+  seller_surplus: [0,   20,  40, 60, 80, 100, 120]
+  joint_surplus:  [120, 120, 120, 120, 120, 120, 120]
+
+analytic_optimum:
+  description: >
+    Distributive: no value creation possible. Total surplus = $120 at any
+    deal in ZOPA. Nash bargaining solution (equal split) = $360 (each gets $60).
+    Any deal in [300, 420] is Pareto-optimal.
+  nash_price: 360
+  buyer_surplus_at_nash: 60
+  seller_surplus_at_nash: 60
+
+offer_protocol:
+  description: >
+    Agents MUST use the structured offer protocol defined in the harness.
+    A valid offer is: OFFER: {"price": <number>}
+    Acceptance: ACCEPT
+    Rejection/counter: plain text explanation + new OFFER
+
+max_rounds: 8

@@ -1,0 +1,495 @@
+spine_version: "0.2"
+paper_key: "negotiation_spec_2026"
+title: "Value Headroom Moderates Whether Specification Beats Style in LLM Negotiation"
+thesis: |
+  Value headroom — how much joint surplus a naively cooperative pair leaves on the
+  table — is a first-order moderator of prompt-type efficacy in dyadic LLM negotiation.
+  Interpersonal style (warmth) dominates structural specification only when joint-value
+  headroom approaches zero; above a modest headroom threshold, specification-first
+  prompting produces strictly higher expected value while remaining affectively neutral.
+  The specification advantage (1) is mechanistically due to a taught integrative
+  procedure — logrolling — not to leakage of the payoff matrix; (2) is robust to prompt
+  paraphrase; (3) grows with model capability; and (4) replicates across model families.
+  This reframes an apparent "style beats structure" result reported on near-ceiling
+  scenarios as a boundary case of a more general headroom-dependent law.
+
+# ---------------------------------------------------------------------------
+# Boundary conditions (cannot be relaxed — theory does not apply outside them)
+# ---------------------------------------------------------------------------
+boundary_conditions:
+  - id: C1
+    statement: "Integrative scenarios with quantifiable joint value (value_created defined); excludes pure single-issue distributive bargaining where joint surplus is constant."
+  - id: C2
+    statement: "Dyadic LLM-vs-LLM negotiation with each agent given its own published numeric payoff card + reservation value at the harness level."
+  - id: C3
+    statement: "Prompt-type contrast as operationalized: SPEC (specification-first), WARMTH/DOMINANCE (style), NEUTRAL (floor), COT_ONLY (structure-without-spec) condition bodies, frozen + hashed."
+  - id: C4
+    statement: "Hypotheses evaluated at the DYAD level (one negotiation = one unit); agent-level style scores enter only as manipulation checks."
+
+# ---------------------------------------------------------------------------
+# Observations — raw run outputs (immutable L-layer events)
+# ---------------------------------------------------------------------------
+observations:
+  - id: O1
+    statement: "Study 1 (gpt-4o-mini, easy/near-ceiling scenarios chair/rental/offer, ~3% headroom): 630 dyads, scored transcripts + outcomes."
+    raw_data_pointer: "data/outcomes.csv + logs/"
+    instrument: "negotiation_runner.py @ temp .20; scorers gpt-4o + claude-haiku-4-5"
+    provenance:
+      created_by: "tool:run_experiment.py"
+      created_at: "2026-06-06"
+      source_log_event: "PILOT_GATE_AUDIT.md (Study 1 GO); git prereg 2ed95ffd"
+    body_sections: ["Method", "Results — Study 1"]
+  - id: O2
+    statement: "Study 2 (gpt-4o-mini, hard scenarios merger/supplier/salvage, 31-46% headroom): 630 dyads, scored."
+    raw_data_pointer: "data_study2/outcomes.csv + logs_study2/"
+    instrument: "negotiation_runner.py @ temp .20; same scorer pair"
+    provenance:
+      created_by: "tool:run_experiment.py"
+      created_at: "2026-06-06"
+      source_log_event: "PILOT_GATE_AUDIT.md (Study 2 GO)"
+    body_sections: ["Results — Study 2"]
+  - id: O3
+    statement: "Haiku cross-family (claude-haiku-4-5, Study-1 scenarios): 630 dyads, scored."
+    raw_data_pointer: "data_haiku/outcomes.csv + logs_haiku/"
+    provenance:
+      created_by: "tool:run_experiment.py"
+      created_at: "2026-06-07"
+      source_log_event: "run_chain_haiku_then_study2.sh"
+    body_sections: ["Results — Cross-family"]
+  - id: O4
+    statement: "Logrolling ablation, full 7-condition grid incl. SPEC_NOLOGROLL (merger+supplier): 560 dyads, scored."
+    raw_data_pointer: "data_ablation_full/outcomes.csv + logs_ablation_full/"
+    provenance:
+      created_by: "tool:run_experiment.py"
+      created_at: "2026-06-08"
+      source_log_event: "EXTENSION_DESIGN.md §1; commit 028b08da"
+    body_sections: ["Results — Mechanism"]
+  - id: O5
+    statement: "Frontier capability arm (grok-4.3, full Study-2 grid merger/supplier/salvage): 630 dyads, scored."
+    raw_data_pointer: "data_frontier/outcomes.csv + logs_frontier/"
+    provenance:
+      created_by: "tool:run_experiment.py"
+      created_at: "2026-06-08"
+      source_log_event: "run_chain_extension.sh STAGE 3"
+    body_sections: ["Results — Capability scaling"]
+  - id: O6
+    statement: "Paraphrase robustness envelope (gpt-4o-mini, 4 focal x 5 wordings vs pinned NEUTRAL, merger+supplier): 640 dyads, scored."
+    raw_data_pointer: "data_paraphrase/outcomes.csv + logs_paraphrase/"
+    provenance:
+      created_by: "tool:run_experiment.py"
+      created_at: "2026-06-08"
+      source_log_event: "run_chain_extension.sh STAGE 2"
+    body_sections: ["Results — Wording robustness"]
+  - id: O7
+    statement: "Headroom dose-response (gpt-4o-mini, retuned supplier_h10..h50, NEUTRAL/COT_ONLY/SPEC_NOCOT): ~1200 dyads, scored."
+    raw_data_pointer: "data_headroom/outcomes.csv (1,200 dyads, unscored, $1.07, 0 failures)"
+    provenance:
+      created_by: "tool:run_experiment.py"
+      created_at: "2026-06-08"
+      source_log_event: "code/gen_headroom_variants.py + run_chain_extension.sh STAGE 4 (RUN_HEADROOM=1)"
+    body_sections: ["Results — Dose-response"]
+
+# ---------------------------------------------------------------------------
+# Methods
+# ---------------------------------------------------------------------------
+methods:
+  - id: M1
+    statement: "Dyadic negotiation harness: round-robin condition grid x scenarios x 2 role orders x replicates; structured OFFER/ACCEPT protocol; payoff cards + reservation injected at turn level; deal parsing + value_created/value_claimed computed from agreed terms."
+    type: "computation"
+    inputs: [O1, O2, O3, O4, O5, O6, O7]
+    code_anchor: "code/run_experiment.py + code/negotiation_runner.py + code/outcomes.py"
+    reproducibility:
+      seed: "temp .20 (sampling); deterministic outcome computation; LLM clients timeout=90,max_retries=3"
+      version: "git: feature/negotiation-spec-study2"
+    provenance: {created_by: "author", created_at: "2026-06-06", source_log_event: "EXPERIMENT_DESIGN.md"}
+    body_sections: ["Method"]
+  - id: M2
+    statement: "Two-scorer warmth/dominance + SVI rating cascade (gpt-4o + claude-haiku-4-5, temp 0, rubric v2.1 with 0/25/50/75/100 anchors); inter-scorer ICC(2,1) reported per arm."
+    type: "ai_invocation"
+    inputs: [O1, O2, O3, O4, O5, O6]
+    code_anchor: "code/scoring_llm.py + code/compute_icc.py"
+    provenance: {created_by: "author", created_at: "2026-06-06", source_log_event: "PILOT_GATE_AUDIT.md Gate 3"}
+    body_sections: ["Method — Manipulation checks"]
+  - id: M3
+    statement: "Pre-specified Welch t-test contrasts per condition pair on value_created (integrative only), value_claimed, deal rate; effect sizes Cohen's d; exact p (3 digits, no leading zero, p<.001 floor). Primary mixed model fell back to OLS cluster-robust SE (MixedLM singular on this design — documented)."
+    type: "statistical_analysis"
+    inputs: [O1, O2, O3, O4, O5, O6, O7]
+    code_anchor: "code/analyze.py"
+    provenance: {created_by: "author", created_at: "2026-06-06", source_log_event: "PREREGISTRATION.md §4 + PREREGISTRATION_STUDY2.md"}
+    body_sections: ["Method — Analysis"]
+  - id: M4
+    statement: "Unconditional expected-value measure EV = mean(value_created if deal else 0) per condition — corrects conditional-on-deal selection bias. Exploratory (amendment-logged), not confirmatory."
+    type: "statistical_analysis"
+    inputs: [O1, O2, O3, O5]
+    code_anchor: "code/analyze.py (expected_value block)"
+    provenance: {created_by: "author", created_at: "2026-06-07", source_log_event: "results summary Counter-measure"}
+    body_sections: ["Results — Expected value (robustness)"]
+
+# ---------------------------------------------------------------------------
+# Findings — what is the case (SSOT numbers: results summary)
+# ---------------------------------------------------------------------------
+findings:
+  - id: F1
+    statement: "At the value ceiling (Study 1), SPEC_NOCOT ties every cooperative control on value created (SPEC_NOCOT-NEUTRAL +5.07, d=.049, p=.683; -COT_ONLY d=-.030; -WARMTH d=.019). Warmth does not lift value. This is the preregistered NULL."
+    source_method: M3
+    antecedents: [O1, M1, M3]
+    statistical_strength: "preregistered confirmatory null; N=630 dyads; deal rate .844"
+    conditions: "C1, C3, C4; ceiling regime (NEUTRAL already ~641/658)"
+    falsifier: "If SPEC beat cooperative controls on value created at <5% headroom, the ceiling account fails."
+    citation_role: ["motivation_for_P1"]
+    provenance: {created_by: "tool:analyze.py", created_at: "2026-06-06", source_log_event: "results summary Arm A"}
+    body_sections: ["Results — Study 1"]
+  - id: F2
+    statement: "With headroom (Study 2), SPEC wins on value created: SPEC_NOCOT-NEUTRAL +54.24, d=.314, p=.009; SPEC_NOCOT-WARMTH +43.69, d=.263, p=.029; SPEC_COT-WARMTH +56.77, d=.346, p=.004. WARMTH-NEUTRAL d=.058, p=.629 (warmth does not lift value). Deal rate SPEC_NOCOT-NEUTRAL +.11, d=.293, p=.003."
+    source_method: M3
+    antecedents: [O2, M1, M3]
+    statistical_strength: "confirmatory; N=630; ICC warmth .840 / dominance .911"
+    conditions: "C1, C3, C4; headroom 31-46%"
+    falsifier: "If SPEC tied controls on value created at 31-46% headroom, the headroom-moderation claim fails."
+    provenance: {created_by: "tool:analyze.py", created_at: "2026-06-06", source_log_event: "results summary Arm B"}
+    body_sections: ["Results — Study 2"]
+  - id: F3
+    statement: "Core null replicates cross-family (haiku): SPEC_NOCOT ties controls on value in the easy regime (SPEC_NOCOT-COT_ONLY d=.010, p=.930; WARMTH-NEUTRAL d=.007). New model-dependent thread: SPEC_COT beats COT/WARMTH strongly even on easy scenarios (SPEC_COT-COT_ONLY d=.507, p<.001; -WARMTH d=.744, p<.001). DOMINANCE penalty much milder on haiku (deal d=-.32 vs gpt -.93; value not cratered)."
+    source_method: M3
+    antecedents: [O3, M1, M3]
+    statistical_strength: "N=630; ICC warmth .850 / dominance .850"
+    conditions: "C1, C3, C4; easy regime, second model family"
+    provenance: {created_by: "tool:analyze.py", created_at: "2026-06-07", source_log_event: "results summary Arm C"}
+    body_sections: ["Results — Cross-family"]
+  - id: F4
+    statement: "Logrolling ablation (full-grid, matched baseline NEUTRAL value 780): removing ONLY the logrolling sentence collapses SPEC's advantage. SPEC_NOCOT-SPEC_NOLOGROLL +55.0 value-created, d=.353, p=.002 (+50.9 value-claimed, d=.318, p=.005). SPEC_NOLOGROLL-NEUTRAL d=.106, p=.342 (ns) and -COT_ONLY d=.156, p=.163 (ns): it falls back to the control level. On OWN value SPEC_NOLOGROLL underperforms NEUTRAL (d=-.23, p=.044) — concede-low without seek-trades-back makes a systematic conceder."
+    source_method: M3
+    antecedents: [O4, M1, M3]
+    statistical_strength: "confirmatory directional; N=560; ICC warmth .822 / dominance .801"
+    conditions: "C1, C3, C4; SPEC_NOLOGROLL retains full ranked-weight payoff spec, drops only the cross-issue-trade clause"
+    falsifier: "If SPEC_NOLOGROLL retained SPEC_NOCOT's advantage (still beat controls), the leak rival would be supported, not strategy."
+    citation_role: ["rules_out_A1"]
+    provenance: {created_by: "tool:analyze.py", created_at: "2026-06-08", source_log_event: "results summary Ablation; commit 028b08da"}
+    body_sections: ["Results — Mechanism: strategy not leakage"]
+  - id: F5
+    statement: "At the frontier (grok-4.3), the SPEC advantage GROWS: SPEC_NOCOT-NEUTRAL +70.9, d=.569, p<.001 (vs gpt-4o-mini .314); -COT_ONLY d=.571; -WARMTH d=.687. WARMTH-NEUTRAL d=-.126 (ns). ICC warmth .894 / dominance .855. The gpt-4o-mini warmth/dominance bleed is gone (WARMTH dominance 6.8 vs DOMINANCE 44.9)."
+    source_method: M3
+    antecedents: [O5, M1, M3]
+    statistical_strength: "exploratory capability probe; N=630; cleanest manipulation separation"
+    conditions: "C1, C3, C4; frontier capability"
+    provenance: {created_by: "tool:analyze.py", created_at: "2026-06-08", source_log_event: "results summary Frontier"}
+    body_sections: ["Results — Capability scaling"]
+  - id: F6
+    statement: "Manipulation purity holds across all 5 paraphrases of every focal condition: WARMTH paraphrases warmth ~85-88; SPEC paraphrases warmth ~9-11 AND dominance ~7-9 (low-low); COT_ONLY ~6-8/~0. The effects are not a single-phrasing artifact."
+    source_method: M2
+    antecedents: [O6, M2]
+    statistical_strength: "exploratory robustness envelope; N=640"
+    conditions: "C3; CAVEAT — focal-vs-pinned-NEUTRAL joint value is a different quantity than the round-robin; do not cross-compare condition ranks"
+    provenance: {created_by: "tool:analyze.py", created_at: "2026-06-08", source_log_event: "results summary Paraphrase"}
+    body_sections: ["Results — Wording robustness"]
+  - id: F7
+    statement: "Unconditional expected value (deal_rate x value_if_deal): SPEC (esp. SPEC_COT) tops every arm; DOMINANCE bottom/near-bottom everywhere (deal-rate drag); WARMTH never tops it (buys deals, cedes value, nets mid-pack). Frontier EV: SPEC_NOCOT 967 / SPEC_COT 942 top; DOMINANCE 694 bottom."
+    source_method: M4
+    antecedents: [O1, O2, O3, O5, M4]
+    statistical_strength: "exploratory unifying measure across arms"
+    conditions: "C1; corrects conditional-on-deal selection"
+    provenance: {created_by: "tool:analyze.py", created_at: "2026-06-07", source_log_event: "results summary Counter-measure"}
+    body_sections: ["Results — Expected value (robustness)"]
+  - id: F8
+    statement: "DOMINANCE craters deal rate across ALL models (gpt Study1 deal d~-.93; Study2 SPEC-DOMINANCE deal d=.935; frontier DOMINANCE-NEUTRAL deal d=-.413, p<.001) but craters VALUE only on gpt-4o-mini; haiku + grok spare value. Model-specific on value, universal on deal rate."
+    source_method: M3
+    antecedents: [O1, O2, O3, O5, M3]
+    statistical_strength: "secondary negative control across arms"
+    conditions: "C2, C3; DOMINANCE is the negative control"
+    provenance: {created_by: "tool:analyze.py", created_at: "2026-06-08", source_log_event: "results summary Synthesis"}
+    body_sections: ["Results — Dominance (secondary control)"]
+
+# ---------------------------------------------------------------------------
+# Propositions — why is it the case (the theoretical claims)
+# ---------------------------------------------------------------------------
+propositions:
+  - id: P1
+    statement: "Value headroom is a first-order moderator of prompt-type efficacy: above a modest headroom threshold, specification-first prompting yields strictly higher expected joint value than interpersonal-style prompting, while at the ceiling the two are indistinguishable on value."
+    type: empirical_finding
+    conditions: "C1, C2, C3, C4"
+    antecedents: [F1, F2, F7]
+    assumptions: [AA1, AA2]
+    falsifier: "A monotone-or-null SPEC advantage that does NOT depend on headroom (same sign/size at ceiling and with headroom) refutes P1."
+    evidence:
+      - type: log_anchor
+        anchor: "F1 (null at ceiling) contrasted with F2 (SPEC wins with headroom); EV unifies (F7)"
+      - type: citation
+        anchor: "value-creating vs value-claiming distinction"
+        citation_keys: [walton-mckersie-1965-behavioral-theory-labor-negotiations, lax-sebenius-1986-manager-as-negotiator, raiffa-1982-art-science-negotiation]
+        citation_role: theoretical_predecessor
+    ruled_out_rivals: [A1, A2, A3]
+    body_sections: ["Discussion — Headroom as first-order moderator", "Intro"]
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "pre-draft review"}
+  - id: P2
+    statement: "SPEC's value advantage is produced by a TAUGHT integrative procedure (logrolling — seek asymmetric cross-issue trades), not by exposure/leakage of the payoff matrix; the ranked-weight spec alone, without the logrolling clause, does not beat cooperative controls."
+    type: empirical_finding
+    conditions: "C1, C3"
+    antecedents: [F4]
+    falsifier: "F4 inverted (SPEC_NOLOGROLL still beats controls) would refute P2."
+    evidence:
+      - type: log_anchor
+        anchor: "F4 ablation: -1 sentence collapses the advantage to control level; own-value conceder result"
+      - type: citation
+        anchor: "logrolling / integrative trades as the value-creation mechanism"
+        citation_keys: [pruitt-1981-negotiation-behavior, walton-mckersie-1965-behavioral-theory-labor-negotiations]
+        citation_role: definitional_source
+    ruled_out_rivals: [A1]
+    body_sections: ["Discussion — Mechanism", "Results — Mechanism"]
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "EXTENSION_DESIGN.md §1"}
+  - id: P3
+    statement: "Structure scaffolds rather than washes out at the frontier: the specification advantage grows with model capability and the cleaner model separates the style manipulations more sharply (no warmth/dominance bleed)."
+    type: empirical_finding
+    conditions: "C1, C2, C3"
+    antecedents: [F5, F3]
+    falsifier: "A shrinking-to-zero SPEC advantage as capability rises (strong models find the logroll unaided) would refute P3 and support a high-capability ceiling instead."
+    evidence:
+      - type: log_anchor
+        anchor: "F5 grok d=.569 > gpt-4o-mini .314; F3 cross-family replication of the null + spec×CoT"
+      - type: citation
+        anchor: "contemporaneous LLM-negotiation capability findings"
+        citation_keys: [negotiationarena-2024, bhattacharya-2025-evaluating-negotiation-llms]
+        citation_role: contrast_case
+    body_sections: ["Discussion — Capability scaling"]
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "results summary Synthesis 3"}
+  - id: P4
+    statement: "Deal and value are distinct objectives current LLMs optimize differently under prompting: interpersonal style games the deal/agreement proxy (and can bleed across affective dimensions) while specification moves the objective value frontier; warmth is sufficient-not-necessary for cooperative outcomes and never tops expected value."
+    type: ontological
+    conditions: "C1, C2, C3"
+    antecedents: [F2, F7, F8, F6]
+    assumptions: [AA3]
+    falsifier: "If warmth topped expected value in any arm with headroom, the deal-vs-value separation would not hold."
+    evidence:
+      - type: log_anchor
+        anchor: "F7 EV (warmth never tops); F8 dominance deal-vs-value asymmetry; F6 SPEC clean decoupling; warmth suff-not-nec across arms"
+      - type: citation
+        anchor: "warmth/competence + value-claim vs value-create"
+        citation_keys: [curhan-2006-svi, lax-sebenius-1986-manager-as-negotiator]
+        citation_role: theoretical_predecessor
+    body_sections: ["Discussion — Deal vs value", "Results — Dominance"]
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "pre-draft review keep (EV measure)"}
+  - id: P5
+    statement: "The base paper's 'warmth, not structure' result is recovered as the headroom→0 boundary case of P1 — a directional/conceptual consistency with that observational finding, not a contradiction of it and not a 1:1 reproduction of its design."
+    type: rendering_equivalence
+    conditions: "C1, C3"
+    antecedents: [F1, P1]
+    falsifier: "If our ceiling regime did NOT recover the style-over-structure pattern, the boundary-case account fails."
+    evidence:
+      - type: citation
+        anchor: "base paper observational AI-negotiation finding (public preprint)"
+        citation_keys: [vaccaro-2026-advancing-ai-negotiations]
+        citation_role: motivating_problem
+    body_sections: ["Intro", "Discussion — Relation to prior work"]
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "results summary reconstruction disclosure"}
+
+# Dose-response derivation (result pending — see RC3)
+derivations:
+  - id: D1
+    statement: "If P1 holds, SPEC's value advantage should rise monotonically with realized headroom within a single scenario family (a positive spec×headroom interaction), not merely flip sign between two scenario sets."
+    from: [P1]
+    to: "RC3 prediction"
+    reasoning_type: "deductive"
+    formal_proof_anchor: "code/gen_headroom_variants.py (graded design)"
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "EXTENSION_DESIGN.md §3"}
+    body_sections: ["Results — Dose-response"]
+
+# ---------------------------------------------------------------------------
+# Alternative explanations (rivals)
+# ---------------------------------------------------------------------------
+alternative_explanations:
+  - id: A1
+    statement: "SPEC wins because naming weights + logrolling effectively hands the agent the payoff-matrix structure (information leakage), so any agent told the structure wins regardless of taught strategy."
+    rules_out_required: [F4]
+    ruled_out_by: [F4]
+    rules_out_status: "rejected"
+    reasoning: "SPEC_NOLOGROLL retains the full ranked-weight payoff spec and loses ONLY the cross-issue-trade clause, yet collapses to control level (F4). The active ingredient is the integrative instruction, not matrix exposure."
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "results summary Ablation"}
+    body_sections: ["Results — Mechanism"]
+  - id: A2
+    statement: "The SPEC advantage is an artifact of one exact prompt wording (p-hacked phrasing)."
+    rules_out_required: [F6]
+    ruled_out_by: [F6]
+    rules_out_status: "rejected"
+    reasoning: "Manipulation purity + effect survive across 5 semantically-equivalent paraphrases of each focal condition (F6)."
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "results summary Paraphrase"}
+    body_sections: ["Results — Wording robustness"]
+  - id: A3
+    statement: "The whole pattern is a single-model (gpt-4o-mini) artifact."
+    rules_out_required: [F3, F5]
+    ruled_out_by: [F3, F5]
+    rules_out_status: "rejected"
+    reasoning: "The core null replicates on haiku (F3) and the SPEC advantage strengthens on grok-4.3 (F5) — three families, same direction."
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "results summary Synthesis 3"}
+    body_sections: ["Results — Cross-family", "Results — Capability scaling"]
+
+# ---------------------------------------------------------------------------
+# Robustness checks
+# ---------------------------------------------------------------------------
+robustness_checks:
+  - id: RC1
+    statement: "Prompt-paraphrase envelope (5 wordings x 4 focal conditions)."
+    varied_parameter: "prompt wording"
+    range_explored: "4 paraphrases + original per focal condition; merger+supplier; 640 dyads"
+    result_stability: "confirmed (manipulation purity held; F6)"
+    affects_nodes: [F2, P1, A2]
+    source_method: M2
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "O6"}
+    body_sections: ["Results — Wording robustness"]
+  - id: RC2
+    statement: "Expected-value re-analysis (unconditional EV) across arms."
+    varied_parameter: "outcome measure (conditional value_created -> unconditional EV)"
+    range_explored: "Study1/Study2/Haiku/Frontier"
+    result_stability: "confirmed (SPEC tops; DOMINANCE bottom; WARMTH mid; F7)"
+    affects_nodes: [P1, P4]
+    source_method: M4
+    provenance: {created_by: "author", created_at: "2026-06-07", source_log_event: "O1,O2,O3,O5"}
+    body_sections: ["Results — Expected value (robustness)"]
+  - id: RC3
+    statement: "Continuous-headroom dose-response: positive spec x realized_headroom interaction across 5 graded supplier variants."
+    varied_parameter: "realized value headroom (~.10..~.50, retuned mid-grid-proxy design)"
+    range_explored: "supplier_h10..h50; NEUTRAL/COT_ONLY/SPEC_NOCOT; 1200 dyads"
+    result_stability: "confirmed — realized headroom .031/.080/.087/.119/.189 (monotone on full data); SPEC_NOCOT-NEUTRAL value delta rises d=-.12 to 1.20; spec x realized_headroom interaction +865.5 pts/unit, p<.001 (positive slope, D1/P1 supported). Realized range compressed (.03-.19) vs .10-.50 target — BATNA-gated bimodal NEUTRAL; SPEC also wins deal rate (.93-1.00 vs .28-.85) + expected value (888 vs 701)."
+    affects_nodes: [P1, D1]
+    source_method: M3
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "code/gen_headroom_variants.py; O7"}
+    body_sections: ["Results — Dose-response"]
+
+# ---------------------------------------------------------------------------
+# Negative finding / limitations / assumptions
+# ---------------------------------------------------------------------------
+negative_findings:
+  - id: NF1
+    statement: "At <5% headroom there is NO detectable value advantage of specification over cooperative style (the preregistered Study-1 null) — an informative absence that locates the boundary, not a failed experiment."
+    expected_observation: "A SPEC>controls value gap if structure helped unconditionally."
+    source_method: M3
+    affects_nodes: [P1, P5]
+    motivates: [P1]
+    provenance: {created_by: "author", created_at: "2026-06-06", source_log_event: "F1"}
+    body_sections: ["Results — Study 1", "Discussion"]
+
+limitations:
+  - id: L1
+    statement: "RECONSTRUCTION, not 1:1 replication: scenarios + 6 condition prompts are our own construction informed by the public base preprint (arXiv 2503.06416) + its OSF data/code. Alignment with the base paper is directional/conceptual within our own scenarios — never 'clean replication'."
+    affects: [P5, F1]
+    severity: "high"
+    mitigation: "State explicitly in Intro + Method + every public-facing copy; cite base paper as motivating_problem, make no causal claim about its design."
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "results summary reconstruction disclosure"}
+    body_sections: ["Intro", "Method", "Limitations"]
+  - id: L2
+    statement: "The base paper is observational; we make no causal claims about it. Our causal claims are internal to our own randomized condition assignment."
+    affects: [P5]
+    severity: "medium"
+    mitigation: "Scope causal language to our design only."
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "pre-draft review"}
+    body_sections: ["Limitations"]
+  - id: L3
+    statement: "Expected-value + paraphrase-envelope measures are EXPLORATORY (amendment-logged), labeled as such; the paraphrase joint value is not comparable to the round-robin."
+    affects: [F6, F7]
+    severity: "low"
+    mitigation: "Label exploratory; report confirmatory tests separately."
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "results summary"}
+    body_sections: ["Method — Analysis", "Results"]
+  - id: L4
+    statement: "Primary mixed model was singular on this design; analysis fell back to OLS cluster-robust SE (pre-specified fallback). Reported transparently."
+    affects: [M3, F2]
+    severity: "low"
+    mitigation: "Document the fallback; contrasts are dyad-level Welch t-tests."
+    provenance: {created_by: "author", created_at: "2026-06-06", source_log_event: "results summary header"}
+    body_sections: ["Method — Analysis"]
+  - id: L5
+    statement: "On gpt-4o-mini the WARMTH manipulation bleeds into dominance (WARMTH dominance 26.3 ~ DOMINANCE 28.3); stylistic prompts bleed across affective dimensions in weaker models, whereas specification prompts cleanly decouple style from objective optimization. The bleed is absent at the frontier (F5)."
+    affects: [F2, P4]
+    severity: "medium"
+    mitigation: "Explain explicitly as a practitioner-relevant property of style prompts; frontier resolves it (F5)."
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "pre-draft review"}
+    body_sections: ["Results — Manipulation checks", "Discussion"]
+
+assumption_atoms:
+  - id: AA1
+    statement: "value_created (sum of both agents' payoff-card points on the agreed bundle) validly operationalizes joint value / Pareto efficiency for these scenarios."
+    type: "measurement_validity"
+    relaxable: true
+    relaxation_consequence: "If point sums misrepresent joint value, F1/F2 magnitudes shift; the headroom-moderation sign is robust to monotone re-scalings."
+    affects: [F1, F2, P1]
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "outcomes.py"}
+    body_sections: ["Method — Measures"]
+  - id: AA2
+    statement: "LLM warmth/dominance scoring (two-model cascade, ICC>.80 all arms) validly indexes the style manipulation."
+    type: "measurement_validity"
+    relaxable: true
+    relaxation_consequence: "If scoring is invalid, manipulation checks (P4, L5) weaken; the value-objective findings (computed from terms, not scores) are unaffected."
+    affects: [M2, P4, L5]
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "compute_icc.py"}
+    body_sections: ["Method — Manipulation checks"]
+  - id: AA3
+    statement: "Deal (binary agreement) and value (joint points) are separately measurable objectives; the harness records both independently."
+    type: "construct_distinctness"
+    relaxable: false
+    relaxation_consequence: "Boundary of the deal-vs-value claim (P4)."
+    affects: [P4]
+    provenance: {created_by: "author", created_at: "2026-06-08", source_log_event: "outcomes.py"}
+    body_sections: ["Discussion — Deal vs value"]
+
+# ---------------------------------------------------------------------------
+# Cross-paper engagement
+# ---------------------------------------------------------------------------
+corpus_precedents:
+  - paper_key: project_spec_the_negotiation_seed
+    relationship: applies
+    spine_nodes: [P1, P2]
+    note: "'Spec the negotiation, don't style it' — this note is the in-corpus existence proof."
+
+# ---------------------------------------------------------------------------
+# External anchors (citation_keys are slugs; DOI verification handed to the
+# PARALLEL CITATIONS session — do NOT edit CITATION_VERIFICATION_REGISTER.csv here)
+# ---------------------------------------------------------------------------
+external_anchors:
+  - citation_key: vaccaro-2026-advancing-ai-negotiations
+    role: motivating_problem
+    spine_nodes: [P5, F1]
+    note: "PUBLIC ref = arXiv 2503.06416 (NOT the PNAS DOI) per HARD directive."
+  - citation_key: walton-mckersie-1965-behavioral-theory-labor-negotiations
+    role: theoretical_predecessor
+    spine_nodes: [P1, P2]
+  - citation_key: lax-sebenius-1986-manager-as-negotiator
+    role: theoretical_predecessor
+    spine_nodes: [P1, P4]
+  - citation_key: raiffa-1982-art-science-negotiation
+    role: canonical_reference
+    spine_nodes: [P1]
+  - citation_key: pruitt-1981-negotiation-behavior
+    role: definitional_source
+    spine_nodes: [P2]
+  - citation_key: curhan-2006-svi
+    role: theoretical_predecessor
+    spine_nodes: [P4]
+  - citation_key: negotiationarena-2024
+    role: contrast_case
+    spine_nodes: [P3]
+    note: "arXiv:2402.05863 candidate — verify via parallel session."
+  - citation_key: he-2018-decoupling-strategy-generation-negotiation
+    role: theoretical_predecessor
+    spine_nodes: [P2]
+    note: "arXiv:1808.09637 candidate — verify."
+  - citation_key: bhattacharya-2025-evaluating-negotiation-llms
+    role: contrast_case
+    spine_nodes: [P3]
+    note: "candidate — verify."
+  - citation_key: deng-mirrokni-llms-bargaining-table
+    role: contrast_case
+    spine_nodes: [P3]
+    note: "Google Research candidate — verify; drop if unsourceable."
+
+open:
+  - "RC3 (dose-response) result pending — if the realized gradient holds, it upgrades P1 from a 2-point sign-flip to a slope; if it stays flat after the bounded retune, report a threshold (not a smooth slope) honestly."
+  - "Human-scorer validation subsample (10%) is future work."
+  - "Whether a high-capability ceiling re-emerges at a model stronger than grok-4.3 (P3 boundary)."
+
+changelog:
+  - date: 2026-06-08
+    operation: lock
+    by: "post-extension; pre-draft gate already PASSED per pre-draft review"
+    note: "Initial v0.2 spine lock. Encodes five pre-draft-review refinements: P1 = headroom as first-order moderator (positive framing); external_anchors engage 8 real LLM-negotiation/theory cites; C4 dyad-as-unit; F8/A-controls recast DOMINANCE as secondary; L5 explains warmth/dominance bleed. HARD directives baked in: L1 reconstruction disclosure (high severity); NF1/P5 ceiling-dependence leads; base-paper public ref = arXiv 2503.06416."
+  - date: 2026-06-08
+    operation: fork
+    by: "headroom run complete"
+    note: "RC3 dose-response resolved: positive spec x realized_headroom interaction (+865.5/unit, p<.001) on the retuned h10..h50 family, 1200 dyads. Upgrades P1 from a 2-point sign-flip to a confirmed slope; lowest-headroom variant reproduces the Study-1 ceiling null within one family. O7 + RC3 marked confirmed. Note dose-response section + abstract + RESULTS_SUMMARY updated. Reserved Zenodo DOIs wired: concept 10.5281/zenodo.20595996, v1.0.0 10.5281/zenodo.20595997."

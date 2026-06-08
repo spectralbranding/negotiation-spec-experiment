@@ -1,0 +1,219 @@
+---
+# Scenario: supplier  (STUDY 2 — high-headroom integrative)
+# Type: integrative (4 issues, buyer-supplier)
+# Issues:
+#   unit_price_usd        (USD/unit, opposed, zero-sum)
+#   volume_commit_kunits  (annual committed volume, k units) — COMPATIBLE: both want HIGH
+#   payment_terms_days    (net payment days) — DISTRACTOR: near-flat for both
+#   warranty_years        (warranty length) — LOGROLL: supplier high weight, buyer low
+#
+# WHY HARDER THAN STUDY 1 (the headroom claim):
+#   (1) volume_commit is COMPATIBLE — the buyer wants supply security and the supplier
+#       wants revenue, so BOTH gain from a high commitment. But it reads like a concession
+#       a buyer should "win down", so a naive haggler settles it LOW, losing ~320 joint pts.
+#   (2) payment_terms is a DISTRACTOR engineered to look negotiable (a visible net-15 / net-90
+#       axis) while being nearly flat in joint value (~40 either way). It absorbs naive
+#       bargaining attention that should go to volume and warranty.
+#   (3) warranty is a real LOGROLL with strong asymmetry; a naive split-the-difference
+#       agent picks 3 years, losing ~120 joint pts versus the joint-optimal 1 year.
+#   Analytic gap: naive joint = 520, equal-split (mid grid) joint = 660; Pareto joint = 960.
+#   Headroom = 440 points off the naive outcome (46% of the frontier), vs ~3% in Study 1.
+#
+# Analytic optimum: unit_price=12, volume=200, payment=45, warranty=1
+#   buyer    =  96 + 200 + 20 +   0 = 316
+#   supplier =  64 + 260 + 20 + 300 = 644
+#   joint    = 960
+#   (unit_price is zero-sum: joint constant at 160 across any price; payment is near-flat ~40.)
+# Naive (unit_price=12, volume=100, payment=45, warranty=3)
+#   buyer    =  96 +  60 + 20 +  40 = 216
+#   supplier =  64 +  80 + 20 + 140 = 304
+#   joint    = 520
+#
+# All point tables published openly.
+
+scenario_id: supplier
+type: integrative
+description: >
+  A procurement buyer and a component supplier negotiate a one-year supply contract on
+  four terms: the unit price (USD per unit), the committed annual volume (in thousands of
+  units), the payment terms (net days), and the warranty length (years). Each party has a
+  private point table; the full matrix is published.
+
+roles:
+  - id: buyer
+    label: Buyer
+    description: >
+      You are procurement for a manufacturer. You want a LOW unit price. You also
+      genuinely benefit from a HIGH committed volume (it secures your supply and locks
+      pricing), though it is easy to forget that under price pressure. You are nearly
+      indifferent to payment terms and care little about warranty length.
+    batna_value: 180
+    batna_description: >
+      Source from an alternative supplier on worse terms — worth 180 points.
+    private_payoff_card:
+      unit_price_usd:
+        description: "Lower unit price is better for you."
+        options:
+          10: 160
+          11: 128
+          12: 96
+          13: 64
+          14: 32
+          15: 0
+      volume_commit_kunits:
+        description: "A higher committed volume secures your supply — better for you."
+        options:
+          50:  0
+          100: 60
+          150: 120
+          200: 200
+      payment_terms_days:
+        description: "You mildly prefer longer terms, but it barely matters."
+        options:
+          15: 30
+          30: 25
+          45: 20
+          60: 15
+          90: 10
+      warranty_years:
+        description: "A longer warranty is mildly nice but low priority for you."
+        options:
+          1: 0
+          2: 20
+          3: 40
+          5: 60
+    total_points_range:
+      minimum: 0 + 0 + 10 + 0    # worst feasible = 10
+      maximum: 160 + 200 + 30 + 60  # best on every issue = 450
+    note: >
+      Weights (max points): volume (200) > unit_price (160) > warranty (60) > payment (30).
+      Concede warranty and payment first; push for high volume and low price.
+
+  - id: supplier
+    label: Supplier
+    description: >
+      You are the vendor. You want a HIGH unit price. You also strongly benefit from a
+      HIGH committed volume (predictable revenue and production planning). You are nearly
+      indifferent to payment terms. You care intensely about a SHORT warranty (long
+      warranties expose you to costly claims — your top priority).
+    batna_value: 180
+    batna_description: >
+      Sell the capacity to another customer on worse terms — worth 180 points.
+    private_payoff_card:
+      unit_price_usd:
+        description: "Higher unit price is better for you."
+        options:
+          10: 0
+          11: 32
+          12: 64
+          13: 96
+          14: 128
+          15: 160
+      volume_commit_kunits:
+        description: "A higher committed volume gives predictable revenue — better for you."
+        options:
+          50:  0
+          100: 80
+          150: 160
+          200: 260
+      payment_terms_days:
+        description: "You mildly prefer shorter terms, but it barely matters."
+        options:
+          15: 10
+          30: 15
+          45: 20
+          60: 25
+          90: 30
+      warranty_years:
+        description: "A SHORTER warranty is much better for you (claim-cost exposure — top priority)."
+        options:
+          1: 300
+          2: 220
+          3: 140
+          5: 0
+    total_points_range:
+      minimum: 0 + 0 + 10 + 0    # worst feasible = 10
+      maximum: 160 + 260 + 30 + 300  # best on every issue = 750
+    note: >
+      Weights (max points): warranty (300) > volume (260) > unit_price (160) > payment (30).
+      Concede payment first; hold firm on a short warranty and push for high volume.
+
+full_payoff_matrix:
+  note: >
+    Key reference bundles. Full per-issue tables above are published openly.
+    Headroom is large here BY DESIGN — see header comment.
+  key_bundles:
+    - label: "Naive (unit_price=12, volume=100, payment=45, warranty=3)"
+      unit_price_usd: 12
+      volume_commit_kunits: 100
+      payment_terms_days: 45
+      warranty_years: 3
+      buyer_points: 216   # 96 + 60 + 20 + 40
+      supplier_points: 304 # 64 + 80 + 20 + 140
+      joint_points: 520
+
+    - label: "Equal-split / mid grid (unit_price=12, volume=150, payment=45, warranty=3)"
+      unit_price_usd: 12
+      volume_commit_kunits: 150
+      payment_terms_days: 45
+      warranty_years: 3
+      buyer_points: 276   # 96 + 120 + 20 + 40
+      supplier_points: 384 # 64 + 160 + 20 + 140
+      joint_points: 660
+
+    - label: "Pareto-optimal (high volume both, short warranty, distractor neutral)"
+      unit_price_usd: 12
+      volume_commit_kunits: 200
+      payment_terms_days: 45
+      warranty_years: 1
+      buyer_points: 316   # 96 + 200 + 20 + 0
+      supplier_points: 644 # 64 + 260 + 20 + 300
+      joint_points: 960
+
+    - label: "Buyer-favorable Pareto (low price, high volume, short warranty)"
+      unit_price_usd: 10
+      volume_commit_kunits: 200
+      payment_terms_days: 45
+      warranty_years: 1
+      buyer_points: 380   # 160 + 200 + 20 + 0
+      supplier_points: 580 # 0 + 260 + 20 + 300
+      joint_points: 960
+
+analytic_optimum:
+  description: >
+    Pareto-optimal bundle: unit_price=$12/unit, volume=200k units, payment=net-45,
+    warranty=1 year. Buyer 96+200+20+0 = 316; Supplier 64+260+20+300 = 644; joint = 960.
+    unit_price is zero-sum (joint constant at 160 across any price, so the split only
+    moves value between parties), and payment_terms is a near-flat distractor (joint ~40
+    either way). Value is created on two issues: volume (compatible — both want 200, +320
+    joint vs the naive volume=100) and warranty (logroll — supplier gains 160 for a 1-year
+    warranty while the buyer loses only 40, +120 joint vs the naive 3-year split). The
+    Pareto split is intentionally lopsided toward the supplier; both still clear BATNA (180).
+  best_bundle:
+    unit_price_usd: 12
+    volume_commit_kunits: 200
+    payment_terms_days: 45
+    warranty_years: 1
+  buyer_points: 316
+  supplier_points: 644
+  joint_points: 960
+  equal_split_bundle:
+    unit_price_usd: 12
+    volume_commit_kunits: 150
+    payment_terms_days: 45
+    warranty_years: 3
+  equal_split_buyer: 276
+  equal_split_supplier: 384
+  equal_split_joint: 660
+  value_created_vs_equal_split: 300
+
+offer_protocol:
+  description: >
+    Agents MUST use the structured offer protocol. A valid offer is an OFFER: line
+    containing a JSON object whose keys are the four issue names exactly as they appear
+    in the payoff card (unit_price_usd, volume_commit_kunits, payment_terms_days,
+    warranty_years). Every value is a number drawn from the option set.
+    Acceptance: ACCEPT on its own line. Rejection/counter: plain text + new OFFER.
+    Example: 'OFFER: {"unit_price_usd": 12, "volume_commit_kunits": 200, "payment_terms_days": 45, "warranty_years": 1}'
+
+max_rounds: 14

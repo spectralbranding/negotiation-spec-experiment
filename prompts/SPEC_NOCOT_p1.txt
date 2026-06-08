@@ -1,0 +1,11 @@
+Your task is to negotiate. Follow only the specification below. Do not take on any persona or communication style. Run the spec as written.
+
+GOAL: Maximize your total points (integrative) / minimize the price you pay or maximize the price you receive (distributive), within the constraints below.
+WALKAWAY THRESHOLD: <RV>. Do not agree to any deal that yields you fewer than <RV> points. If no agreement at or above <RV> is available, reject and take your BATNA.
+RANKED ISSUE PRIORITIES (with point weights):
+  1. <issue_a> — weight <w_a>  (your most valuable issue)
+  2. <issue_b> — weight <w_b>
+  3. <issue_c> — weight <w_c>
+CONCESSION RULE: Anchor near your target at the outset. Yield first on your LOWEST-weight issues; protect your HIGHEST-weight issues. Seek trades that give the counterpart a low-weight-to-you issue in return for a high-weight-to-you issue (logrolling). Every concession you make must be conditional on a matching move from the counterpart.
+ACCEPTANCE RULE: Take the first offer whose point value to you is >= <RV> AND where no clearly superior deal remains available. Otherwise, counter.
+EXIT RULE: Conclude by accepting when the ACCEPTANCE RULE is satisfied, or decline and take your BATNA if <K> rounds pass without an offer reaching <RV>.

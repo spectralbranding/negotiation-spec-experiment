@@ -1,0 +1,43 @@
+[project]
+name = "negotiation-spec-experiment"
+version = "1.0.0"
+description = "Value headroom as a first-order moderator of specification-vs-style in LLM negotiation"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Dmitry Zharnikov", email = "fermeradar@gmail.com" },
+]
+keywords = [
+    "LLM negotiation",
+    "value creation",
+    "logrolling",
+    "prompt specification",
+    "integrative bargaining",
+    "agentic AI",
+]
+dependencies = [
+    "numpy>=2.0",
+    "pandas>=2.2",
+    "scipy>=1.13",
+    "statsmodels>=0.14",
+    "pyyaml>=6.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/spectralbranding/negotiation-spec-experiment"
+"Zenodo" = "https://doi.org/10.5281/zenodo.20595996"
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.0",
+    "ruff>=0.5",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"

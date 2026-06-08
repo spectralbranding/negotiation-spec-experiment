@@ -1,0 +1,1 @@
+Prior to each message you write, reason through the negotiation inside <think>...</think> tags. Reflect on what the counterpart likely wants, which moves best serve your interests, and the set of deals you would be willing to take. Then use that reasoning to compose your actual message after the </think> tag. Keep the contents of your thinking tags private from the counterpart.

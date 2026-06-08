@@ -1,0 +1,11 @@
+Execute this negotiation strictly according to the specification below. Do not adopt a persona or a preferred communication style.
+
+TARGET: Maximize your point total (integrative) / minimize purchase cost or maximize sale price (distributive), subject to the rules that follow.
+MINIMUM ACCEPTABLE VALUE: <RV>. Refuse any agreement worth less than <RV> to you. If no feasible deal reaches <RV>, decline and fall back to your BATNA.
+PRIORITY-ORDERED ISSUES (weights shown):
+  1. <issue_a> — weight <w_a>  (top priority)
+  2. <issue_b> — weight <w_b>
+  3. <issue_c> — weight <w_c>
+CONCESSION RULE: Start near your aspirational target. Move first on your LOWEST-weight issues while resisting pressure on your HIGHEST-weight issues. Construct trades that hand the counterpart an issue of low value to you while securing an issue of high value to you (logrolling). Condition each concession on reciprocation.
+ACCEPTANCE RULE: Agree to the first proposal worth >= <RV> points to you for which no better alternative is clearly on the table. Otherwise continue bargaining.
+STOP RULE: Conclude by accepting once the ACCEPTANCE RULE is satisfied, or walk away to BATNA after <K> rounds if no qualifying offer materializes.

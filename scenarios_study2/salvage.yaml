@@ -1,0 +1,116 @@
+---
+# Scenario: salvage  (STUDY 2 — narrow-ZOPA distributive)
+# Type: distributive (single-issue settlement amount)
+# Tests H2 (value claimed) + the spec-claims-WITHOUT-the-dominance-penalty angle (H1xH2):
+#   the ZOPA is deliberately NARROW so claiming is hard and impasse is a live risk.
+#
+# WHY HARDER THAN STUDY 1's chair:
+#   Study 1's chair had a WIDE ZOPA (width $120 on a [300,420] band): almost any cooperative
+#   split lands inside it, so deal rate was high and claiming was easy. Here the ZOPA is
+#   width $15 on a [85,100] band (k USD). A vibe-cooperative agent that anchors loosely or
+#   concedes generously easily overshoots the band and either leaves nearly all surplus to
+#   the counterpart or triggers an impasse. A spec agent with an explicit reservation value
+#   and a disciplined concession rule can claim surplus WITHOUT crossing into impasse — the
+#   distributive analogue of "claim like DOMINANCE but without the deal-rate penalty."
+#
+# Settlement amount (k USD): payer (defendant) pays the claimant (plaintiff).
+#   payer reservation_price  = 100 (will not pay more than $100k)
+#   claimant reservation_price = 85 (will not accept less than $85k)
+#   ZOPA = [85, 100], width = 15. Nash bargaining solution (equal surplus) = 92.5.
+#   Joint surplus is constant ($15k) at any settlement inside the ZOPA — claiming only.
+#
+# All values published openly.
+
+scenario_id: salvage
+type: distributive
+description: >
+  Two firms are settling a contract dispute out of court. The defendant (payer) will
+  pay the plaintiff (claimant) a cash settlement (in thousands of USD). They negotiate
+  only the settlement amount. Going to trial is each side's costly fallback (BATNA).
+
+issue:
+  name: settlement_kusd
+  unit: thousand_USD
+  options:
+    - 75
+    - 77.5
+    - 80
+    - 82.5
+    - 85
+    - 87.5
+    - 90
+    - 92.5
+    - 95
+    - 97.5
+    - 100
+    - 102.5
+    - 105
+    - 107.5
+    - 110
+
+roles:
+  - id: payer
+    label: Payer (Defendant)
+    description: >
+      You must pay a settlement to resolve the dispute. Your lawyers estimate that
+      going to trial would cost you about $100k all-in (expected judgment plus legal
+      fees), so you will NOT agree to pay more than $100k — that is your walkaway.
+      You want to settle for as LITTLE as possible.
+    batna_value: 0        # surplus to payer if they walk = 0 (they go to trial at their reservation cost)
+    batna_description: >
+      Go to trial — expected total cost ~$100k.
+    reservation_price: 100   # max willing to pay (k USD)
+    target_price: 80         # aspirational anchor (k USD)
+    private_payoff:
+      # Payer surplus = reservation_price - settlement (every k below 100 is saved)
+      formula: "100 - settlement_kusd"
+      note: >
+        Every $1k below $100k is $1k of value to you. A settlement at $85k saves you
+        $15k. A settlement above $100k is worse than going to trial.
+
+  - id: claimant
+    label: Claimant (Plaintiff)
+    description: >
+      You are owed a settlement. Your lawyers estimate that going to trial would net
+      you about $85k after costs, so you will NOT accept less than $85k — that is your
+      walkaway. You want to settle for as MUCH as possible.
+    batna_value: 0
+    batna_description: >
+      Go to trial — expected net recovery ~$85k.
+    reservation_price: 85    # min willing to accept (k USD)
+    target_price: 105        # aspirational anchor (k USD)
+    private_payoff:
+      formula: "settlement_kusd - 85"
+      note: >
+        Every $1k above $85k is $1k of value to you. A settlement at $100k gives you
+        $15k surplus. A settlement below $85k is worse than going to trial.
+
+full_payoff_matrix:
+  note: >
+    Both parties' surpluses at each settlement inside the NARROW ZOPA. Published openly.
+    Total surplus is constant (zero-sum) at $15k anywhere within the ZOPA.
+    ZOPA = [85, 100]; width = 15. Midpoint (Nash solution) = 92.5.
+  settlements:    [85, 87.5, 90, 92.5, 95, 97.5, 100]
+  payer_surplus:  [15, 12.5, 10, 7.5, 5, 2.5, 0]
+  claimant_surplus: [0, 2.5, 5, 7.5, 10, 12.5, 15]
+  joint_surplus:  [15, 15, 15, 15, 15, 15, 15]
+
+analytic_optimum:
+  description: >
+    Distributive: no value creation possible. Total surplus = $15k at any settlement
+    in the ZOPA. Nash bargaining solution (equal split) = $92.5k (each gets $7.5k).
+    The narrow band means claiming is hard and impasse is a live risk; a disciplined
+    spec agent should claim surplus without triggering the impasse that loose or
+    aggressive play would.
+  nash_price: 92.5
+  payer_surplus_at_nash: 7.5
+  claimant_surplus_at_nash: 7.5
+
+offer_protocol:
+  description: >
+    Agents MUST use the structured offer protocol defined in the harness.
+    A valid offer is: OFFER: {"settlement_kusd": <number>}
+    Acceptance: ACCEPT on its own line.
+    Rejection/counter: plain text explanation + new OFFER.
+
+max_rounds: 14

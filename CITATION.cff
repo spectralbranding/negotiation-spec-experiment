@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Value Headroom Moderates Whether Specification Beats Style in LLM Negotiation"
+version: "1.0.0"
+authors:
+  - family-names: "Zharnikov"
+    given-names: "Dmitry"
+    orcid: "0009-0000-6893-9231"
+date-released: "2026-06-08"
+license: "MIT"
+repository-code: "https://github.com/spectralbranding/negotiation-spec-experiment"
+url: "https://doi.org/10.5281/zenodo.20595996"
+doi: "10.5281/zenodo.20595996"
+abstract: >
+  An independent conceptual test of whether interpersonal style or objective
+  specification matters more when two language-model agents negotiate. The note
+  identifies value headroom (the joint surplus a naively cooperative pair leaves
+  on the table) as a first-order moderator: specification-first prompting ties
+  interpersonal style on near-ceiling scenarios but yields strictly higher joint
+  value once headroom is present, with the advantage growing with model
+  capability and confirmed by a graded dose-response design. This is a
+  reconstruction from public materials, not a one-to-one reproduction of any base
+  study.
+keywords:
+  - "LLM negotiation"
+  - "value creation"
+  - "logrolling"
+  - "prompt specification"
+  - "integrative bargaining"
+  - "agentic AI"

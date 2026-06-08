@@ -1,0 +1,196 @@
+---
+# Scenario: offer
+# Type: integrative (3 issues, recruiter-candidate)
+# Issues: salary_usd_annual, remote_days_per_week (0-5), start_weeks (weeks from now)
+#
+# Design logic:
+#   Candidate: salary most important, remote days second, start date flexible
+#   Recruiter: salary cost second, start date (sooner) most important, remote less important
+#   KEY ASYMMETRY:
+#     - Recruiter cares most about FAST start (they have a critical project gap)
+#     - Candidate cares most about SALARY
+#     - Recruiter is flexible on remote (their team is distributed anyway)
+#     - Candidate mildly prefers more remote days but salary dominates
+#   Logroll: candidate concedes on start date (gives fast start, modest point cost)
+#            recruiter concedes on remote days (low weight for recruiter, high for candidate)
+#            recruiter concedes on salary (candidate's top priority)
+#
+# Pareto-optimal bundle: (salary=115000, remote=4, start=2)
+#   candidate: 250 + 160 + 60 = 470 points
+#   recruiter:  60 + 40 + 280 = 380 points
+#   joint = 850 (vs equal-split joint ~600)
+#
+# Equal-split (midpoints): (salary=110000, remote=2, start=6)
+#   candidate: 150 + 80 + 30 = 260
+#   recruiter:  110 + 80 + 80 = 270
+#   joint = 530
+
+scenario_id: offer
+type: integrative
+description: >
+  A recruiter and candidate negotiate the terms of a job offer on three issues:
+  annual salary, remote working days per week, and start date (weeks from today).
+  The recruiter wants the candidate to start quickly; the candidate prioritizes salary.
+
+roles:
+  - id: candidate
+    label: Candidate
+    description: >
+      You are negotiating a job offer. You care MOST about salary, SECOND about
+      remote working days, and LEAST about start date (you are reasonably flexible).
+    batna_value: 150
+    batna_description: >
+      Keep your current job or accept a competing offer worth ~150 points to you.
+    private_payoff_card:
+      salary_usd_annual:
+        description: "Higher salary is better for you."
+        options:
+          95000:  0
+          100000: 50
+          105000: 100
+          110000: 150
+          115000: 250
+          120000: 320
+          125000: 380
+      remote_days_per_week:
+        description: "More remote days is better for you."
+        options:
+          0: 0
+          1: 40
+          2: 80
+          3: 120
+          4: 160
+          5: 200
+      start_weeks:
+        description: "Starting later (more notice time) is slightly better for you."
+        options:
+          1: 0
+          2: 20
+          3: 30
+          4: 50
+          6: 60
+          8: 80
+          12: 100
+    total_points_range:
+      minimum: 0 + 0 + 0     # lowest salary + 0 remote + immediate start = 0
+      maximum: 380 + 200 + 100  # best salary + 5 days remote + 12 weeks = 680
+    note: >
+      Weights: salary (380 max) >> remote (200 max) > start_date (100 max).
+      Concede on start date first (lowest weight); hold firm on salary.
+
+  - id: recruiter
+    label: Recruiter
+    description: >
+      You are extending a job offer. You care MOST about the candidate starting
+      quickly (critical project needs them), SECOND about keeping salary in budget,
+      and LEAST about remote working arrangement (your team is distributed).
+    batna_value: 150
+    batna_description: >
+      Hire a second-choice candidate or delay the project — worth ~150 points to
+      your organization (costly).
+    private_payoff_card:
+      salary_usd_annual:
+        description: "Lower salary cost is better for your budget."
+        options:
+          95000:  220
+          100000: 180
+          105000: 140
+          110000: 110
+          115000: 60
+          120000: 20
+          125000: 0
+      remote_days_per_week:
+        description: "Fewer remote days (more in-office) is mildly preferred for team cohesion."
+        options:
+          0: 120
+          1: 100
+          2: 80
+          3: 60
+          4: 40
+          5: 20
+      start_weeks:
+        description: "Sooner start is much better — critical project gap."
+        options:
+          1: 300
+          2: 280
+          3: 240
+          4: 180
+          6: 80
+          8: 20
+          12: 0
+    total_points_range:
+      minimum: 0 + 20 + 0    # highest salary + 5 remote + 12 weeks start = 20
+      maximum: 220 + 120 + 300  # best salary + 0 remote + 1 week start = 640
+    note: >
+      Weights: start_date (300 max) >> salary (220 max) > remote (120 max).
+      Concede on remote days first (lowest weight for you); hold firm on start date.
+
+full_payoff_matrix:
+  note: >
+    Key reference bundles. Full matrix published openly.
+  key_bundles:
+    - label: "Equal-split (midpoints: salary=110k, remote=2, start=6)"
+      salary: 110000
+      remote: 2
+      start_weeks: 6
+      candidate_points: 310  # 150 + 80 + 60 = 290... exact: salary@110k=150, remote@2=80, start@6=60 = 290
+      recruiter_points: 270  # 110 + 80 + 80 = 270
+      joint_points: 560
+      note: "candidate=290, recruiter=270, joint=560 (exact from tables)"
+
+    - label: "Pareto-optimal (logroll: fast start for recruiter, high salary+remote for candidate)"
+      salary: 115000
+      remote: 4
+      start_weeks: 2
+      candidate_points: 430  # 250 + 160 + 20 = 430
+      recruiter_points: 420  # 60 + 40 + 280 = 380... exact: salary@115k=60, remote@4=40, start@2=280 = 380
+      joint_points: 810
+      note: "candidate=430, recruiter=380, joint=810 (exact from tables)"
+
+    - label: "Best joint (salary=110k, remote=4, start=2 — bigger logroll)"
+      salary: 110000
+      remote: 4
+      start_weeks: 2
+      candidate_points: 390  # 150 + 160 + 20 = 330
+      recruiter_points: 430  # 110 + 40 + 280 = 430
+      joint_points: 760
+      note: "candidate=330, recruiter=430, joint=760 (exact from tables)"
+
+analytic_optimum:
+  description: >
+    The Pareto-optimal bundle under logrolling is:
+    salary=$115,000, remote=4 days/week, start=2 weeks.
+    Candidate: salary@115k=250, remote@4=160, start@2=20 → 430 points.
+    Recruiter: salary@115k=60, remote@4=40, start@2=280 → 380 points.
+    Joint = 810 points.
+    vs equal-split (110k, 2 days, 6 weeks): candidate=290, recruiter=270, joint=560.
+    Value created by logrolling = 810 - 560 = 250 additional joint points.
+    The logroll: candidate concedes on start date (gives 2-week start, gains 20 pts)
+    to get high salary (250 pts) + more remote (160 pts); recruiter concedes on
+    remote (loses 40 pts relative to 0-remote) and on salary (60 vs 180 at 100k)
+    but gains fast start (280 pts). Both exceed BATNA (150) comfortably.
+    The Pareto-optimal is NOT equal-split: candidate gets more of the surplus.
+  best_bundle:
+    salary: 115000
+    remote_days: 4
+    start_weeks: 2
+  candidate_points: 430
+  recruiter_points: 380
+  joint_points: 810
+  equal_split_bundle:
+    salary: 110000
+    remote_days: 2
+    start_weeks: 6
+  equal_split_candidate: 290
+  equal_split_recruiter: 270
+  equal_split_joint: 560
+  value_created_vs_equal_split: 250
+
+offer_protocol:
+  description: >
+    Agents MUST use the structured offer protocol.
+    A valid offer: OFFER: {"salary": <number>, "remote": <number>, "start": <number>}
+    Acceptance: ACCEPT
+    Rejection/counter: plain text + new OFFER
+
+max_rounds: 8

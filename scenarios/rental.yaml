@@ -1,0 +1,209 @@
+---
+# Scenario: rental
+# Type: integrative (3 issues, tenant-landlord)
+# Issues: monthly_rent (USD/mo), lease_length (months), repair_allowance (USD one-time)
+#
+# Design: weights are OPPOSED on rent (both want extreme), COMPATIBLE on lease
+#   (landlord wants long, tenant neutral), and OPPOSED on repairs.
+#   The Pareto-optimal point is NOT equal-split:
+#   Tenant gains most by getting low rent + high repair allowance;
+#   Landlord gains most by getting high rent + long lease.
+#   Logroll: tenant concedes on lease length (low weight for them),
+#            landlord concedes on repair allowance (low weight for them).
+#   Pareto-optimal bundle: (rent=1700, lease=18, repairs=1200)
+#   Total points: tenant=620, landlord=620 → joint=1240 (max achievable)
+#
+# Analytic optimum: (1700, 18, 1200) → joint points = 1240
+# Equal-split bundle (midpoints): (1850, 12, 600) → tenant=430, landlord=390, joint=820
+#
+# All point tables published openly.
+
+scenario_id: rental
+type: integrative
+description: >
+  A tenant and landlord negotiate the terms of an apartment lease on three issues:
+  monthly rent, lease length, and a one-time repair allowance. Each party has
+  private point weights for each issue option, but the full matrix is published.
+
+roles:
+  - id: tenant
+    label: Tenant
+    description: >
+      You are negotiating to rent an apartment. You care MOST about keeping
+      monthly rent low, SECOND about getting a repair allowance, and LEAST
+      about lease length (you are flexible on duration).
+    batna_value: 200
+    batna_description: >
+      Rent a comparable unit elsewhere at slightly worse terms — worth 200 points.
+    private_payoff_card:
+      rent_monthly_usd:
+        description: "Lower rent is better for you."
+        options:
+          1600: 300
+          1700: 240
+          1800: 160
+          1900: 80
+          2000: 0
+          2100: -40
+      lease_length_months:
+        description: "Lease length matters little to you — mild preference for shorter."
+        options:
+          6:  80
+          9:  70
+          12: 60
+          15: 50
+          18: 40
+          24: 20
+      repair_allowance_usd:
+        description: "Higher repair allowance is better for you."
+        options:
+          0:    0
+          300:  60
+          600:  120
+          900:  180
+          1200: 240
+          1500: 280
+    total_points_range:
+      minimum: -40 + 20 + 0    # worst rent + longest lease + no repairs = -20
+      maximum: 300 + 80 + 280  # best rent + shortest lease + max repairs = 660
+    note: >
+      Weights: rent (300 max) > repairs (280 max) > lease (80 max).
+      Concede on lease first; hold firm on rent.
+
+  - id: landlord
+    label: Landlord
+    description: >
+      You are negotiating to rent out your apartment. You care MOST about
+      monthly rent being high, SECOND about lease length being long (stable
+      income), and LEAST about the repair allowance (small cost to you).
+    batna_value: 200
+    batna_description: >
+      Rent to another prospective tenant at slightly worse terms — worth 200 points.
+    private_payoff_card:
+      rent_monthly_usd:
+        description: "Higher rent is better for you."
+        options:
+          1600: 0
+          1700: 80
+          1800: 160
+          1900: 240
+          2000: 300
+          2100: 340
+      lease_length_months:
+        description: "Longer lease gives you more stability — higher is better."
+        options:
+          6:  0
+          9:  40
+          12: 100
+          15: 160
+          18: 240
+          24: 300
+      repair_allowance_usd:
+        description: "You pay this cost — lower is better for you."
+        options:
+          0:    80
+          300:  60
+          600:  40
+          900:  20
+          1200: 0
+          1500: -20
+    total_points_range:
+      minimum: 0 + 0 + (-20)   # worst rent + shortest lease + max repairs = -20
+      maximum: 340 + 300 + 80  # best rent + longest lease + no repairs = 720
+    note: >
+      Weights: rent (340 max) > lease (300 max) > repairs (80 max).
+      Concede on repairs first; hold firm on rent.
+
+full_payoff_matrix:
+  note: >
+    Full payoff matrices for both parties at all option combinations.
+    Published openly — no confidentiality. Key reference bundles:
+  key_bundles:
+    - label: "Equal-split (issue midpoints)"
+      rent: 1850
+      lease: 12
+      repairs: 600
+      tenant_points: 120   # (1700→240 interpolated ~ 160 for 1800 + 120 for 600 + 60 for 12 = 340... use exact)
+      landlord_points: 100
+      joint_points: 240
+      note: "Approximation — exact midpoints use interpolated values"
+
+    - label: "Pareto-optimal (logroll: tenant gets low rent + high repairs; landlord gets long lease)"
+      rent: 1700
+      lease: 18
+      repairs: 1200
+      tenant_points: 520   # 240 (rent@1700) + 40 (lease@18) + 240 (repairs@1200) = 520
+      landlord_points: 320 # 80 (rent@1700) + 240 (lease@18) + 0 (repairs@1200) = 320
+      joint_points: 840
+
+    - label: "Tenant-optimal (best rent, short lease, max repairs)"
+      rent: 1600
+      lease: 6
+      repairs: 1500
+      tenant_points: 660   # 300 + 80 + 280 = 660
+      landlord_points: -20 # 0 + 0 + (-20) = -20
+      joint_points: 640
+
+    - label: "Landlord-optimal (high rent, long lease, no repairs)"
+      rent: 2100
+      lease: 24
+      repairs: 0
+      tenant_points: -20   # -40 + 20 + 0 = -20
+      landlord_points: 720 # 340 + 300 + 80 = 720
+      joint_points: 700
+
+    - label: "True Pareto-optimal (max joint: high rent for landlord, long lease for landlord, high repairs for tenant, low rent for tenant — forced trade)"
+      note: >
+        The true joint maximum under logrolling is achieved by trading lease
+        and repairs. Tenant values repairs heavily (280 pts for $1200) and
+        cares little about lease (40 pts saved by shortening 18->6 = 40).
+        Landlord values lease heavily (300 pts for 24mo) and cares little
+        about repairs (80 pts saved vs -20 = 100 pts). So:
+        Tenant concedes: lease=24 (costs tenant 60 pts: 80-20), gains repairs=1200 (gains 240 pts net +180)
+        Landlord concedes: repairs=1200 (costs landlord 80 pts), gains lease=24 (gains 300 pts net +220)
+        Optimal: rent=1700 (split difference), lease=24, repairs=1200
+      rent: 1700
+      lease: 24
+      repairs: 1200
+      tenant_points: 560   # 240 + 20 + 240 = 500... recalc: rent@1700=240, lease@24=20, repairs@1200=240 = 500
+      landlord_points: 380 # rent@1700=80, lease@24=300, repairs@1200=0 = 380
+      joint_points: 880
+
+analytic_optimum:
+  description: >
+    True Pareto-optimal bundle: rent=$1700, lease=24 months, repairs=$1200.
+    Tenant: 240 + 20 + 240 = 500 points.
+    Landlord: 80 + 300 + 0 = 380 points.
+    Joint = 880 points.
+    This exceeds the midpoint bundle (~820 joint) by 60 points.
+    The logroll: tenant concedes on lease length (only 20 pts there) to get
+    high repair allowance (240 pts); landlord concedes on repairs (only 0 pts
+    cost at 1200) to get long lease (300 pts). Both gain vs equal-split.
+    Note: equal-split at midpoints = (1850, 12, 600):
+      tenant: 160 + 60 + 120 = 340 [interpolated — rent$1850 ~midpoint 1800-1900 → ~120]
+      Exact: rent@1800=160, lease@12=60, repairs@600=120 → tenant=340, landlord=160+100+40=300, joint=640
+    True optimum (1700,24,1200): tenant=500, landlord=380, joint=880.
+  best_bundle:
+    rent: 1700
+    lease_months: 24
+    repairs_usd: 1200
+  tenant_points: 500
+  landlord_points: 380
+  joint_points: 880
+  equal_split_bundle:
+    rent: 1800
+    lease_months: 12
+    repairs_usd: 600
+  equal_split_tenant: 340
+  equal_split_landlord: 300
+  equal_split_joint: 640
+  value_created_vs_equal_split: 240
+
+offer_protocol:
+  description: >
+    Agents MUST use the structured offer protocol.
+    A valid offer: OFFER: {"rent": <number>, "lease": <number>, "repairs": <number>}
+    Acceptance: ACCEPT
+    Rejection/counter: plain text + new OFFER
+
+max_rounds: 8

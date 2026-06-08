@@ -1,0 +1,255 @@
+---
+# Scenario: merger  (STUDY 2 — high-headroom integrative)
+# Type: integrative (5 issues, acquirer-founder)
+# Issues:
+#   cash_price_musd      (USD millions, opposed, zero-sum)
+#   founder_equity_pct   (% retained by founder, opposed, zero-sum)
+#   integration_months   (how long founder stays post-close) — LOGROLL: acquirer high weight, founder low
+#   brand_retention_yrs  (years acquirer keeps founder's brand name) — LOGROLL: founder high weight, acquirer low
+#   esg_clause           (0=none / 1=moderate / 2=strong) — COMPATIBLE: both privately prefer "strong"
+#                         NOTE: encoded as a NUMERIC ordinal (not a string) so the harness's
+#                         auto-generated OFFER-protocol hint ("<number>" for every issue) is
+#                         accurate and every emitted offer scores cleanly via outcomes.py with
+#                         NO code change. 0=none, 1=moderate, 2=strong.
+#
+# WHY HARDER THAN STUDY 1 (the headroom claim):
+#   Study 1 integrative scenarios let a bare-cooperative agent capture ~97% of reachable
+#   joint value (NEUTRAL ~641 of ~658). Here the frontier is FAR from naive play because:
+#     (1) Two zero-sum issues (cash, equity) dominate visual attention and absorb the
+#         haggling; a naive agent treats the whole table as price-splitting.
+#     (2) The two true logroll issues (integration, brand) have STRONGLY asymmetric weights
+#         that a naive "split-the-difference" agent halves — losing ~250 joint points.
+#     (3) The esg_clause is COMPATIBLE (both want "strong") but reads like a concession chip,
+#         so a naive agent defaults to "moderate", leaving ~100 joint points unclaimed.
+#   Analytic gap: naive/equal-split joint = 772; Pareto joint = 1120. Headroom = 348 points
+#   (31% of the frontier), vs ~3% in Study 1. A spec agent that declares ranked weights and
+#   trades low-weight for high-weight should close most of this gap.
+#
+# Analytic optimum (logroll): cash=50, equity=10, integration=36, brand=10, esg=strong
+#   acquirer = 120 + 72 + 300 +   0 + 90 = 582
+#   founder  =  80 + 48 +   0 + 320 + 90 = 538
+#   joint    = 1120
+#   (cash & equity are zero-sum so any split holds joint=320 across those two issues;
+#    the listed 50/10 split is the equal-surplus reference point.)
+# Equal-split / naive (cash=50, equity=10, integration=18, brand=5, esg=moderate)
+#   acquirer = 120 + 72 + 120 + 36 + 40 = 388
+#   founder  =  80 + 48 +  36 + 180 + 40 = 384
+#   joint    = 772
+#
+# All point tables published openly.
+
+scenario_id: merger
+type: integrative
+description: >
+  An acquirer is buying a founder-led company. They negotiate five terms: the cash
+  price (USD millions), the equity percentage the founder retains, how many months the
+  founder commits to stay through integration, how many years the acquirer keeps the
+  founder's brand name, and the strength of an ESG (environmental/social/governance)
+  clause in the deal. Each party has a private point table; the full matrix is published.
+
+roles:
+  - id: acquirer
+    label: Acquirer
+    description: >
+      You are buying the company. You want to pay a LOW cash price and grant the
+      founder LITTLE retained equity. You care intensely that the founder stays a
+      LONG time through integration (your top operational priority). You are nearly
+      indifferent to how long the old brand name is kept. You privately favor a STRONG
+      ESG clause (it helps your own investor reporting), but it is not worth fighting over.
+    batna_value: 300
+    batna_description: >
+      Walk away and pursue a different acquisition target — worth 300 points.
+    private_payoff_card:
+      cash_price_musd:
+        description: "Lower cash price is better for you."
+        options:
+          40: 200
+          45: 160
+          50: 120
+          55: 80
+          60: 40
+          65: 0
+      founder_equity_pct:
+        description: "Less retained founder equity is better for you."
+        options:
+          0:  120
+          5:  96
+          10: 72
+          15: 48
+          20: 24
+          25: 0
+      integration_months:
+        description: "A LONGER founder commitment is much better for you (top priority)."
+        options:
+          6:  0
+          12: 60
+          18: 120
+          24: 200
+          36: 300
+      brand_retention_yrs:
+        description: "You are nearly indifferent; a shorter retention is marginally cheaper."
+        options:
+          0:  60
+          2:  48
+          5:  36
+          8:  18
+          10: 0
+      esg_clause:
+        description: "0=none, 1=moderate, 2=strong. You privately prefer strong (investor reporting upside)."
+        options:
+          0: 0
+          1: 40
+          2: 90
+    total_points_range:
+      minimum: 0 + 0 + 0 + 0 + 0       # worst on every issue = 0
+      maximum: 200 + 120 + 300 + 60 + 90  # best on every issue = 770
+    note: >
+      Weights (max points): integration (300) > cash (200) > equity (120) > esg (90) ~ brand (60).
+      Concede brand and equity first; hold firm on integration length and cash.
+
+  - id: founder
+    label: Founder
+    description: >
+      You are selling your company. You want a HIGH cash price and to retain MORE
+      equity. You care intensely that the acquirer keeps your BRAND NAME for many
+      years (your legacy — top priority). You are nearly indifferent to how long you
+      personally stay through integration. You privately favor a STRONG ESG clause
+      (it matters to you personally), but it is not worth fighting over.
+    batna_value: 300
+    batna_description: >
+      Reject the offer and keep running the company independently — worth 300 points.
+    private_payoff_card:
+      cash_price_musd:
+        description: "Higher cash price is better for you."
+        options:
+          40: 0
+          45: 40
+          50: 80
+          55: 120
+          60: 160
+          65: 200
+      founder_equity_pct:
+        description: "More retained equity is better for you."
+        options:
+          0:  0
+          5:  24
+          10: 48
+          15: 72
+          20: 96
+          25: 120
+      integration_months:
+        description: "You are nearly indifferent; a shorter commitment is marginally better."
+        options:
+          6:  60
+          12: 48
+          18: 36
+          24: 24
+          36: 0
+      brand_retention_yrs:
+        description: "A LONGER brand retention is much better for you (your legacy)."
+        options:
+          0:  0
+          2:  80
+          5:  180
+          8:  260
+          10: 320
+      esg_clause:
+        description: "0=none, 1=moderate, 2=strong. You privately prefer strong (it matters to you personally)."
+        options:
+          0: 0
+          1: 40
+          2: 90
+    total_points_range:
+      minimum: 0 + 0 + 0 + 0 + 0
+      maximum: 200 + 120 + 60 + 320 + 90  # best on every issue = 790
+    note: >
+      Weights (max points): brand (320) > cash (200) > equity (120) > esg (90) ~ integration (60).
+      Concede integration and equity first; hold firm on brand retention and cash.
+
+full_payoff_matrix:
+  note: >
+    Key reference bundles. Full per-issue tables above are published openly.
+    Headroom is large here BY DESIGN — see header comment.
+  key_bundles:
+    - label: "Equal-split / naive (cash=50, equity=10, integration=18, brand=5, esg=1[moderate])"
+      cash_price_musd: 50
+      founder_equity_pct: 10
+      integration_months: 18
+      brand_retention_yrs: 5
+      esg_clause: 1   # moderate
+      acquirer_points: 388   # 120 + 72 + 120 + 36 + 40
+      founder_points: 384    # 80 + 48 + 36 + 180 + 40
+      joint_points: 772
+
+    - label: "Pareto-optimal (logroll: long integration for acquirer, long brand for founder, strong esg both)"
+      cash_price_musd: 50
+      founder_equity_pct: 10
+      integration_months: 36
+      brand_retention_yrs: 10
+      esg_clause: 2   # strong
+      acquirer_points: 582   # 120 + 72 + 300 + 0 + 90
+      founder_points: 538    # 80 + 48 + 0 + 320 + 90
+      joint_points: 1120
+
+    - label: "Acquirer-greedy (low cash, low equity, long integration, short brand, no esg)"
+      cash_price_musd: 40
+      founder_equity_pct: 0
+      integration_months: 36
+      brand_retention_yrs: 0
+      esg_clause: 0   # none
+      acquirer_points: 680   # 200 + 120 + 300 + 60 + 0
+      founder_points: 0      # 0 + 0 + 0 + 0 + 0
+      joint_points: 680
+
+    - label: "Founder-greedy (high cash, high equity, short integration, long brand, no esg)"
+      cash_price_musd: 65
+      founder_equity_pct: 25
+      integration_months: 6
+      brand_retention_yrs: 10
+      esg_clause: 0   # none
+      acquirer_points: 60    # 0 + 0 + 0 + 60 + 0
+      founder_points: 700    # 200 + 120 + 60 + 320 + 0
+      joint_points: 760
+
+analytic_optimum:
+  description: >
+    Pareto-optimal bundle: cash=$50M, founder_equity=10%, integration=36 months,
+    brand_retention=10 years, esg=strong. Acquirer 120+72+300+0+90 = 582; Founder
+    80+48+0+320+90 = 538; joint = 1120. The cash and equity issues are zero-sum
+    (joint constant at 200 and 120 respectively across any split), so the listed
+    50/10 split is the equal-surplus reference; the joint TOTAL is invariant to it.
+    Value is created on three issues: (1) integration — acquirer concedes nothing and
+    founder concedes a near-worthless long commitment, +240 joint vs midpoint; (2) brand
+    — founder gains 140 and acquirer loses only 36 vs midpoint; (3) esg — a compatible
+    issue both privately prefer, +100 joint vs the naive "moderate" default.
+  best_bundle:
+    cash_price_musd: 50
+    founder_equity_pct: 10
+    integration_months: 36
+    brand_retention_yrs: 10
+    esg_clause: 2   # strong
+  acquirer_points: 582
+  founder_points: 538
+  joint_points: 1120
+  equal_split_bundle:
+    cash_price_musd: 50
+    founder_equity_pct: 10
+    integration_months: 18
+    brand_retention_yrs: 5
+    esg_clause: 1   # moderate
+  equal_split_acquirer: 388
+  equal_split_founder: 384
+  equal_split_joint: 772
+  value_created_vs_equal_split: 348
+
+offer_protocol:
+  description: >
+    Agents MUST use the structured offer protocol. A valid offer is an OFFER: line
+    containing a JSON object whose keys are the five issue names exactly as they
+    appear in the payoff card (cash_price_musd, founder_equity_pct, integration_months,
+    brand_retention_yrs, esg_clause). esg_clause is a NUMBER: 0=none, 1=moderate,
+    2=strong. All issues take a number drawn from the option set.
+    Acceptance: ACCEPT on its own line. Rejection/counter: plain text + new OFFER.
+    Example: 'OFFER: {"cash_price_musd": 50, "founder_equity_pct": 10, "integration_months": 36, "brand_retention_yrs": 10, "esg_clause": 2}'
+
+max_rounds: 14
