@@ -1,7 +1,7 @@
 # paper.yaml — Value Headroom Moderates Whether Specification Beats Style in LLM Negotiation
 # Citation key: negotiation_spec_2026
 # Concept DOI 10.5281/zenodo.20595996 (always resolves to latest version; always cite).
-# v1.0.0 versioned DOI 10.5281/zenodo.20595997 (2026-06-08 upload).
+# v1.0.0 versioned DOI 10.5281/zenodo.20595997 (2026-06-09 upload).
 # Paper Spec schema: https://github.com/spectralbranding/paper-spec/SPECIFICATION.md
 
 paper_spec_version: "0.1.0"
@@ -15,7 +15,7 @@ metadata:
       corresponding: true
   citation_key: "negotiation_spec_2026"
   doi: "10.5281/zenodo.20595996"
-  date: "2026-06-08"
+  date: "2026-06-09"
   version: "1.0.0"
   status: preprint
   license: "CC-BY-4.0"  # paper text CC-BY-4.0; companion code MIT
@@ -277,7 +277,7 @@ limitations:
 submission_history:
   - venue: "Zenodo"
     type: preprint
-    date: "2026-06-08"
+    date: "2026-06-09"
     status: published
     doi: "10.5281/zenodo.20595996"
 

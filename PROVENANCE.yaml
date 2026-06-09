@@ -79,7 +79,7 @@ provenance:
 
   versions:
     - version: "1.0.0"
-      date: "2026-06-08"
+      date: "2026-06-09"
       description: >
         Initial preprint. Seven arms across three model families, 4,920 dyads: Study 1
         near-ceiling null (630), Study 2 high-headroom specification win (630), Haiku
