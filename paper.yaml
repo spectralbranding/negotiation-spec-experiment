@@ -18,7 +18,7 @@ metadata:
   date: "2026-06-09"
   version: "1.0.0"
   status: preprint
-  license: "CC-BY-4.0"  # paper text CC-BY-4.0; companion code MIT
+  license: "CC-BY-NC-ND-4.0"  # paper text CC-BY-NC-ND-4.0; companion code MIT, data CC-BY-4.0
   abstract: >
     When two language-model agents negotiate, does it matter more how they are styled
     (warm, dominant) or how their objective is specified (ranked priorities, a reservation
