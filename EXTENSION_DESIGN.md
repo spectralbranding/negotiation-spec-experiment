@@ -3,7 +3,7 @@ title: "Full Extension Design — Negotiation Spec Experiment (4 robustness comp
 status: DESIGN ONLY — NO RUNS, NO API CALLS. Awaiting user GO / REVISE / DROP + frontier-model + budget confirmation.
 author: Dmitry Zharnikov
 date: 2026-06-07
-base_paper: Vaccaro, Caoson, Ju, Aral & Curhan (2026), PNAS 10.1073/pnas.2521774123 (arXiv 2503.06416)
+base_paper: Vaccaro, Caosun, Ju, Aral & Curhan (2026), PNAS 10.1073/pnas.2521774123 (arXiv 2503.06416)
 preregistration: PREREGISTRATION.md (Study 1, git 2ed95ffd) + PREREGISTRATION_STUDY2.md (Study 2)
 results_so_far: RESULTS_SUMMARY.md (3 arms × 630 dyads — Study 1 / Study 2 / Haiku cross-family)
 formatting: PAPER_QUALITY_STANDARDS (no leading zero on decimals < 1; exact p, 3 digits; p < .001 floor; effect sizes mandatory)

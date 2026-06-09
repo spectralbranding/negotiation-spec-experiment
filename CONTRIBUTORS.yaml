@@ -1,0 +1,51 @@
+# CONTRIBUTORS.yaml — Value Headroom Moderates Whether Specification Beats Style in LLM Negotiation
+# Verified contributor attribution per the Research-as-Repository protocol
+
+contributors:
+  - name: "Dmitry Zharnikov"
+    orcid: "0009-0000-6893-9231"
+    type: human
+    roles:
+      - conceptualization
+      - methodology
+      - software
+      - formal-analysis
+      - investigation
+      - data-curation
+      - writing-original
+      - writing-review
+    affiliation: "Independent Researcher"
+    corresponding: true
+
+  - name: "Claude Opus 4.8 (Anthropic)"
+    type: ai_tool
+    roles:
+      - literature-search
+      - software-development
+      - experiment-orchestration
+      - writing-review
+    disclosure: >
+      Assistive tool used for literature search, software development (the negotiation harness
+      and the scoring and analysis scripts), orchestration and control of the experiment runs
+      through those scripts, and editorial refinement. Not an author. All claims, propositions,
+      and interpretations are the author's sole responsibility.
+
+  - name: "Grok 4.3 (xAI)"
+    type: ai_tool
+    roles:
+      - literature-search
+      - writing-review
+    disclosure: >
+      Assistive tool used for literature search and editorial refinement. Not an author.
+
+  - name: "Gemini 3.1 (Google)"
+    type: ai_tool
+    roles:
+      - literature-search
+      - writing-review
+    disclosure: >
+      Assistive tool used for literature search and editorial refinement. Not an author.
+
+# Note: gpt-4o-mini, claude-haiku-4-5, grok-4.3, and gpt-4o appear in this study as
+# SUBJECTS/instruments of the experiment (negotiating players and manipulation-check
+# scorers), not as contributors to the analysis or interpretation.

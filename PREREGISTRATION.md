@@ -3,7 +3,7 @@ title: "Spec-Agent vs Styled-Agent in AI–AI Negotiation — Preregistration"
 status: FROZEN PRE-RUN (v1.0.0) — canonical freeze = git commit 2ed95ffd (2026-06-06); archived (timestamped) on Zenodo 10.5281/zenodo.20595996 + GitHub
 author: Dmitry Zharnikov
 date: 2026-06-06
-base_paper: Vaccaro, Caoson, Ju, Aral & Curhan (2026), arXiv 2503.06416 (PNAS published version; PUBLIC REF = arXiv 2503.06416)
+base_paper: Vaccaro, Caosun, Ju, Aral & Curhan (2026), arXiv 2503.06416 (PNAS published version; PUBLIC REF = arXiv 2503.06416)
 design_doc: EXPERIMENT_DESIGN.md (same directory)
 ---
 

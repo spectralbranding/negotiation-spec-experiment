@@ -9,7 +9,7 @@ temperature: 0
 version: v1.0
 date: 2026-06-06
 source_code_reference: "code/scoring_llm.py::SVI_SYSTEM"
-base_paper_reference: "Vaccaro, Caoson, Ju, Aral & Curhan (2026), arXiv 2503.06416"
+base_paper_reference: "Vaccaro, Caosun, Ju, Aral & Curhan (2026), arXiv 2503.06416"
 svi_instrument_reference: "Curhan, Elfenbein & Xu (2006), J. Personality and Social Psychology"
 published_copy: "prompts/SCORING_SVI.txt (this file)"
 ---

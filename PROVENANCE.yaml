@@ -1,0 +1,91 @@
+# PROVENANCE.yaml — Value Headroom Moderates Whether Specification Beats Style in LLM Negotiation
+# Data and code provenance per the Research-as-Repository protocol
+
+provenance:
+  paper_title: "Value Headroom Moderates Whether Specification Beats Style in LLM Negotiation"
+  citation_key: "negotiation_spec_2026"
+  repository: "spectralbranding/negotiation-spec-experiment"
+
+  canonical_timestamp:
+    pre_run_freeze_commit: "2ed95ffd"
+    description: >
+      Pre-run freeze: the six condition prompts and scenario payoff cards were frozen and
+      hashed at this commit before any paid run, establishing the preregistration timestamp.
+
+  data_arms:
+    - arm: "Study 1 (near-ceiling, ~3% headroom)"
+      player_model: "gpt-4o-mini"
+      dyads: 630
+      data_pointer: "data/outcomes.csv"
+    - arm: "Study 2 (harder scenarios, 31-46% headroom)"
+      player_model: "gpt-4o-mini"
+      dyads: 630
+      data_pointer: "data_study2/outcomes.csv"
+    - arm: "Cross-family (easy scenarios)"
+      player_model: "claude-haiku-4-5"
+      dyads: 630
+      data_pointer: "data_haiku/outcomes.csv"
+    - arm: "Logrolling ablation (full 7-condition grid incl. SPEC_NOLOGROLL)"
+      player_model: "gpt-4o-mini"
+      dyads: 560
+      data_pointer: "data_ablation_full/outcomes.csv"
+    - arm: "Frontier capability (full Study-2 grid)"
+      player_model: "grok-4.3"
+      dyads: 630
+      data_pointer: "data_frontier/outcomes.csv"
+    - arm: "Paraphrase robustness envelope (4 focal x 5 wordings)"
+      player_model: "gpt-4o-mini"
+      dyads: 640
+      data_pointer: "data_paraphrase/outcomes.csv"
+    - arm: "Graded headroom dose-response (5 variants)"
+      player_model: "gpt-4o-mini"
+      dyads: 1200
+      data_pointer: "data_headroom/outcomes.csv"
+
+  total_dyads: 4920
+
+  scorer_models:
+    - "gpt-4o (warmth/dominance + SVI manipulation-check scorer)"
+    - "claude-haiku-4-5 (warmth/dominance + SVI manipulation-check scorer)"
+
+  datasets:
+    - name: "Full negotiation transcripts"
+      repository: "spectralbranding/negotiation-spec-experiment"
+      doi: "10.57967/hf/9090"
+      platform: "HuggingFace"
+
+  archival_records:
+    concept_doi: "10.5281/zenodo.20595996"  # always resolves to latest version
+    version_doi: "10.5281/zenodo.20595997"  # v1.0.0
+
+  licenses:
+    code: "MIT"
+    data: "CC-BY-4.0"
+    paper_text: "CC-BY-4.0"
+
+  reproducibility:
+    note: >
+      Every numerical value cited in the note is reproducible from the published scripts with
+      the documented run commands. Per-arm outcomes.csv files carry the raw dyad outcomes;
+      analyze.py computes per-arm contrasts and effect sizes; compute_icc.py computes
+      inter-scorer reliability; compute_headroom.py computes the dose-response; and
+      gen_headroom_variants.py regenerates and arithmetically verifies the graded-headroom
+      scenarios. No figure or statistic is hand-entered.
+    scripts:
+      - "analyze.py"
+      - "compute_icc.py"
+      - "compute_headroom.py"
+      - "gen_headroom_variants.py"
+
+  versions:
+    - version: "1.0.0"
+      date: "2026-06-08"
+      description: >
+        Initial preprint. Seven arms across three model families, 4,920 dyads: Study 1
+        near-ceiling null (630), Study 2 high-headroom specification win (630), Haiku
+        cross-family replication (630), full-grid logrolling ablation (560), grok-4.3 frontier
+        (630), paraphrase envelope (640), graded headroom dose-response (1,200). Transcripts
+        archived at HuggingFace DOI 10.57967/hf/9090. Concept DOI 10.5281/zenodo.20595996;
+        version DOI 10.5281/zenodo.20595997.
+
+  forks: []

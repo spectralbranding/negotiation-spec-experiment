@@ -34,7 +34,7 @@ DESCRIPTION = (
     "specification-first negotiation agent (explicit objective, reservation value, "
     "ranked issue weights, concession + stop rules) outperforms style-based agents "
     "(warmth / dominance), isolating structured specification from chain-of-thought "
-    "via a 2x2 factorial. Extension of Vaccaro, Caoson, Ju, Aral & Curhan (2026), "
+    "via a 2x2 factorial. Extension of Vaccaro, Caosun, Ju, Aral & Curhan (2026), "
     "'Advancing AI negotiations' (arXiv:2503.06416). Canonical pre-run freeze = git "
     "commit 2ed95ffd. Full code/data will be mirrored on GitHub + Zenodo + HuggingFace."
 )

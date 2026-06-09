@@ -3,7 +3,7 @@ title: "Spec-Agent vs Styled-Agent: A Negotiation Replication-and-Extension Desi
 status: DRAFT — design only, NO RUNS, awaiting user GO/REVISE/DROP
 author: Dmitry Zharnikov
 date: 2026-06-06
-base_paper: Vaccaro, Caoson, Ju, Aral & Curhan (2026), PNAS 10.1073/pnas.2521774123; arXiv 2503.06416v3
+base_paper: Vaccaro, Caosun, Ju, Aral & Curhan (2026), PNAS 10.1073/pnas.2521774123; arXiv 2503.06416v3
 model_target: gpt-4o-mini @ temperature .20 (matches base paper)
 ---
 
@@ -354,7 +354,7 @@ flowchart TB
   `research/PUBLIC_MIRROR_STANDARD.md` (CITATION.cff, dual license,
   reproduce.sh, output/{figures,tables,logs}/). HF dataset DOI for transcripts.
 - **Citation discipline**: cite the base paper as
-  Vaccaro, Caoson, Ju, Aral & Curhan (2026), PNAS 10.1073/pnas.2521774123. This
+  Vaccaro, Caosun, Ju, Aral & Curhan (2026), PNAS 10.1073/pnas.2521774123. This
   is an *outside-corpus* extension, not an SBT self-citation — no Zharnikov
   citation-key applies. Direction-of-citation: we cite them; we do not bolt SBT
   vocabulary onto a negotiation paper.
