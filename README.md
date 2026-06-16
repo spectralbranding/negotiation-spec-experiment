@@ -16,7 +16,7 @@ This repository accompanies an independent conceptual test of whether interperso
 
 ---
 
-## 2 | What's Here
+## 2 | Project Layout
 
 ```
 .
