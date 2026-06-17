@@ -13,7 +13,7 @@ meta:
   doi: 10.5281/zenodo.20595996
   date: '2026-06-01'
   venue: Preprint
-  license: CC-BY-NC-ND-4.0
+  license: CC-BY-4.0
   abstract: When two language-model agents negotiate, does it matter more how they are *styled* (warm,
     dominant) or how their objective is *specified* (ranked priorities, a reservation value, a concession
     rule)? A large autonomous-negotiation study reported that interpersonal warmth, not structure, predicted
