@@ -9,7 +9,7 @@ Tests:
     is_acceptance            — standalone ACCEPT required; prose "accept" not matched
 
 Run:
-    uv run pytest code/test_robustness.py -v
+    uv run pytest [internal path removed] -v
 """
 
 from __future__ import annotations
@@ -341,7 +341,7 @@ class TestWriteRunStatus:
             dyads_done=42,
             dyads_remaining=88,
             cost_so_far=1.23,
-            resume_cmd="uv run python run_experiment.py --resume",
+            resume_cmd="bws run -- uv run python run_experiment.py --resume",
         )
         assert p.exists()
         content = p.read_text()
@@ -363,7 +363,7 @@ class TestWriteRunStatus:
             dyads_done=0,
             dyads_remaining=630,
             cost_so_far=0.0,
-            resume_cmd="uv run python run_experiment.py --resume",
+            resume_cmd="bws run -- uv run python run_experiment.py --resume",
         )
         content = p.read_text()
         assert "authentication" in content.lower() or "API key" in content

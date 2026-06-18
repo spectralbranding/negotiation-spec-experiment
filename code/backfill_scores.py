@@ -13,13 +13,13 @@ after a provider pause continues where it stopped. Graceful provider-block handl
 re-uses the same RUN_STATUS.md / ntfy mechanism as the main runner.
 
 Usage (from repo root):
-    uv run --with openai --with anthropic --with pyyaml --with numpy \\
-        python code/backfill_scores.py \\
+    bws run -- uv run --with openai --with anthropic --with pyyaml --with numpy \\
+        python [internal path removed] \\
         --data-dir data_study2 --logs-dir logs_study2
 
 Mock validation (no API calls; writes to outcomes.mocktest.csv, never the real file):
     uv run --with openai --with anthropic --with pyyaml --with numpy \\
-        python code/backfill_scores.py \\
+        python [internal path removed] \\
         --data-dir data_study2 --logs-dir /tmp/bf_logs --mock --limit 5
 """
 
@@ -111,8 +111,8 @@ def main() -> None:
     )
 
     resume_cmd = (
-        "uv run --with openai --with anthropic --with pyyaml --with numpy "
-        "python code/backfill_scores.py "
+        "bws run -- uv run --with openai --with anthropic --with pyyaml --with numpy "
+        "python [internal path removed] "
         f"--data-dir {args.data_dir} --logs-dir {args.logs_dir}"
     )
 

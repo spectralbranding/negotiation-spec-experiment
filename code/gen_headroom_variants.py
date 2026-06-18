@@ -5,7 +5,7 @@ REPRODUCIBILITY: this script is the SSOT for every payoff number in
 scenarios_headroom/supplier_h10..h50.yaml. Run it to regenerate the YAMLs and the
 README arithmetic table. No API calls; pure arithmetic + file emission.
 
-    uv run python code/gen_headroom_variants.py
+    uv run python [internal path removed]
 
 WHY A RETUNE (2026-06-08): the original analytic ladder (supplier_h05..h50, headroom
 5/15/25/40/50% by construction at the *naive* bundle) FAILED the realized-monotonicity

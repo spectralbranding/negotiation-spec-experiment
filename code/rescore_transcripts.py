@@ -21,12 +21,12 @@ PILOT_GATE_AUDIT.md). The audit mode produces supplementary qualitative evidence
 Do NOT run capture_reasoning=True during the live primary run.
 
 Usage (standard rescore, from repo root):
-    uv run --with openai --with anthropic --with pyyaml --with numpy \\
-        python code/rescore_transcripts.py
+    bws run -- uv run --with openai --with anthropic --with pyyaml --with numpy \\
+        python [internal path removed]
 
 Usage (audit mode, post-run only):
-    uv run --with openai --with anthropic --with pyyaml --with numpy \\
-        python code/rescore_transcripts.py \\
+    bws run -- uv run --with openai --with anthropic --with pyyaml --with numpy \\
+        python [internal path removed] \\
         --capture-reasoning
 
 Cost cap: ~$0.30 standard (40 agent-turns x 2 scorers x ~$0.003/call).

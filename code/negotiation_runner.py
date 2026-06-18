@@ -48,7 +48,7 @@ from pathlib import Path
 from typing import Any
 
 # ---------------------------------------------------------------------------
-# Path setup — allow importing llm_call_logger from research/code/
+# Path setup — allow importing llm_call_logger from [internal path removed]
 # ---------------------------------------------------------------------------
 REPO_ROOT = Path(__file__).resolve().parents[3]
 RESEARCH_CODE = REPO_ROOT / "research" / "code"
@@ -602,7 +602,7 @@ def _call_anthropic(
 OPENAI_MODELS = {"gpt-4o-mini", "gpt-4o", "gpt-4o-2024-11-20"}
 ANTHROPIC_MODELS = {"claude-haiku-4-5", "claude-haiku-4-5-20251001"}
 # xAI Grok models: routed via OpenAI-compatible endpoint at api.x.ai/v1.
-# GROK_API_KEY is read from the environment at run time.
+# GROK_API_KEY is injected by BWS at run time.
 GROK_MODELS = {"grok-4.3"}
 GROK_BASE_URL = "https://api.x.ai/v1"
 
@@ -623,7 +623,7 @@ def _call_grok(
     Grok exposes an OpenAI-compatible chat-completions API at
     ``https://api.x.ai/v1``.  We construct an ``openai.OpenAI`` client with
     ``base_url`` overridden to that endpoint and ``api_key`` read from
-    ``GROK_API_KEY`` (read from the environment).  The call is otherwise identical to
+    ``GROK_API_KEY`` (injected by BWS).  The call is otherwise identical to
     ``_call_openai``.
 
     The SCORERS (gpt-4o + claude-haiku-4-5) are UNCHANGED — this branch is only

@@ -5,7 +5,7 @@ experiment and uploads the pre-run scientific artifacts. Reads OSF_ACCESS_TOKEN
 from the environment (via BWS); never prints the token.
 
 Run:
-    bws run -- uv run python research/negotiation_spec_experiment/code/osf_publish.py
+    bws run -- uv run python [internal path removed]
 
 Idempotent: reuses an existing node with the same title and overwrites files of
 the same name (so re-running updates the uploads rather than duplicating).

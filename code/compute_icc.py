@@ -11,14 +11,14 @@ This script makes this paper's cited ICC values (.863 warmth / .802 dominance)
 script-reproducible per PAPER_QUALITY_STANDARDS §37a.
 
 Usage (from repo root):
-    uv run python code/compute_icc.py
-    uv run python code/compute_icc.py \\
-        --logs-dir logs/
-    uv run python code/compute_icc.py \\
-        --logs-dir logs/ \\
+    uv run python [internal path removed]
+    uv run python [internal path removed] \\
+        --logs-dir [internal path removed]
+    uv run python [internal path removed] \\
+        --logs-dir [internal path removed] \\
         --phase-filter rescore_v2
-    uv run python code/compute_icc.py \\
-        --logs-dir logs/ \\
+    uv run python [internal path removed] \\
+        --logs-dir [internal path removed] \\
         --include-svi
 """
 

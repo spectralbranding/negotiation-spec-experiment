@@ -108,9 +108,9 @@ All scenarios, the six frozen condition prompts (with hashes), the negotiation h
 
 *Companion computation script.* Every numerical value cited in this note is reproducible from the published analysis scripts in the public repository — `analyze.py` (per-arm contrasts and effect sizes), `compute_icc.py` (inter-scorer reliability), and `compute_headroom.py` (the dose-response) — with the run commands documented in the repository README; the graded-headroom scenarios are regenerated and arithmetically verified by `gen_headroom_variants.py`. No figure or statistic in this note is hand-entered.
 
-## Acknowledgments and Author Contributions
+## Acknowledgments
 
-AI assistants (Claude Opus 4.8, Grok 4.3, Gemini 3.1) were used for initial literature search, for software development — authoring the experiment harness and the analysis and scoring scripts — and for orchestrating and running the reported experiments through those scripts, as well as for editorial refinement; all theoretical claims, propositions, and interpretations are the author's sole responsibility. CRediT: Dmitry Zharnikov — Conceptualization, Methodology, Software, Formal analysis, Investigation, Data curation, Writing (original draft and review & editing).
+AI assistants (Claude Opus 4.8, Grok 4.20, Gemini 2.5 Pro) were used for initial literature search, for software development — authoring the experiment harness and the analysis and scoring scripts — and for orchestrating and running the reported experiments through those scripts, as well as for editorial refinement; all theoretical claims, propositions, and interpretations are the author's sole responsibility. CRediT: Dmitry Zharnikov — Conceptualization, Methodology, Software, Formal analysis, Investigation, Data curation, Writing (original draft and review & editing).
 
 ## References
 

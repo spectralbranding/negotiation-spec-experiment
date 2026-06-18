@@ -48,23 +48,23 @@ Flags:
                            Example: --opponent NEUTRAL
 
 Usage (dry-run, zero API):
-    uv run python code/run_experiment.py \\
+    uv run python [internal path removed] \\
         --dry-run --pilot 60
 
 Usage (isolated dry-run for a second model arm):
-    uv run python code/run_experiment.py \\
+    uv run python [internal path removed] \\
         --dry-run --pilot 30 --data-dir dryrun_iso
 
-Usage (preflight check, real API):
-    uv run python code/run_experiment.py \\
+Usage (preflight check, real API via bws):
+    bws run -- uv run python [internal path removed] \\
         --preflight --model gpt-4o-mini
 
-Usage (pilot, real API):
-    uv run python code/run_experiment.py \\
+Usage (pilot, real API via bws):
+    bws run -- uv run python [internal path removed] \\
         --pilot 60 --model gpt-4o-mini
 
 Usage (haiku robustness arm, isolated output dir):
-    uv run python code/run_experiment.py \\
+    bws run -- uv run python [internal path removed] \\
         --model claude-haiku-4-5 --score --data-dir data_haiku --budget-stop 38
 """
 
@@ -485,8 +485,8 @@ def _extract_cost_from_logs(logs_dir: Path, dyad_id: str) -> float:
 def _make_resume_cmd(args: argparse.Namespace) -> str:
     """Reconstruct the CLI command with --resume appended."""
     parts = [
-        "uv run python",
-        "code/run_experiment.py",
+        "bws run -- uv run python",
+        "[internal path removed]",
         "--resume",
     ]
     if args.dry_run:
@@ -546,7 +546,7 @@ def _preflight_call_grok(model: str) -> None:
     credentials and reachability.
 
     Uses the same OpenAI SDK with ``base_url`` overridden to ``api.x.ai/v1``
-    and ``GROK_API_KEY`` read from the environment.
+    and ``GROK_API_KEY`` injected by BWS.
     """
     import openai
 
