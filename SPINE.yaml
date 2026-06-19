@@ -240,7 +240,7 @@ propositions:
         anchor: "F5 grok d=.569 > gpt-4o-mini .314; F3 cross-family replication of the null + spec×CoT"
       - type: citation
         anchor: "contemporaneous LLM-negotiation capability findings"
-        citation_keys: [negotiationarena-2024, bhattacharya-2025-evaluating-negotiation-llms]
+        citation_keys: [bianchi-2024-negotiationarena, bhattacharya-2025-evaluating-negotiation-llms]
         citation_role: contrast_case
     body_sections: ["Discussion — Capability scaling"]
     provenance: {created_by: "author", created_at: "2026-06-08"}
@@ -455,7 +455,7 @@ external_anchors:
   - citation_key: curhan-2006-svi
     role: theoretical_predecessor
     spine_nodes: [P4]
-  - citation_key: negotiationarena-2024
+  - citation_key: bianchi-2024-negotiationarena
     role: contrast_case
     spine_nodes: [P3]
     note: "arXiv:2402.05863 candidate — verify via parallel session."
