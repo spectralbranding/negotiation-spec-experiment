@@ -2,10 +2,4 @@
 
 ## Glossary
 
-_Terms used by **negotiation_spec_2026** (Value Headroom Moderates Whether Specification Beats Style in LLM Negotiation). Defined terms this paper introduces, refines, or imports from the corpus ontology._
-
-*Terms introduced by this paper*
-
-- **Value Headroom** (write: `value headroom`)
-  - The fraction of attainable joint value a naively cooperative pair would leave on the table, operationalized as (Pareto-joint minus naive-joint) over Pareto-joint, which moderates whether specification beats style.
-  - first use: Specification, Style, and a Result That Depends on the Exam
+_No ontology module found for 2026aq. Author `research/ontology/2026aq.yaml` and run build_ontology.py._

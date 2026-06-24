@@ -472,8 +472,3 @@ external_anchors:
     spine_nodes: [P3]
     note: "Google Research candidate — verify; drop if unsourceable."
 
-open:
-  - "RC3 (dose-response) result pending — if the realized gradient holds, it upgrades P1 from a 2-point sign-flip to a slope; if it stays flat after the bounded retune, report a threshold (not a smooth slope) honestly."
-  - "Human-scorer validation subsample (10%) is future work."
-  - "Whether a high-capability ceiling re-emerges at a model stronger than grok-4.3 (P3 boundary)."
-
