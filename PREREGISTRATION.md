@@ -104,9 +104,8 @@ H5) is pre-registered, not hidden.
   `*/dryrun/` and is git-ignored.
 - Every paid call logged before the next is issued; redaction at write time.
 - No SBT vocabulary bolted onto a negotiation paper; we cite the base paper, not vice versa.
-- The empirical-note DRAFTING stage triggers the Grok pre-draft gate
-  (`research/reviews/R_PAPER_PREDRAFT_WORKFLOW.md`) — confirmed by user 2026-06-06 to fire at
-  draft stage, NOT before the run.
+- The empirical-note DRAFTING stage triggers a pre-draft critical-review — confirmed
+  2026-06-06 to fire at draft stage, NOT before the run.
 
 ## 8. Amendments (append-only, dated)
 

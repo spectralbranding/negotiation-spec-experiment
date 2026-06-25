@@ -1,6 +1,6 @@
 ---
 title: "Spec-Agent vs Styled-Agent: A Negotiation Replication-and-Extension Design"
-status: DRAFT — design only, NO RUNS, awaiting user GO/REVISE/DROP
+status: DRAFT — design only, NO RUNS, awaiting user decision
 author: Dmitry Zharnikov
 date: 2026-06-06
 base_paper: Vaccaro, Caosun, Ju, Aral & Curhan (2026), PNAS 10.1073/pnas.2521774123; arXiv 2503.06416v3
@@ -426,7 +426,7 @@ fires when we move to draft the note.
 6. **Scorer model for warmth/dominance + SVI.** Match the paper's frontier scorer
    (they used GPT-5.2) for comparability, or use gpt-4o-mini to save cost and
    accept a within-set-only manipulation check (H6)?
-7. **Pre-draft gate timing.** Confirm the Grok pre-draft review fires when we move
+7. **Pre-draft review timing.** Confirm the pre-draft critical-review fires when we move
    from this design to drafting the empirical note (not before the run).
 
 NO negotiations are run and NO API budget is spent until the user issues

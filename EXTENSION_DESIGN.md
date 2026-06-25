@@ -549,6 +549,6 @@ To append to `PREREGISTRATION_STUDY2.md §10` (append-only, dated) at run time:
 
 The note's spine: Study 1 (null/ceiling) → Study 2 (SPEC wins with headroom) → Component 1
 (it's the strategy) → Component 3 (it scales with headroom, dose-response) → Component 2 (robust
-to wording) → Component 4 (capability scope). The Grok pre-draft gate
-(`research/reviews/R_PAPER_PREDRAFT_WORKFLOW.md`) fires when drafting begins — after this
+to wording) → Component 4 (capability scope). A pre-draft critical-review
+fires when drafting begins — after this
 extension data is in hand.
