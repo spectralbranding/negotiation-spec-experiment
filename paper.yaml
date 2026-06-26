@@ -15,6 +15,15 @@ meta:
   date: '2026-06-01'
   venue: Preprint
   license: CC-BY-4.0
+  keywords:
+  - LLM negotiation
+  - automated negotiation
+  - prompt specification
+  - value headroom
+  - logrolling
+  - joint surplus
+  - agentic AI
+  - prompt robustness
   abstract: When two language-model agents negotiate, does it matter more how they are *styled* (warm,
     dominant) or how their objective is *specified* (ranked priorities, a reservation value, a concession
     rule)? A large autonomous-negotiation study reported that interpersonal warmth, not structure, predicted

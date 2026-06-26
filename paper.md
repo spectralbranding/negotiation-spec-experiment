@@ -12,6 +12,8 @@ Working Paper v1.1.0 – June 2026 (revised June 2026)
 
 When two language-model agents negotiate, does it matter more how they are *styled* (warm, dominant) or how their objective is *specified* (ranked priorities, a reservation value, a concession rule)? A large autonomous-negotiation study reported that interpersonal warmth, not structure, predicted success. This note offers an independent test — a reconstruction from that study's public materials, not a one-to-one reproduction — and identifies *value headroom* (the joint surplus a naively cooperative pair leaves on the table) as a first-order moderator. Across seven arms spanning three model families (4,920 dyads), specification-first prompting ties interpersonal style on near-ceiling scenarios (a preregistered null) but yields strictly higher joint value once headroom is present (Cohen *d* = .314, *p* = .009 on a mid-capability model; *d* = .569, *p* < .001 at the frontier — the advantage grows with capability), with a graded design confirming the headroom slope. An ablation shows the advantage comes from teaching logrolling, not leaking the payoff matrix; it survives prompt paraphrase and replicates across model families. Specification moves the objective value frontier while remaining affectively neutral; style games the agreement proxy. The apparent "style beats structure" result is recovered as the zero-headroom boundary case of a more general law.
 
+**Keywords:** LLM negotiation, automated negotiation, prompt specification, value headroom, logrolling, joint surplus, agentic AI, prompt robustness
+
 ---
 
 ## Specification, Style, and a Result That Depends on the Exam
@@ -110,7 +112,11 @@ All scenarios, the six frozen condition prompts (with hashes), the negotiation h
 
 ## Acknowledgments
 
-AI assistants (Claude Opus 4.8, Grok 4.20, Gemini 2.5 Pro) were used for initial literature search, for software development — authoring the experiment harness and the analysis and scoring scripts — and for orchestrating and running the reported experiments through those scripts, as well as for editorial refinement; all theoretical claims, propositions, and interpretations are the author's sole responsibility. CRediT: Dmitry Zharnikov — Conceptualization, Methodology, Software, Formal analysis, Investigation, Data curation, Writing (original draft and review & editing).
+AI assistants (Claude Opus 4.8, Grok 4.20, Gemini 2.5 Pro) were used for initial literature search, for software development — authoring the experiment harness and the analysis and scoring scripts — and for orchestrating and running the reported experiments through those scripts, as well as for editorial refinement; all theoretical claims, propositions, and interpretations are the author's sole responsibility.
+
+## Author Contributions (CRediT)
+
+Dmitry Zharnikov: Conceptualization, Methodology, Software, Formal analysis, Investigation, Data curation, Writing (original draft and review & editing).
 
 ## References
 

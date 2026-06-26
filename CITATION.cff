@@ -14,6 +14,15 @@ identifiers:
   - type: doi
     value: "10.5281/zenodo.20595996"
     description: "Zenodo concept DOI (all versions)"
+keywords:
+  - LLM negotiation
+  - automated negotiation
+  - prompt specification
+  - value headroom
+  - logrolling
+  - joint surplus
+  - agentic AI
+  - prompt robustness
 license:
   - CC-BY-4.0
   - MIT
