@@ -8,11 +8,11 @@ DOI: [10.5281/zenodo.20595996](https://doi.org/10.5281/zenodo.20595996)
 
 Working Paper v1.1.0 – June 2026 (revised June 2026)
 
----
-
 ## Abstract
 
 When two language-model agents negotiate, does it matter more how they are *styled* (warm, dominant) or how their objective is *specified* (ranked priorities, a reservation value, a concession rule)? A large autonomous-negotiation study reported that interpersonal warmth, not structure, predicted success. This note offers an independent test — a reconstruction from that study's public materials, not a one-to-one reproduction — and identifies *value headroom* (the joint surplus a naively cooperative pair leaves on the table) as a first-order moderator. Across seven arms spanning three model families (4,920 dyads), specification-first prompting ties interpersonal style on near-ceiling scenarios (a preregistered null) but yields strictly higher joint value once headroom is present (Cohen *d* = .314, *p* = .009 on a mid-capability model; *d* = .569, *p* < .001 at the frontier — the advantage grows with capability), with a graded design confirming the headroom slope. An ablation shows the advantage comes from teaching logrolling, not leaking the payoff matrix; it survives prompt paraphrase and replicates across model families. Specification moves the objective value frontier while remaining affectively neutral; style games the agreement proxy. The apparent "style beats structure" result is recovered as the zero-headroom boundary case of a more general law.
+
+---
 
 ## Specification, Style, and a Result That Depends on the Exam
 
@@ -50,7 +50,7 @@ What is missing from this prior work is an isolation of *structure itself* — h
 
 *Specification wins once there is headroom.* On the harder scenarios (Study 2), specification pulls clear of every cooperative control on value created (Table 1). SPEC_NOCOT − NEUTRAL = +54.24 (*d* = .314, *p* = .009); SPEC_NOCOT − WARMTH = +43.69 (*d* = .263, *p* = .029); SPEC_COT − WARMTH = +56.77 (*d* = .346, *p* = .004). Warmth does not lift value even here (WARMTH − NEUTRAL *d* = .058, *p* = .629). Specification also wins the deal: SPEC_NOCOT − NEUTRAL deal rate +.11 (*d* = .293, *p* = .003). The same prompt contrast that produced a null at the ceiling produces a robust specification advantage once the exam is hard.
 
-Table 1: Value-created contrasts by regime (gpt-class mid-capability model, dyad level).
+**Table 1.** Value-created contrasts by regime (gpt-class mid-capability model, dyad level).
 
 | Contrast | Study 1 (≈3% headroom) | Study 2 (31–46% headroom) |
 |---|---|---|
@@ -72,7 +72,7 @@ Table 1: Value-created contrasts by regime (gpt-class mid-capability model, dyad
 
 *Dose-response: the advantage scales with headroom.* The two-point easy/hard contrast above shows the sign of the specification effect flips with headroom; a graded design tests the *shape*. We built five variants of a single scenario family (holding issues, roles, and prose fixed and varying only the payoff tables) and measured each variant's realized headroom as the fraction of attainable joint value a neutral pair leaves on the table; three conditions (NEUTRAL, COT_ONLY, SPEC_NOCOT) ran across all five, 1,200 dyads. Realized headroom graded monotonically across the variants (.031, .080, .087, .119, .189), and the SPEC_NOCOT − NEUTRAL value-created advantage rose with it in lockstep (Table 2): from a null at the lowest-headroom variant (*d* = −.120 — the Study-1 ceiling, reproduced *within a single scenario family*) to a large effect at the highest (*d* = 1.198, *p* = .002). The pre-specified specification × realized-headroom interaction is positive and significant (+865 joint points per unit of realized headroom, *p* < .001) — the sign-flip is a slope.
 
-Table 2: Specification advantage by realized headroom (one scenario family, five graded variants).
+**Table 2.** Specification advantage by realized headroom (one scenario family, five graded variants).
 
 | Variant | Realized headroom | SPEC_NOCOT − NEUTRAL (value created) | *d* | *p* |
 |---|---|---|---|---|
