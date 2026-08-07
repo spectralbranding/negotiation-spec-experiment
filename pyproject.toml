@@ -29,6 +29,13 @@ dependencies = [
 "Zenodo" = "https://doi.org/10.5281/zenodo.20595996"
 
 [tool.uv]
+# A reproduction bundle is a collection of scripts, not an installable library:
+# it ships no package directory matching the project name. Without this, `uv run`
+# inside the mirror tries to build a wheel and dies in hatchling with
+# "Unable to determine which files to ship inside the wheel" — which takes down
+# reproduce.sh before its first line of analysis. Keep this false unless the
+# mirror genuinely ships an importable package.
+package = false
 dev-dependencies = [
     "pytest>=8.0",
     "ruff>=0.5",
