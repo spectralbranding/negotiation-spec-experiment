@@ -1,0 +1,33 @@
+EXPLORATORY / ROBUSTNESS — preregistration amendment; NOT a confirmatory test.
+Unconditional expected value = deal_rate * value_if_deal (no-deal = 0).
+Scope: integrative scenarios only; one dyad-side (cond_a) to avoid double-counting.
+
+Table: Mean Unconditional Expected Value by Agent Condition
+(Corrects conditional-on-deal selection bias in value_created)
+
+Agent condition    Mean EV  Mean EV (int)         SD    N dyads
+-----------------------------------------------------------------
+WARMTH               816.3            816      179.7         32
+WARMTH_p4            793.4            793      196.3         32
+WARMTH_p1            784.1            784      117.3         32
+NEUTRAL              749.1            749      262.1         32
+WARMTH_p3            714.9            715      325.8         32
+SPEC_NOCOT_p2        697.1            697      286.8         32
+SPEC_NOCOT_p1        692.4            692      250.9         32
+COT_ONLY             663.1            663      396.1         32
+SPEC_NOCOT_p4        645.6            646      295.9         32
+NEUTRAL_p3           642.1            642      324.6         32
+COT_ONLY_p1          608.0            608      398.4         32
+COT_ONLY_p3          597.4            597      390.6         32
+COT_ONLY_p4          594.5            594      419.5         32
+WARMTH_p2            587.0            587      380.1         32
+SPEC_NOCOT           581.5            582      402.6         32
+COT_ONLY_p2          565.1            565      425.4         32
+NEUTRAL_p4           537.4            537      377.7         32
+SPEC_NOCOT_p3        484.1            484      388.5         32
+NEUTRAL_p1           478.4            478      411.0         32
+NEUTRAL_p2           457.4            457      392.7         32
+
+Note: EV = mean(value_created if deal=1, else 0) per condition. No-deal rows contribute 0.
+SD and N refer to integrative dyads where the agent held that condition.
+Ordering and magnitude differences are descriptive; no hypothesis test conducted.

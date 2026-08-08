@@ -19,8 +19,8 @@ Mixed model (primary):
       (common with small pilot data)
 
 Usage:
-    uv run python [internal path removed]
-    uv run python [internal path removed] \\
+    uv run python code/analyze.py
+    uv run python code/analyze.py \\
         --input [internal path removed]
 """
 

@@ -1,0 +1,18 @@
+Table: Pre-specified contrasts for outcome 'value_claimed'
+(PREREGISTRATION §4 contrasts; Welch t-tests; per PAPER_QUALITY_STANDARDS)
+
+Contrast                                             Mean A   Mean B     Diff            d            p    n_A    n_B
+--------------------------------------------------------------------------------------------------------------
+SPEC_NOCOT - NEUTRAL                                 103.38   129.70   -26.33    d = -.181     p = .121     32    672
+SPEC_NOCOT - COT_ONLY                                103.38   179.09   -75.72    d = -.512     p = .047     32     32
+SPEC_NOCOT - WARMTH                                  103.38   184.50   -81.12    d = -.566     p = .028     32     32
+SPEC_NOCOT - DOMINANCE                               103.38      n/a      n/a      d = nan insufficient data     32      0
+SPEC_COT - COT_ONLY                                     n/a   179.09      n/a      d = nan insufficient data      0     32
+SPEC_COT - WARMTH                                       n/a   184.50      n/a      d = nan insufficient data      0     32
+WARMTH - NEUTRAL                                     184.50   129.70   +54.80     d = .367     p = .104     32    672
+DOMINANCE - NEUTRAL                                     n/a   129.70      n/a      d = nan insufficient data      0    672
+(SPEC_COT - COT_ONLY) - (SPEC_NOCOT - NEUTRAL) [interaction]      n/a      n/a      n/a          n/a see mixed model    n/a    n/a
+
+Note: d = Cohen's d (pooled SD); p = exact Welch t-test p-value (3 decimals; floor p < .001).
+No significance stars per PAPER_QUALITY_STANDARDS.
+Method: welch_t

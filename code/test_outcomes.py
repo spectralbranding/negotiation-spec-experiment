@@ -4,7 +4,7 @@ All tests are deterministic and make ZERO API calls.
 Hand-computed expected values are derived from the scenario YAML payoff tables.
 
 Run:
-    uv run pytest [internal path removed] -v
+    uv run pytest code/test_outcomes.py -v
 """
 
 import math

@@ -6,7 +6,7 @@ to verify the ICC(2,1) formula and the log-parsing / key-normalization logic.
 All tests are deterministic and make ZERO API calls.
 
 Run:
-    uv run pytest [internal path removed] -v
+    uv run pytest code/test_icc.py -v
 """
 
 from __future__ import annotations

@@ -14,12 +14,12 @@ re-uses the same RUN_STATUS.md / ntfy mechanism as the main runner.
 
 Usage (from repo root):
     bws run -- uv run --with openai --with anthropic --with pyyaml --with numpy \\
-        python [internal path removed] \\
+        python code/backfill_scores.py \\
         --data-dir data_study2 --logs-dir logs_study2
 
 Mock validation (no API calls; writes to outcomes.mocktest.csv, never the real file):
     uv run --with openai --with anthropic --with pyyaml --with numpy \\
-        python [internal path removed] \\
+        python code/backfill_scores.py \\
         --data-dir data_study2 --logs-dir /tmp/bf_logs --mock --limit 5
 """
 
@@ -112,7 +112,7 @@ def main() -> None:
 
     resume_cmd = (
         "bws run -- uv run --with openai --with anthropic --with pyyaml --with numpy "
-        "python [internal path removed] "
+        "python code/backfill_scores.py "
         f"--data-dir {args.data_dir} --logs-dir {args.logs_dir}"
     )
 

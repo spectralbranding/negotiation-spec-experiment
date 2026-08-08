@@ -1,0 +1,51 @@
+Model method: OLS_cluster_robust (MixedLM failed: Singular matrix)
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                   deal   R-squared:                       0.044
+Model:                            OLS   Adj. R-squared:                  0.027
+Method:                 Least Squares   F-statistic:                    0.5883
+Date:                Fri, 07 Aug 2026   Prob (F-statistic):              0.675
+Time:                        14:18:06   Log-Likelihood:                -660.20
+No. Observations:                1280   AIC:                             1366.
+Df Residuals:                    1257   BIC:                             1485.
+Df Model:                          22                                         
+Covariance Type:              cluster                                         
+==================================================================================================
+                                     coef    std err          z      P>|z|      [0.025      0.975]
+--------------------------------------------------------------------------------------------------
+Intercept                          0.7578      0.029     26.169      0.000       0.701       0.815
+C(agent_type)[T.COT_ONLY_p1]      -0.0313        nan        nan        nan         nan         nan
+C(agent_type)[T.COT_ONLY_p2]      -0.0938        nan        nan        nan         nan         nan
+C(agent_type)[T.COT_ONLY_p3]      -0.0313        nan        nan        nan         nan         nan
+C(agent_type)[T.COT_ONLY_p4]      -0.0625        nan        nan        nan         nan         nan
+C(agent_type)[T.NEUTRAL]           0.0357      0.029      1.211      0.226      -0.022       0.094
+C(agent_type)[T.NEUTRAL_p1]       -0.1562        nan        nan        nan         nan         nan
+C(agent_type)[T.NEUTRAL_p2]       -0.1562        nan        nan        nan         nan         nan
+C(agent_type)[T.NEUTRAL_p3]        0.0625        nan        nan        nan         nan         nan
+C(agent_type)[T.NEUTRAL_p4]       -0.0625        nan        nan        nan         nan         nan
+C(agent_type)[T.SPEC_NOCOT]       -0.0625        nan        nan        nan         nan         nan
+C(agent_type)[T.SPEC_NOCOT_p1]     0.1562        nan        nan        nan         nan         nan
+C(agent_type)[T.SPEC_NOCOT_p2]     0.1250        nan        nan        nan         nan         nan
+C(agent_type)[T.SPEC_NOCOT_p3]    -0.1250        nan        nan        nan         nan         nan
+C(agent_type)[T.SPEC_NOCOT_p4]     0.0937        nan        nan        nan         nan         nan
+C(agent_type)[T.WARMTH]            0.2187        nan        nan        nan         nan         nan
+C(agent_type)[T.WARMTH_p1]         0.2500        nan        nan        nan         nan         nan
+C(agent_type)[T.WARMTH_p2]     -1.548e-16        nan        nan        nan         nan         nan
+C(agent_type)[T.WARMTH_p3]         0.0937        nan        nan        nan         nan         nan
+C(agent_type)[T.WARMTH_p4]         0.2187        nan        nan        nan         nan         nan
+C(scenario_id)[T.supplier]        -0.0104      0.033     -0.318      0.751      -0.075       0.054
+C(role_order)[T.buyer]            -0.0052      0.068     -0.076      0.939      -0.139       0.129
+C(role_order)[T.founder]        5.412e-16      0.025   2.12e-14      1.000      -0.050       0.050
+C(role_order)[T.supplier]         -0.0052      0.058     -0.090      0.929      -0.119       0.109
+==============================================================================
+Omnibus:                      215.142   Durbin-Watson:                   0.755
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              335.916
+Skew:                          -1.250   Prob(JB):                     1.14e-73
+Kurtosis:                       2.791   Cond. No.                     4.27e+15
+==============================================================================
+
+Notes:
+[1] Standard Errors are robust to cluster correlation (cluster)
+[2] The smallest eigenvalue is 1.29e-28. This might indicate that there are
+strong multicollinearity problems or that the design matrix is singular.

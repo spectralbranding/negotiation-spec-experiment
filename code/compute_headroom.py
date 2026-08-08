@@ -15,7 +15,7 @@ Realized headroom = 1 - mean(value_created | deal) / PARETO_JOINT, computed on D
 from the "what a naive pair leaves on the table" measure; deal rate is reported separately).
 
     uv run --with pandas --with scipy --with numpy --with statsmodels python \
-      [internal path removed] \
+      code/compute_headroom.py \
       --input [internal path removed]
 """
 

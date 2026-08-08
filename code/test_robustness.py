@@ -9,7 +9,7 @@ Tests:
     is_acceptance            — standalone ACCEPT required; prose "accept" not matched
 
 Run:
-    uv run pytest [internal path removed] -v
+    uv run pytest code/test_robustness.py -v
 """
 
 from __future__ import annotations

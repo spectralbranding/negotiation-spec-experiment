@@ -1,0 +1,33 @@
+EXPLORATORY / ROBUSTNESS — preregistration amendment; NOT a confirmatory test.
+H6 agent-level manipulation check: mean warmth and dominance by agent's own condition.
+All scenarios where scores exist (warmth/dominance scored by LLM judge on 0-100 scale).
+
+Table: Mean Warmth and Dominance by Agent Condition (H6 Manipulation Check)
+
+Agent condition   Warmth mean   Warmth SD   Dom mean   Dom SD   N agents
+---------------------------------------------------------------------------
+WARMTH_p1                87.9         2.8       21.7      9.7         32
+WARMTH_p4                87.2         3.0       22.8      6.1         32
+WARMTH                   86.4         2.8       22.9      6.1         32
+WARMTH_p3                85.8         2.4       24.5     11.5         32
+WARMTH_p2                85.1         2.3       28.4     10.0         32
+NEUTRAL                  29.7        25.4       13.0     11.8        672
+NEUTRAL_p3               19.0        10.7        8.0      8.7         32
+NEUTRAL_p4               15.9         9.6        7.1     10.0         32
+NEUTRAL_p2               14.4        14.2        7.6      9.0         32
+SPEC_NOCOT_p1            11.0        10.8        8.9     10.7         32
+NEUTRAL_p1               10.9        12.2        6.1      7.9         32
+SPEC_NOCOT_p4            10.6         9.5        6.7      9.6         32
+SPEC_NOCOT               10.5        10.6        7.1      8.5         32
+SPEC_NOCOT_p3             9.6        10.6        7.0      9.4         32
+SPEC_NOCOT_p2             8.6         9.2        6.6      9.2         32
+COT_ONLY_p1               8.4         9.0        0.6      1.9         32
+COT_ONLY_p3               7.7         8.8        0.0      0.0         32
+COT_ONLY                  7.7         8.8        0.1      0.4         32
+COT_ONLY_p4               7.0         7.6        0.1      0.4         32
+COT_ONLY_p2               5.5         7.5        0.0      0.0         32
+
+Note: Scores from LLM judge (S19 scale); mean across all agent turns in all scenarios.
+Expected pattern (H6): WARMTH highest warmth, DOMINANCE highest dominance,
+SPEC conditions low on both (spec achieves value without warmth or dominance).
+N = rows with non-missing warmth score (same sample used for dominance).

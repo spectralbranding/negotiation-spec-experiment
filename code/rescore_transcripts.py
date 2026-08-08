@@ -22,11 +22,11 @@ Do NOT run capture_reasoning=True during the live primary run.
 
 Usage (standard rescore, from repo root):
     bws run -- uv run --with openai --with anthropic --with pyyaml --with numpy \\
-        python [internal path removed]
+        python code/rescore_transcripts.py
 
 Usage (audit mode, post-run only):
     bws run -- uv run --with openai --with anthropic --with pyyaml --with numpy \\
-        python [internal path removed] \\
+        python code/rescore_transcripts.py \\
         --capture-reasoning
 
 Cost cap: ~$0.30 standard (40 agent-turns x 2 scorers x ~$0.003/call).
