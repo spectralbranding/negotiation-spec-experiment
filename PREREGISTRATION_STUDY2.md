@@ -63,7 +63,7 @@ Identical to Study 1 except the scenario set. Reproduced here for self-containme
 | Scenarios | **NEW, self-contained, high-headroom** (§3): 1 distributive (`salvage`, narrow ZOPA) + 2 integrative (`merger` 5-issue, `supplier` 4-issue). Full payoff matrices published in `scenarios_study2/`. Same YAML schema as Study 1 → same harness, no code change. |
 | Sampling | Pilot (~300 Study 2 negotiations) → MVP ~150/cell. Scale to ~400/cell on the primary model only if the MVP shows a directional SPEC effect worth tightening. |
 | Budget ceiling | **$40 USD for Study 2** (separate from Study 1; user-approved required before first paid call). Logger sums `cost_usd_est`; runner aborts at $38. |
-| Logging | Per-call JSONL via `research/code/llm_call_logger.py` (HARD RULE). Transcripts are the SSOT. Study 2 transcripts land in a `study2/` subtree, never overwriting Study 1 data. |
+| Logging | Per-call JSONL via `code/llm_call_logger.py` (HARD RULE). Transcripts are the SSOT. Study 2 transcripts land in a `study2/` subtree, never overwriting Study 1 data. |
 | Hosting | Same GitHub mirror `negotiation-spec-experiment` + Zenodo dual-DOI + HF dataset (DOI 10.57967/hf/9090). |
 
 ## 2. Conditions — the SAME 2×2 (structured-spec × CoT) plus controls
@@ -132,7 +132,7 @@ Identical definitions to Study 1 (so Study 1 ↔ Study 2 numbers are comparable)
 - Pre-specified contrasts: `SPEC_NOCOT − NEUTRAL`; `SPEC_NOCOT − COT_ONLY`;
   `SPEC_NOCOT − WARMTH`; `SPEC_NOCOT − DOMINANCE`; the structure×CoT interaction (§2).
 - Report effect sizes (raw point deltas + Cohen's d) with exact p (three decimals;
-  `p < .001` floor) per `research/PAPER_QUALITY_STANDARDS.md`. No significance stars. No
+  `p < .001` floor) per `[internal path removed]`. No significance stars. No
   leading zero on decimals (e.g., `d = .31`, `p = .047`).
 - Robustness arm (`claude-haiku-4-5`): re-estimate the primary contrasts; the structure
   effect is declared model-agnostic only if `SPEC_NOCOT − NEUTRAL` holds sign +

@@ -3,8 +3,8 @@ title: "Logging and Provenance Standard — Negotiation Spec Experiment"
 status: ACTIVE — working checklist + gap analysis
 author: Dmitry Zharnikov
 date: 2026-06-06
-applies_to: research/negotiation_spec_experiment/
-precedent_repo: research/meaning-meaningfulness-empirical/ (Paper B 2026ap)
+applies_to: [internal path removed]
+precedent_repo: [internal path removed] (Paper B 2026ap)
 ---
 
 # Logging and Provenance Standard
@@ -29,10 +29,10 @@ Grouped into nine domains.
 *Why*: transcripts are the SSOT; without per-call logs, a reviewer cannot
 distinguish prompt-injection runs from standard runs or verify that the same prompt
 was used for all replicates.
-*Precedent*: `research/code/llm_call_logger.py` schema v1.2; `research/meaning-meaningfulness-empirical/logs/README.md` §Schema.
+*Precedent*: `code/llm_call_logger.py` schema v1.2; `logs/README.md` §Schema.
 
 Required fields per row: `log_format_version`, `phase`, `operation`, `operator`,
-`operator_role`, `model_version`, `timestamp_utc`, `system_prompt`, `user_prompt`,
+`operator_role`, `model_version`, `timestamp_utc`, `system_prompt`, `[internal ref removed]`,
 `parameters` (model + temperature + max_tokens + seed if fixed), `request_id`,
 `endpoint`, `sdk_version`, `response`, `response_metadata`, `tokens` (input +
 output), `latency_seconds`, `cost_usd_est`, `errors`, `retries`, `git_sha_caller`,
@@ -41,7 +41,7 @@ output), `latency_seconds`, `cost_usd_est`, `errors`, `retries`, `git_sha_caller
 **2. Every scorer call (warmth/dominance + SVI) logged in JSONL — both scorer models.**
 *Why*: inter-scorer ICC(2,1) is a pre-registered gate (§5 of PREREGISTRATION.md);
 reviewers must be able to recompute it from the logs.
-*Precedent*: `feedback_llm_call_professional_logging.md`; Paper B phase-3.5b logs
+*Precedent*: `[internal ref removed]`; Paper B phase-3.5b logs
 include every extractor-and-preservation-judge call as a separate JSONL file.
 
 **3. Scorer response MUST include full natural-language reasoning, not only the JSON score.**
@@ -49,7 +49,7 @@ include every extractor-and-preservation-judge call as a separate JSONL file.
 gives no audit trail for rubric fidelity. Rubric fidelity is reviewable only when
 the scorer explains the score. Enables post-hoc spot-check of the 30-transcript
 hand-check mandated in PREREGISTRATION §5.
-*Precedent*: `research/meaning-meaningfulness-empirical/code/cross_operator_extraction.py`
+*Precedent*: `code/cross_operator_extraction.py`
 captures the full structured-extraction response (not just the metric); the analogous
 rule for this experiment requires `{"warmth_score": ..., "dominance_score": ..., "reasoning": "..."}`
 or a CoT-style response before the JSON, logged in full.
@@ -60,7 +60,7 @@ satisfies this item without breaking the regex parser.
 
 **4. REDACTION verification grep run after every phase before public-mirror push.**
 *Why*: API keys embedded in prompts/responses are a security and publication blocker.
-*Precedent*: `research/meaning-meaningfulness-empirical/logs/README.md` §Redaction audit.
+*Precedent*: `logs/README.md` §Redaction audit.
 Run command:
 ```bash
 grep -iE "(sk-ant-|sk-proj-|AQVN|Bearer [A-Za-z0-9])" logs/*.jsonl  # must return empty
@@ -71,7 +71,7 @@ grep -iE "PENDING_UPDATES|SESSION_[A-Z]_(COMPLETION|HANDOFF)|TRIAGE_MEMO" logs/*
 *Why*: without a README, a reviewer opening the logs directory faces 947+ JSONL
 files with no entry point. The README defines the public/internal scope boundary,
 the schema, the per-phase table, and the redaction audit commands.
-*Precedent*: `research/meaning-meaningfulness-empirical/logs/README.md` (full
+*Precedent*: `logs/README.md` (full
 template; copy and adapt).
 Required sections: (a) Scope: experiments vs drafting; (b) Per-phase JSONL file
 table (file | calls | operator | what it covers); (c) Schema JSON block; (d)
@@ -87,7 +87,7 @@ summary table.
 `phase_3_5b_runs/multi_llm_manifest.json`, `phase_3_5c_runs/multi_llm_manifest.json`)
 as the authoritative index of what data exists and what each file contains. The
 negotiation experiment needs an equivalent for its transcript corpus.
-*Precedent*: `research/meaning-meaningfulness-empirical/phase_3_5b_runs/multi_llm_manifest.json`.
+*Precedent*: `[internal path removed]`.
 
 Minimum fields for DATA_MANIFEST.yaml:
 ```yaml
@@ -225,11 +225,11 @@ published code and documented in the Companion Computation Script subsection.
 ### Domain 7 — Provenance Prose (Paper.md subsections)
 
 **19. `### LLM-call provenance.` subsection in the paper.**
-*Why*: PAPER_QUALITY_STANDARDS §37f + `feedback_llm_call_professional_logging.md`
+*Why*: PAPER_QUALITY_STANDARDS §37f + `[internal ref removed]`
 (HARD RULE): every cited LLM call must be cited by GitHub URL in paper.md. The
 subsection names every JSONL file by purpose, states the operator/model/version,
 notes the public GitHub URL, and discloses the experiment-vs-drafting scope boundary.
-*Precedent*: `research/meaning-meaningfulness-empirical/paper.md` lines 125-131
+*Precedent*: `[internal path removed]` lines 125-131
 (verbatim model to adapt). Key elements: GitHub URL for the `logs/` directory;
 per-phase file table; redaction discipline note; `reconstructed_post_hoc` disclosure
 if any.
@@ -240,7 +240,7 @@ computed numerical figures. For this experiment the cited figures are: mean outc
 by condition, Cohen's d on each contrast, ICC(2,1) on each scorer pair, deal rates.
 The subsection names the public-mirror code path, the run command, and the fixed
 seed.
-*Precedent*: `research/meaning-meaningfulness-empirical/paper.md` lines 149-151.
+*Precedent*: `[internal path removed]` lines 149-151.
 Minimum: `"Every numerical figure cited in this paper is reproducible from
 <GitHub URL for code/>. Run command: uv run python code/analyze.py --input
 data/outcomes.csv. ICC computation: uv run python code/analyze.py --icc. Fixed
@@ -281,7 +281,7 @@ reproduction path is clear.
 requires an anchor. The project-root `pyproject.toml` works if the public mirror
 reproduces the full repo structure; if the public mirror is a standalone repo, it
 needs its own `pyproject.toml`.
-*Status*: `pyproject.toml` exists at project root `/Users/d/projects/spectral-branding/pyproject.toml`.
+*Status*: `pyproject.toml` exists at project root `[internal path removed]`.
 For the standalone public mirror, a copy or stub is needed.
 
 ---
@@ -292,7 +292,7 @@ For the standalone public mirror, a copy or stub is needed.
 *Why*: PUBLIC_MIRROR_STANDARD §Zenodo dual-DOI discipline; PREREGISTRATION §1
 locked-decisions table. Concept DOI = canonical reference; version DOI =
 reproducibility anchor at paper submission. Mint at submission, not before (version
-bumps only at Zenodo upload per `feedback_version_only_at_zenodo`).
+bumps only at Zenodo upload per `[internal ref removed]`).
 *Status*: not yet minted (run in progress; correct — mint at paper-draft stage).
 
 **27. HuggingFace dataset card (`spectralbranding/negotiation-spec-transcripts`).**
@@ -357,7 +357,7 @@ None require modifying code/, data/, or logs/.
    mirrored on GitHub. (An OSF node was originally planned; OSF is not used.)
 
 2. **Create `logs/README.md`** — copy the structure from
-   `research/meaning-meaningfulness-empirical/logs/README.md` and adapt:
+   `logs/README.md` and adapt:
    - Update scope section (experiments = all negotiation + scoring calls; internal =
      none in this experiment, all calls are experimental evidence)
    - Write the per-phase file table (phase_negotiation_turn_* | negotiation turns |
@@ -429,17 +429,17 @@ These items require the final data to exist or require writing the paper:
 
 ## Cross-references
 
-- `research/PUBLIC_MIRROR_STANDARD.md` — source for items 21-27
-- `research/code/llm_call_logger.py` — JSONL schema (items 1-5)
-- `research/meaning-meaningfulness-empirical/logs/README.md` — template for item 5
-- `research/meaning-meaningfulness-empirical/paper.md` lines 125-131 — LLM-call provenance subsection template (item 19)
-- `research/meaning-meaningfulness-empirical/paper.md` lines 149-151 — Companion Computation Script subsection template (item 20)
-- `research/PAPER_QUALITY_STANDARDS.md` items 37a-37f — computation script + transparency doc rules
-- `research/negotiation_spec_experiment/PREREGISTRATION.md` — source for items 12-13, 14-15
-- `research/meaning-meaningfulness-empirical/PROMPT_PURITY_PROTOCOL.md` — prompt publication discipline (item 11)
-- `memory/feedback_llm_call_professional_logging.md` — HARD RULE source for items 1-5
-- `memory/feedback_publish_computation_scripts.md` — HARD RULE source for item 20
-- `memory/feedback_transparency_docs_must_be_public.md` — HARD RULE source for item 37f
+- `[internal path removed]` — source for items 21-27
+- `code/llm_call_logger.py` — JSONL schema (items 1-5)
+- `logs/README.md` — template for item 5
+- `[internal path removed]` lines 125-131 — LLM-call provenance subsection template (item 19)
+- `[internal path removed]` lines 149-151 — Companion Computation Script subsection template (item 20)
+- `[internal path removed]` items 37a-37f — computation script + transparency doc rules
+- `[internal path removed]` — source for items 12-13, 14-15
+- `[internal path removed]` — prompt publication discipline (item 11)
+- `memory/[internal ref removed]` — HARD RULE source for items 1-5
+- `memory/[internal ref removed]` — HARD RULE source for item 20
+- `memory/[internal ref removed]` — HARD RULE source for item 37f
 
 ---
 

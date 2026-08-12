@@ -61,8 +61,8 @@ texts in `prompts/` were NOT changed.
 **Command to recompute from current data** (once the primary run is underway):
 
 ```bash
-uv run python research/negotiation_spec_experiment/code/analyze.py \
-    --input research/negotiation_spec_experiment/data/outcomes.csv
+uv run python code/analyze.py \
+    --input data/outcomes.csv
 # Look for "Deal rate:" in the [analyze] output block.
 # For condition-specific deal rates, see output/tables/contrasts_H1_deal_rate.txt
 ```
@@ -109,8 +109,8 @@ models (gpt-4o and claude-haiku-4-5).
 
 ```bash
 # Requires: logs/phase_rescore_v2_* JSONL files to exist
-uv run python research/negotiation_spec_experiment/code/compute_icc.py \
-    --logs-dir research/negotiation_spec_experiment/logs/ \
+uv run python code/compute_icc.py \
+    --logs-dir [internal path removed] \
     --phase-filter rescore_v2
 # Prints: n, WARMTH ICC, DOMINANCE ICC, Pearson r for each metric.
 ```
@@ -118,8 +118,8 @@ uv run python research/negotiation_spec_experiment/code/compute_icc.py \
 For the full-run ICC (all dyads scored so far):
 
 ```bash
-uv run python research/negotiation_spec_experiment/code/compute_icc.py \
-    --logs-dir research/negotiation_spec_experiment/logs/
+uv run python code/compute_icc.py \
+    --logs-dir [internal path removed]
 # Uses phase_scoring_wd_gpt4o_* and phase_scoring_wd_haiku_* files.
 ```
 
@@ -144,8 +144,8 @@ means table. From the amendment record:
 # Re-run the rescore to see the manipulation-check table
 # (costs ~$0.30 in API calls — only re-run if re-validating)
 # Instead, read the rescore output from the full-run scorer logs:
-uv run python research/negotiation_spec_experiment/code/analyze.py \
-    --input research/negotiation_spec_experiment/data/outcomes.csv
+uv run python code/analyze.py \
+    --input data/outcomes.csv
 # See output/tables/contrasts_H6_dominance.txt (when generated)
 # and output/figures/fig_dominance_by_condition.png
 ```
@@ -226,7 +226,7 @@ parsing failure.
 ```bash
 uv run --with pandas python -c "
 import pandas as pd
-df = pd.read_csv('research/negotiation_spec_experiment/data_study2_pilot/outcomes.csv')
+df = pd.read_csv('[internal path removed]')
 print(df.groupby('scenario_id')['deal'].agg(['mean','count']).round(3))
 print('overall', round(df['deal'].mean(),3))
 "
@@ -252,8 +252,8 @@ modification. Scored-pilot total cost $0.18.
 **Command to recompute** (logs retained, fully reproducible):
 
 ```bash
-uv run python research/negotiation_spec_experiment/code/compute_icc.py \
-    --logs-dir research/negotiation_spec_experiment/logs_study2_pilot_scored/
+uv run python code/compute_icc.py \
+    --logs-dir [internal path removed]
 ```
 
 ## Study 2 GO decision
@@ -265,9 +265,9 @@ uv run python research/negotiation_spec_experiment/code/compute_icc.py \
 | WARMTH ICC(2,1) | >= .70 | .919 | PASS |
 | DOMINANCE ICC(2,1) | >= .70 | .944 | PASS |
 
-**Decision**: GO — all Study 2 gates PASS. Full Study 2 run authorized 2026-06-06,
-chained to run after the Haiku Study-1 cross-family arm completes
-(sequential, single detached job). (If salvage
+**Decision**: GO — all Study 2 gates PASS. Full Study 2 run authorized 2026-06-06
+([internal ref removed]), chained to run after the Haiku Study-1 cross-family arm completes
+(sequential, single detached job — see `run_chain_haiku_then_study2.sh`). (If salvage
 deal rate had fallen below .3, the
 PREREGISTRATION_STUDY2 logged ZOPA-widening amendment would apply, hypotheses
 unchanged — not triggered: salvage .875 is comfortably in band.)
@@ -337,7 +337,7 @@ value_created is therefore the wrong axis and resists a wide realized gradient o
 
 **Decision (per the bounded-retune plan, user-approved 2026-06-08): execute the FALLBACK, not a
 second retune.** One bounded retune + one 30/variant re-pilot were spent; rather than iterate
-(loop-avoidance per CLAUDE.md), the full headroom stage runs anyway on `supplier_h10..h50`
+(loop-avoidance per [internal ref removed]), the full headroom stage runs anyway on `supplier_h10..h50`
 (NEUTRAL/COT_ONLY/SPEC_NOCOT, 20 reps, ~1,200 dyads, **unscored** — value + deal rate is all the
 dose-response needs; conditions are byte-identical to the manipulation-checked Study-2 arm). The
 dose-response is fit on the **measured** realized headroom per variant (continuous covariate — the
@@ -361,7 +361,7 @@ any impure paraphrase is re-authored before the paraphrase stage reaches in the 
 | 3 — Headroom | realized-monotonicity | retuned 2026-06-08; strict gate FAIL (compressed, 1 inversion) → **FALLBACK run (measured-realized x-axis)** |
 | 4 — Frontier (Grok) | preflight PASS; ICC verified post-hoc from logs_frontier | GO |
 
-**Decision:** components 1, 2, 4 ran clean. Component 3 (headroom) retuned +
+**Decision:** components 1, 2, 4 ran clean (RESULTS_SUMMARY.md). Component 3 (headroom) retuned +
 re-piloted 2026-06-08; the strict realized-monotonicity gate fails (compressed .054–.186, one h40
 inversion) but deal rate passes and the gradient is real — per the bounded-retune plan the full
 stage runs on the measured-realized x-axis (FALLBACK, no further tuning). Budget: per-stage

@@ -129,7 +129,7 @@ dependencies:
 - relationship: applies
   claim: '''Spec the negotiation, don''t style it'' — this note is the in-corpus existence proof.'
   critical: false
-  reference: Zharnikov (project_spec_the_negotiation_seed), this corpus.
+  reference: Zharnikov ([internal ref removed]), this corpus.
 - relationship: extends
   claim: PUBLIC ref = arXiv 2503.06416 (NOT the PNAS DOI) per HARD directive.
   doi: 10.1073/pnas.2521774123

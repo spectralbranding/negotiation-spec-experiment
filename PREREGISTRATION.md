@@ -36,7 +36,7 @@ structure with CoT and never isolated structure itself; that isolation is our co
 | Scenarios | Self-contained (§3 of design doc); **full payoff matrices published** (no confidentiality). 1 distributive (`chair`) + 2 integrative (`rental`, `offer`). |
 | Sampling | Pilot ~300 negotiations → MVP ~150/cell → scale to ~400/cell on the primary model; robustness arm at MVP density. |
 | Budget ceiling | **$40 USD** (user-approved). Hard stop; logger sums `cost_usd_est` and the runner aborts at $38. |
-| Logging | Per-call JSONL via `research/code/llm_call_logger.py` (HARD RULE). Transcripts are the SSOT. |
+| Logging | Per-call JSONL via `code/llm_call_logger.py` (HARD RULE). Transcripts are the SSOT. |
 | Hosting | GitHub mirror `negotiation-spec-experiment` (SSOT) + Zenodo dual-DOI (data + code) + HF dataset (transcripts). |
 | Author contact | None. Full open release lets the base authors reproduce against their own unpublished data. |
 
@@ -104,8 +104,9 @@ H5) is pre-registered, not hidden.
   `*/dryrun/` and is git-ignored.
 - Every paid call logged before the next is issued; redaction at write time.
 - No SBT vocabulary bolted onto a negotiation paper; we cite the base paper, not vice versa.
-- The empirical-note DRAFTING stage triggers a pre-draft critical-review — confirmed
-  2026-06-06 to fire at draft stage, NOT before the run.
+- The empirical-note DRAFTING stage triggers the Grok pre-draft gate
+  (`[internal path removed][internal ref removed].md`) — confirmed by user 2026-06-06 to fire at
+  draft stage, NOT before the run.
 
 ## 8. Amendments (append-only, dated)
 

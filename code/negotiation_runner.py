@@ -515,10 +515,10 @@ def _call_openai(
         logs_dir=logs_dir,
     ) as logger:
         logger.set_system_prompt(system_prompt)
-        user_context = (
+        [internal ref removed] = (
             json.dumps(messages[-3:]) if len(messages) > 3 else json.dumps(messages)
         )
-        logger.set_user_prompt(user_context)
+        logger.set_user_prompt([internal ref removed])
         logger.set_parameters(
             {
                 "model": model,
@@ -576,10 +576,10 @@ def _call_anthropic(
         logs_dir=logs_dir,
     ) as logger:
         logger.set_system_prompt(system_prompt)
-        user_context = (
+        [internal ref removed] = (
             json.dumps(messages[-3:]) if len(messages) > 3 else json.dumps(messages)
         )
-        logger.set_user_prompt(user_context)
+        logger.set_user_prompt([internal ref removed])
         logger.set_parameters(
             {
                 "model": model,
@@ -662,10 +662,10 @@ def _call_grok(
         logs_dir=logs_dir,
     ) as logger:
         logger.set_system_prompt(system_prompt)
-        user_context = (
+        [internal ref removed] = (
             json.dumps(messages[-3:]) if len(messages) > 3 else json.dumps(messages)
         )
-        logger.set_user_prompt(user_context)
+        logger.set_user_prompt([internal ref removed])
         logger.set_parameters(
             {
                 "model": model,

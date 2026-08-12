@@ -1,6 +1,6 @@
 ---
 title: "Spec-Agent vs Styled-Agent: A Negotiation Replication-and-Extension Design"
-status: DRAFT — design only, NO RUNS, awaiting user decision
+status: DRAFT — design only, NO RUNS, awaiting user GO/REVISE/DROP
 author: Dmitry Zharnikov
 date: 2026-06-06
 base_paper: Vaccaro, Caosun, Ju, Aral & Curhan (2026), PNAS 10.1073/pnas.2521774123; arXiv 2503.06416v3
@@ -337,7 +337,7 @@ flowchart TB
   `operator, model_version, temperature, full system+user prompts, params,
   response, prompt_tokens, completion_tokens, latency_ms, usd_cost, git_sha,
   scenario_id, agent_id, role, dyad_id, redacted_secrets`. Reuse / extend
-  `research/code/llm_call_logger.py` (single-source schema). Logs published in
+  `code/llm_call_logger.py` (single-source schema). Logs published in
   the public mirror at `<paper-slug>/logs/` and cited in an "LLM-call provenance"
   subsection.
 - **Companion computation script** (mandatory): the harness runner + scoring +
@@ -351,7 +351,7 @@ flowchart TB
   outcomes) and a second for the code, per the dual-DOI public-mirror standard.
 - **Public mirror**: new mirror `negotiation-spec-experiment` scaffolded from
   `templates/public-mirror-scaffold/`, compliant with
-  `research/PUBLIC_MIRROR_STANDARD.md` (CITATION.cff, dual license,
+  `[internal path removed]` (CITATION.cff, dual license,
   reproduce.sh, output/{figures,tables,logs}/). HF dataset DOI for transcripts.
 - **Citation discipline**: cite the base paper as
   Vaccaro, Caosun, Ju, Aral & Curhan (2026), PNAS 10.1073/pnas.2521774123. This
@@ -398,7 +398,7 @@ MVP-vs-full based on the pilot.
 ### 9.3 Pre-draft gate
 
 Per project rule, a **new R-paper/empirical note triggers the pre-draft Grok
-critical-review gate** (`research/reviews/R_PAPER_PREDRAFT_WORKFLOW.md`) before
+critical-review gate** (`[internal path removed][internal ref removed].md`) before
 drafting prose. This document is design/scoping, upstream of that gate. The gate
 fires when we move to draft the note.
 
@@ -426,7 +426,7 @@ fires when we move to draft the note.
 6. **Scorer model for warmth/dominance + SVI.** Match the paper's frontier scorer
    (they used GPT-5.2) for comparability, or use gpt-4o-mini to save cost and
    accept a within-set-only manipulation check (H6)?
-7. **Pre-draft review timing.** Confirm the pre-draft critical-review fires when we move
+7. **Pre-draft gate timing.** Confirm the Grok pre-draft review fires when we move
    from this design to drafting the empirical note (not before the run).
 
 NO negotiations are run and NO API budget is spent until the user issues
