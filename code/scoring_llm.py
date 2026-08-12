@@ -245,7 +245,7 @@ def _parse_json_response(text: str, required_keys: list[str]) -> dict[str, float
 def _score_with_openai(
     model: str,
     system_prompt: str,
-    [internal ref removed]: str,
+    user_prompt: str,
     dyad_id: str,
     operation_tag: str,
     logs_dir: Path,
@@ -279,13 +279,13 @@ def _score_with_openai(
         logs_dir=logs_dir,
     ) as logger:
         logger.set_system_prompt(system_prompt)
-        logger.set_user_prompt([internal ref removed])
+        logger.set_user_prompt(user_prompt)
         logger.set_parameters({"model": model, "temperature": 0.0, "max_tokens": 200})
         response = client.chat.completions.create(
             model=model,
             messages=[
                 {"role": "system", "content": system_prompt},
-                {"role": "user", "content": [internal ref removed]},
+                {"role": "user", "content": user_prompt},
             ],
             temperature=0.0,
             max_tokens=200,
@@ -298,7 +298,7 @@ def _score_with_openai(
 def _score_with_anthropic(
     model: str,
     system_prompt: str,
-    [internal ref removed]: str,
+    user_prompt: str,
     dyad_id: str,
     operation_tag: str,
     logs_dir: Path,
@@ -332,12 +332,12 @@ def _score_with_anthropic(
         logs_dir=logs_dir,
     ) as logger:
         logger.set_system_prompt(system_prompt)
-        logger.set_user_prompt([internal ref removed])
+        logger.set_user_prompt(user_prompt)
         logger.set_parameters({"model": model, "temperature": 0.0, "max_tokens": 200})
         response = client.messages.create(
             model=model,
             system=system_prompt,
-            messages=[{"role": "user", "content": [internal ref removed]}],
+            messages=[{"role": "user", "content": user_prompt}],
             temperature=0.0,
             max_tokens=200,
         )
@@ -376,7 +376,7 @@ def score_warmth_dominance(
             for scorer in SCORER_MODELS
         }
 
-    [internal ref removed] = _build_scoring_prompt(transcript, target_role, "warmth_dominance")
+    user_prompt = _build_scoring_prompt(transcript, target_role, "warmth_dominance")
     dyad_id = transcript.get("dyad_id", "unknown")
 
     results = {}
@@ -384,7 +384,7 @@ def score_warmth_dominance(
     raw = _score_with_openai(
         "gpt-4o",
         WARMTH_DOMINANCE_SYSTEM,
-        [internal ref removed],
+        user_prompt,
         dyad_id,
         "wd_gpt4o",
         logs_dir,
@@ -395,7 +395,7 @@ def score_warmth_dominance(
     raw = _score_with_anthropic(
         "claude-haiku-4-5",
         WARMTH_DOMINANCE_SYSTEM,
-        [internal ref removed],
+        user_prompt,
         dyad_id,
         "wd_haiku",
         logs_dir,
@@ -430,7 +430,7 @@ def score_svi(
             for scorer in SCORER_MODELS
         }
 
-    [internal ref removed] = _build_scoring_prompt(transcript, target_role, "svi")
+    user_prompt = _build_scoring_prompt(transcript, target_role, "svi")
     dyad_id = transcript.get("dyad_id", "unknown")
     required_keys = ["instrumental", "self", "process", "relationship"]
 
@@ -438,7 +438,7 @@ def score_svi(
     raw = _score_with_openai(
         "gpt-4o",
         SVI_SYSTEM,
-        [internal ref removed],
+        user_prompt,
         dyad_id,
         "svi_gpt4o",
         logs_dir,
@@ -448,7 +448,7 @@ def score_svi(
     raw = _score_with_anthropic(
         "claude-haiku-4-5",
         SVI_SYSTEM,
-        [internal ref removed],
+        user_prompt,
         dyad_id,
         "svi_haiku",
         logs_dir,

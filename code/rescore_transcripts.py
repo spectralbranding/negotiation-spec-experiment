@@ -129,7 +129,7 @@ def _rescore_one_agent(
         {"gpt-4o": {"warmth_score": float, "dominance_score": float},
          "claude-haiku-4-5": {...}}
     """
-    [internal ref removed] = _build_scoring_prompt(transcript, target_role, "warmth_dominance")
+    user_prompt = _build_scoring_prompt(transcript, target_role, "warmth_dominance")
     dyad_id = transcript.get("dyad_id", "unknown")
 
     # Select system prompt based on audit mode
@@ -146,7 +146,7 @@ def _rescore_one_agent(
         _score_with_openai,
         "gpt-4o",
         system_prompt,
-        [internal ref removed],
+        user_prompt,
         dyad_id,
         op_tag,
         LOGS_DIR,
@@ -158,7 +158,7 @@ def _rescore_one_agent(
         _score_with_anthropic,
         "claude-haiku-4-5",
         system_prompt,
-        [internal ref removed],
+        user_prompt,
         dyad_id,
         op_tag,
         LOGS_DIR,

@@ -32,7 +32,7 @@ was used for all replicates.
 *Precedent*: `code/llm_call_logger.py` schema v1.2; `logs/README.md` §Schema.
 
 Required fields per row: `log_format_version`, `phase`, `operation`, `operator`,
-`operator_role`, `model_version`, `timestamp_utc`, `system_prompt`, `[internal ref removed]`,
+`operator_role`, `model_version`, `timestamp_utc`, `system_prompt`, `user_prompt`,
 `parameters` (model + temperature + max_tokens + seed if fixed), `request_id`,
 `endpoint`, `sdk_version`, `response`, `response_metadata`, `tokens` (input +
 output), `latency_seconds`, `cost_usd_est`, `errors`, `retries`, `git_sha_caller`,
