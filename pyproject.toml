@@ -37,8 +37,12 @@ dependencies = [
 # mirror genuinely ships an importable package.
 package = false
 dev-dependencies = [
+    "black>=26.3.1",
+    "flake8>=7.4.1",
+    "mypy>=2.4.0",
     "pytest>=8.0",
     "ruff>=0.5",
+    "types-pyyaml>=6.0.12.20260906",
 ]
 
 [build-system]

@@ -16,6 +16,7 @@ import math
 import sys
 import tempfile
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -130,7 +131,7 @@ def _make_wd_jsonl(path: Path, scorer_prefix: str, data: list[dict]) -> None:
                     "dominance_score": item["dominance"],
                 }
             )
-            row = {
+            row: dict[str, Any] = {
                 "log_format_version": "1.0",
                 "phase": "scoring",
                 "operation": operation,
@@ -247,7 +248,7 @@ class TestComputeInterscorerICC:
         )
         # Write haiku file with fenced JSON
         haiku_path = logs_dir / "phase_scoring_wd_haiku_fencetest_calls.jsonl"
-        row = {
+        row: dict[str, Any] = {
             "log_format_version": "1.0",
             "phase": "scoring",
             "operation": "wd_haiku_t1",
