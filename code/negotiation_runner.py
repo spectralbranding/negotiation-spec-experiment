@@ -214,7 +214,7 @@ def _build_system_prompt(
             opts = data["options"]
             try:
                 sorted_opts = dict(sorted(opts.items(), key=lambda kv: float(kv[0])))
-            except (TypeError, ValueError):
+            except TypeError, ValueError:
                 sorted_opts = opts
             payoff_lines.append(f"  {issue}:")
             for val, pts in sorted_opts.items():

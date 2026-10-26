@@ -111,7 +111,7 @@ def _parse_wd_log(path: Path, scorer_label: str) -> dict[str, dict[str, float]]:
                     "warmth_score": warmth,
                     "dominance_score": dominance,
                 }
-            except (ValueError, KeyError, TypeError):
+            except ValueError, KeyError, TypeError:
                 pass  # skip unparseable rows
     return results
 
@@ -143,7 +143,7 @@ def _parse_svi_log(path: Path, scorer_label: str) -> dict[str, dict[str, float]]
                     for k in ["instrumental", "self", "process", "relationship"]
                     if k in scores
                 }
-            except (ValueError, KeyError, TypeError):
+            except ValueError, KeyError, TypeError:
                 pass
     return results
 

@@ -472,7 +472,7 @@ def _extract_cost_from_logs(logs_dir: Path, dyad_id: str) -> float:
                     row = json.loads(line)
                     if dyad_id in row.get("operation", ""):
                         total += float(row.get("cost_usd_est", 0.0))
-        except (json.JSONDecodeError, OSError):
+        except json.JSONDecodeError, OSError:
             pass
     return total
 
