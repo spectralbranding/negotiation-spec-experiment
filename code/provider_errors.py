@@ -89,7 +89,7 @@ def _classify(exc: BaseException) -> dict[str, Any]:
     status_code: int | None = None
     try:
         status_code = int(getattr(exc, "status_code", None) or 0) or None
-    except (TypeError, ValueError):
+    except TypeError, ValueError:
         status_code = None
     if status_code is None:
         try:

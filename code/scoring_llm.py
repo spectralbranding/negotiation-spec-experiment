@@ -224,7 +224,7 @@ def _parse_json_response(text: str, required_keys: list[str]) -> dict[str, float
     try:
         data = json.loads(text.strip())
         return {k: float(data[k]) for k in required_keys}
-    except (json.JSONDecodeError, KeyError, ValueError):
+    except json.JSONDecodeError, KeyError, ValueError:
         pass
 
     # Step 3: extract the first {...} block (handles trailing reasoning text)
@@ -233,7 +233,7 @@ def _parse_json_response(text: str, required_keys: list[str]) -> dict[str, float
         try:
             data = json.loads(m.group())
             return {k: float(data[k]) for k in required_keys}
-        except (json.JSONDecodeError, KeyError, ValueError):
+        except json.JSONDecodeError, KeyError, ValueError:
             pass
 
     raise ValueError(

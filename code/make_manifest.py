@@ -72,7 +72,7 @@ def _sum_costs(logs_dir: Path) -> tuple[float, int]:
                         cost = row.get("cost_usd_est", 0) or 0
                         total_cost += float(cost)
                         n_calls += 1
-                    except (json.JSONDecodeError, TypeError, ValueError):
+                    except json.JSONDecodeError, TypeError, ValueError:
                         pass
         except OSError:
             pass

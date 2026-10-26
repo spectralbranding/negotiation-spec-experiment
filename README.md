@@ -71,7 +71,7 @@ needs model API credentials.
 
 ## 4 | Dependencies
 
-Python 3.12 with numpy (>= 2.0), pandas (>= 2.2), scipy (>= 1.13), and PyYAML
+Python 3.14 with numpy (>= 2.0), pandas (>= 2.2), scipy (>= 1.13), and PyYAML
 (>= 6.0) — declared in [pyproject.toml](pyproject.toml). Install with `uv sync`
 (or `pip install -e .`). Reproducing the committed statistics needs nothing else;
 generating fresh transcripts additionally needs model API credentials.

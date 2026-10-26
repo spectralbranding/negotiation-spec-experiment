@@ -49,13 +49,13 @@ def _lookup_issue_points(
         v_int = int(value)
         if v_int in options:
             return float(options[v_int])
-    except (ValueError, TypeError):
+    except ValueError, TypeError:
         pass
     try:
         v_float = float(value)
         if v_float in options:
             return float(options[v_float])
-    except (ValueError, TypeError):
+    except ValueError, TypeError:
         pass
     # Try string key
     v_str = str(value)
