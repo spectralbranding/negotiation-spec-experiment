@@ -7,7 +7,7 @@ realized value-creation headroom from ~10% to ~50%. Used in Component 3 of the e
 **SSOT for every payoff number here is `code/gen_headroom_variants.py`** — it emits these
 YAMLs and asserts all invariants. Regenerate with:
 
-    uv run python research/negotiation_spec_experiment/code/gen_headroom_variants.py
+    uv run python code/gen_headroom_variants.py
 
 The runner loads them via `--scenarios-dir scenarios_headroom --scenario-ids
 supplier_h10,supplier_h20,supplier_h30,supplier_h40,supplier_h50`.

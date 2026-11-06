@@ -426,8 +426,8 @@ fires when we move to draft the note.
 6. **Scorer model for warmth/dominance + SVI.** Match the paper's frontier scorer
    (they used GPT-5.2) for comparability, or use gpt-4o-mini to save cost and
    accept a within-set-only manipulation check (H6)?
-7. **Pre-draft gate timing.** Confirm the Grok pre-draft review fires when we move
-   from this design to drafting the empirical note (not before the run).
+7. **Drafting timing.** Drafting of the empirical note begins after the run, not
+   before it.
 
 NO negotiations are run and NO API budget is spent until the user issues
 **GO / REVISE / DROP** with decisions 1–3 at minimum resolved.
