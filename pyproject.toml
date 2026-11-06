@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.14,<3.15"
 license = { file = "LICENSE" }
 authors = [
-    { name = "Dmitry Zharnikov", email = "fermeradar@gmail.com" },
+    { name = "Dmitry Zharnikov", email = "dmitry@spectralbranding.com" },
 ]
 keywords = [
     "LLM negotiation",

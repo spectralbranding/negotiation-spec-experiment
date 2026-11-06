@@ -4,7 +4,7 @@ Run before OSF registration to freeze the exact prompt texts.
 Writes prompts/PROMPT_HASHES.txt.
 
 Usage:
-    uv run python research/negotiation_spec_experiment/prompts/hash_prompts.py
+    uv run python prompts/hash_prompts.py
 """
 
 import hashlib
