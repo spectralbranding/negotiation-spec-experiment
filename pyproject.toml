@@ -54,4 +54,6 @@ line-length = 100
 target-version = "py314"
 
 [tool.black]
-target-version = ["py314"]
+# py312 matches the source tree this code is published from; the code runs on 3.12 and 3.14,
+# and a py314 target would rewrite `except (A, B):` to the 3.14-only `except A, B:` form.
+target-version = ["py312"]
