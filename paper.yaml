@@ -12,7 +12,7 @@ meta:
     orcid: 0009-0000-6893-9231
     affiliation: Independent Researcher
   doi: 10.5281/zenodo.20595996
-  date: '2026-06-26'
+  date: '2026-11-10'
   venue: Preprint
   license: CC-BY-4.0
   keywords:
@@ -102,7 +102,7 @@ acceptance:
   falsification: A monotone-or-null SPEC advantage that does NOT depend on headroom (same sign/size at
     ceiling and with headroom) refutes P1.
 - claim_id: P2
-  criterion: Holds if sPEC's value advantage is produced by a TAUGHT integrative procedure (logrolling
+  criterion: Holds if SPEC's value advantage is produced by a TAUGHT integrative procedure (logrolling
     — seek asymmetric cross-issue trades), not by exposure/leakage of the payoff matrix; the ranked-weight
     spec alone, without the logrolling clause, does not beat cooperative controls.
   falsification: F4 inverted (SPEC_NOLOGROLL still beats controls) would refute P2.
@@ -149,17 +149,17 @@ dependencies:
   claim: 'anchor: curhan-2006-svi'
   reference: curhan-2006-svi
 - relationship: extends
-  claim: arXiv:2402.05863 candidate — verify via parallel session.
+  claim: 'anchor: bianchi-2024-negotiationarena'
   doi: 10.48550/arXiv.2402.05863
 - relationship: extends
-  claim: arXiv:1808.09637 candidate — verify.
+  claim: 'anchor: he-2018-decoupling-strategy-generation-negotiation'
   reference: he-2018-decoupling-strategy-generation-negotiation
 - relationship: extends
-  claim: candidate — verify.
+  claim: 'anchor: bhattacharya-2025-evaluating-negotiation-llms'
   doi: 10.1177/10711813251372102
 - relationship: extends
-  claim: Google Research candidate — verify; drop if unsourceable.
-  reference: deng-mirrokni-llms-bargaining-table
+  claim: 'anchor: deng-2024-llms-bargaining-table'
+  reference: deng-2024-llms-bargaining-table
 contradictions: []
 limitations:
 - description: 'RECONSTRUCTION, not 1:1 replication: scenarios + 6 condition prompts are our own construction

@@ -458,17 +458,13 @@ external_anchors:
   - citation_key: bianchi-2024-negotiationarena
     role: contrast_case
     spine_nodes: [P3]
-    note: "arXiv:2402.05863 candidate — verify via parallel session."
   - citation_key: he-2018-decoupling-strategy-generation-negotiation
     role: theoretical_predecessor
     spine_nodes: [P2]
-    note: "arXiv:1808.09637 candidate — verify."
   - citation_key: bhattacharya-2025-evaluating-negotiation-llms
     role: contrast_case
     spine_nodes: [P3]
-    note: "candidate — verify."
-  - citation_key: deng-mirrokni-llms-bargaining-table
+  - citation_key: deng-2024-llms-bargaining-table
     role: contrast_case
     spine_nodes: [P3]
-    note: "Google Research candidate — verify; drop if unsourceable."
 
